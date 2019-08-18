@@ -1,7 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { DeckOfCards } from 'cardgames';
-import { Card } from './Card';
+import { DeckOfCards } from 'card-games-typescript';
+import Card from './Card';
+
+
 
 class App extends React.Component {
   constructor(props) {
