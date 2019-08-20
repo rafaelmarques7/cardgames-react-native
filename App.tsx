@@ -1,24 +1,17 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-// import Game from './src/components/Game';
 import GameScreen from './src/components/GameScreen';
+import Game from './src/containers/Game';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import { rootReducer } from './src/stateHandle/reducer';
+
+const store = createStore(rootReducer);
 
 export default function App() {
   return (
-    // <View style={styles.container}>
-    <View>
-    {/* <Text>hey Waddduupp!</Text> */}
-      {/* <Text>Open up App.tsx to start working on your app!</Text> */}
-      <GameScreen />
-    </View>
+    <Provider store={store}>
+      {/* <Game /> */}
+    <GameScreen />
+    </Provider>
   );
 }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: "#009900",
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
