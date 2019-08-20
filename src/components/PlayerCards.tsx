@@ -1,8 +1,26 @@
 import React from 'react';
-import { PlayerHighLow } from 'card-games-typescript';
 import { View, Text, StyleSheet } from 'react-native';
 import Card from './Card';
 
+const PlayersCards = ({ cards, displayCards=true, username=''}) => {
+  return (
+    <View style={styles.container}>
+      <View style={styles.cards}>
+      { cards.map((card, index) => {
+          return (
+            <Card 
+              key={`card-${index}`}
+              cardObject={card} 
+              backOfDeck={!displayCards}
+            />
+          );
+        })
+      }
+      </View>
+      <Text style={styles.text}>{username}</Text>
+    </View>
+  );
+}
 
 // const PlayersCards = (player: PlayerHighLow) => {
 //   return (
@@ -12,32 +30,32 @@ import Card from './Card';
 //   )
 // }
 
-interface Props {
-  player: PlayerHighLow;
-  displayCards: boolean;
-}
+// interface Props {
+//   player: PlayerHighLow;
+//   displayCards: boolean;
+// }
 
-const PlayersCards: React.SFC<Props> = ({ player, displayCards }) => {
-  console.log(`inside PlayerCards\n\tplayer: ${JSON.stringify(player)}\n\tdisplayCards:${displayCards}`);
-  return (
-    <View style={styles.container}>
-      <View style={styles.cards}>
-      {
-        player.cards.cards.map((card, index) => {
-          return (
-            <Card 
-              key={`card-${player.username}-${index}`}
-              cardObject={card} 
-              backOfDeck={!displayCards}
-            />
-          );
-        })
-      }
-      </View>
-      <Text style={styles.text}>{player.username}</Text>
-    </View>
-  );
-}
+// const PlayersCards: React.SFC<Props> = ({ player, displayCards }) => {
+//   console.log(`inside PlayerCards\n\tplayer: ${JSON.stringify(player)}\n\tdisplayCards:${displayCards}`);
+//   return (
+//     <View style={styles.container}>
+//       <View style={styles.cards}>
+//       {
+//         player.cards.cards.map((card, index) => {
+//           return (
+//             <Card 
+//               key={`card-${player.username}-${index}`}
+//               cardObject={card} 
+//               backOfDeck={!displayCards}
+//             />
+//           );
+//         })
+//       }
+//       </View>
+//       <Text style={styles.text}>{player.username}</Text>
+//     </View>
+//   );
+// }
 
 const styles = StyleSheet.create({
   cards: {
