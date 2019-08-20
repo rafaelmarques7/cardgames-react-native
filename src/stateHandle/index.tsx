@@ -92,6 +92,9 @@ function gamePayoff(state) {
 
 export const getDealerCards = (state) => { return state.game.dealer.cards.cards } 
 
+export const getPlayersBet = (state) => { return state.game.players[0].bet } 
+
+
 export function getPlayersCards(state, indexPlayer=0) {
   if (state.game.players && state.game.players[indexPlayer]) {
     return state.game.players[indexPlayer].cards.cards
