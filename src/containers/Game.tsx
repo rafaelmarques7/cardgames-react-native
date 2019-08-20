@@ -10,7 +10,7 @@ import {
   actionGameBet,
   actionGamePayoff,
   getDealerCards,
-  
+  getPlayersBet,
 } from '../stateHandle';
 import { View, Button } from 'react-native';
 import CreditPlayer from '../components/Credit';
@@ -33,7 +33,10 @@ const Game = (props) => {
         cards={props.dealer.cards} 
         username={'Dealer'} 
         displayCards={false}/>
-      {/* <BetDisplay {...props} /> */}
+      <BetDisplay 
+        betMaximum={props.player.creditAmmount}
+        onSetBet={(bet) => {props.actionGameBet([bet])}}
+        />
       <PlayerCards 
         cards={props.player.cards} 
         username={props.player.username} />
@@ -46,6 +49,7 @@ const mapStateToProps = state => ({
     cards:  getPlayersCards(state),
     creditAmmount: getPlayersCreditAmmount(state),
     username: getPlayersUsername(state),
+    bet: getPlayersBet(state),
   },
   dealer: {
     cards: getDealerCards(state),
