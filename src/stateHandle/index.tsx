@@ -1,10 +1,17 @@
 import { HigherOrLower, PlayerHighLow } from 'card-games-typescript';
 
-export const initialState = {
-  game: new HigherOrLower(),
+export const initState = {
+  game: {}, // class object for game HigherOrLower
+  isGameOnGoing: false, // boolean to determine if a round is currently being played
 }
 
-export const rootReducer = (state=initialState, action) => {
+export const startGame = (store) => {
+  const players = [new PlayerHighLow('R7M')];
+  const numCardsPerHand = 2;
+  store.dispatch(actionGameInit(players, numCardsPerHand));
+}
+
+export const rootReducer = (state=initState, action) => {
   switch(action.type) {
     case 'GAME_INIT':
       return gameInit(state, action);
@@ -15,7 +22,7 @@ export const rootReducer = (state=initialState, action) => {
     case 'GAME_PAYOFF':
       return gamePayoff(state);
     default:
-      return initialState;  
+      return state;  
   }
 }
 
@@ -57,7 +64,8 @@ function gameDeal(state) {
     Object.create(Object.getPrototypeOf(state.game)), state.game);
   return {
     ...state,
-    game: newGame
+    game: newGame,
+    isGameOnGoing: true,
   }
 }
 
@@ -78,12 +86,23 @@ function gamePayoff(state) {
   return {
     ...state,
     game: newGame,
+    isGameOnGoing: false,
   }
 }
+
+export const getDealerCards = (state) => { return state.game.dealer.cards.cards } 
 
 export function getPlayersCards(state, indexPlayer=0) {
   if (state.game.players && state.game.players[indexPlayer]) {
     return state.game.players[indexPlayer].cards.cards
   }
   return [];
+}
+
+export function getPlayersCreditAmmount(state, indexPlayer=0) {
+  return state.game.players[indexPlayer].credit;
+}
+
+export function getPlayersUsername(state, indexPlayer=0) {
+  return state.game.players[indexPlayer].username;
 }

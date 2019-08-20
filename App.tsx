@@ -1,17 +1,17 @@
 import React from 'react';
-import GameScreen from './src/components/GameScreen';
 import Game from './src/containers/Game';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import { rootReducer } from './src/stateHandle/reducer';
+import { rootReducer } from './src/stateHandle';
+import { startGame } from './src/stateHandle';
 
 const store = createStore(rootReducer);
+startGame(store); // dispatch initial action to start the game state
 
 export default function App() {
   return (
     <Provider store={store}>
-      {/* <Game /> */}
-    <GameScreen />
+      <Game />
     </Provider>
   );
 }
