@@ -10,7 +10,8 @@ const store = createStore(rootReducer);
 export default function App() {
   return (
     <Provider store={store}>
-      <Game />
+      {/* <Game /> */}
+    <GameScreen />
     </Provider>
   );
 }

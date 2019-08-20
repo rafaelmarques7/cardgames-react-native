@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-import { Text, Button, View } from 'react-native';
-import { PlayerHighLow, Bet } from 'card-games-typescript';
 import { 
   getPlayersCards, 
   actionGameDeal, 
@@ -10,34 +8,12 @@ import {
   actionGameBet,
   actionGamePayoff,
 } from '../stateHandle/reducer';
-
-const bet = new Bet('high', 2);
+import GameScreen from '../components/GameScreen';
 
 const Game = (props) => {
-  console.log('dealer: ', props.game.dealer);
-  console.log('player: ', props.game.players);
+  console.log('<Game /> props: ', props);
   return(
-    <View
-      style={{top:100}}>
-    <Text>Hello</Text>
-    <Button
-      title="Init Game"
-      onPress={() => {props.actionGameInit([new PlayerHighLow('rafael')], 2)}}
-      />
-    <Button
-      title="Deal Cards"
-      onPress={() => {props.actionGameDeal()}}
-      />
-    <Button
-      title="Set Bet"
-      onPress={() => {props.actionGameBet([bet])}}
-      />
-    <Button
-      title="Set Payoff"
-      onPress={() => {props.actionGamePayoff()}}
-      />
-    </View>
-
+    <GameScreen />
   );
 }
 
