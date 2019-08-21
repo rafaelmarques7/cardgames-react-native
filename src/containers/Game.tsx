@@ -8,7 +8,6 @@ import {
   actionGameDeal, 
   actionGameInit,
   actionGameBet,
-  actionGamePayoff,
   getDealerCards,
   getPlayersBet,
 } from '../stateHandle';
@@ -47,7 +46,6 @@ const Game = (props) => {
   );
 }
 
-
 const mapStateToProps = state => ({
   player: {
     cards:  getPlayersCards(state),
@@ -62,13 +60,11 @@ const mapStateToProps = state => ({
   numCardsPerHand: state.game.numCardsPerHand,
 });
 
-
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
     actionGameDeal,
     actionGameInit,
     actionGameBet,
-    // actionGamePayoff,
   }, dispatch);
 };
 

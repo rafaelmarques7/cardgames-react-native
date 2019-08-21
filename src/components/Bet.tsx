@@ -42,12 +42,6 @@ class BetDisplay extends React.Component<BetProps, BetState> {
     if (this.props.acceptBets) {
       this.props.onSetBet(state.bet); // callback function that dispatches action to set bet
     }
-    // this.setState({
-    //   bet: {
-    //     on: 'pass',
-    //     ammount: 1,
-    //   }
-    // })
   }
 
   render() {
@@ -63,9 +57,6 @@ class BetDisplay extends React.Component<BetProps, BetState> {
           <Button title="-" onPress={() => {this.onSetAmmount(false)}} />
           <Text>Bet: {this.state.bet.ammount}$ on {this.state.bet.on !== 'pass' ? this.state.bet.on : 'playerToDecide'} </Text>
         </View>
-        <View>
-          
-        </View>
       </View>
     );    
   }
@@ -77,6 +68,5 @@ const styles = StyleSheet.create({
     top: 200,
   }
 });
-
 
 export default BetDisplay;

@@ -1,23 +1,13 @@
-import { PlayerHighLow } from "card-games-typescript";
+import { PlayerHighLow } from 'card-games-typescript';
 
-const DEFAULT_NUM_CARDS = 2;
-const DEFAULT_PLAYERS = [new PlayerHighLow('R7M')];
+const DEF_PLAYERS = [new PlayerHighLow('R7M')];
+const DEF_NUM_CARDS_PER_HAND = 2;
 
 export const startGame = (store) => {
-  const players = [new PlayerHighLow('R7M')];
-  const numCardsPerHand = 2;
-  store.dispatch(actionGameInit(players, numCardsPerHand));
+  store.dispatch(actionGameInit(DEF_PLAYERS, DEF_NUM_CARDS_PER_HAND));
 }
 
-export const actionGameInit = (playersList=null, numCardsPerHand=null) => {
-  playersList = playersList ? playersList : DEFAULT_PLAYERS;
-  numCardsPerHand = numCardsPerHand ? numCardsPerHand : DEFAULT_NUM_CARDS;
-  return dispatch => {
-    dispatch(actionGameSetConfig)
-  }
-}
-
-const actionGameSetConfig = (players, numCardsPerHand) => ({
+export const actionGameInit = (players, numCardsPerHand) => ({
   type: 'GAME_INIT',
   payload: {
     players: players,
@@ -27,7 +17,6 @@ const actionGameSetConfig = (players, numCardsPerHand) => ({
 
 export const actionGameDeal = () => ({
   type: 'GAME_DEAL',
-
 })
 
 export const actionBet = (bets) => ({
@@ -37,19 +26,17 @@ export const actionBet = (bets) => ({
   }
 })
 
-export function actionGameBet(bets) {
+export const actionGamePayoff = () => ({
+  type: 'GAME_PAYOFF',
+})
+
+export const actionGameBet = (bets) => {
   return dispatch => {
     // set bet action
     dispatch(actionBet(bets));
     // set payoff action, but delay it
     setTimeout(() => {
       dispatch(actionGamePayoff());
-    }, 5000);
+    }, 3000);
   }
 }
-
-export const actionGamePayoff = () => ({
-  type: 'GAME_PAYOFF',
-})
-
-
