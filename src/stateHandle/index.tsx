@@ -2,7 +2,11 @@ import { HigherOrLower, PlayerHighLow } from 'card-games-typescript';
 
 export const initState = {
   game: {}, // class object for game HigherOrLower
-  isGameOnGoing: false, // boolean to determine if a round is currently being played
+  gameStatus: {
+    dealMode: true,
+    betMode: false,
+    endMode: false,
+  }
 }
 
 export const startGame = (store) => {
@@ -38,12 +42,24 @@ export const actionGameDeal = () => ({
   type: 'GAME_DEAL',
 })
 
-export const actionGameBet = (bets) => ({
+export const actionBet = (bets) => ({
   type: 'GAME_BET',
   payload: {
     bets: bets, // except bets to be an array of valid bets
   }
 })
+
+export function actionGameBet(bets) {
+  return dispatch => {
+    // set bet action
+    dispatch(actionBet(bets));
+    // set payoff action, but delay it
+    setTimeout(() => {
+      dispatch(actionGamePayoff());
+    }, 5000);
+  }
+}
+
 
 export const actionGamePayoff = () => ({
   type: 'GAME_PAYOFF',
@@ -65,7 +81,11 @@ function gameDeal(state) {
   return {
     ...state,
     game: newGame,
-    isGameOnGoing: true,
+    gameStatus: {
+      ...state.gameStatus,
+      dealMode: false,
+      betMode: true,
+    },
   }
 }
 
@@ -76,6 +96,11 @@ function gameBet(state, action) {
   return {
     ...state,
     game: newGame,
+    gameStatus: {
+      ...state.gameStatus,
+      betMode: false,
+      endMode: true,
+    }
   }
 }
 
@@ -86,7 +111,11 @@ function gamePayoff(state) {
   return {
     ...state,
     game: newGame,
-    isGameOnGoing: false,
+    gameStatus: {
+      ...state.gameStatus,
+      endMode: false,
+      dealMode: true 
+    },
   }
 }
 
