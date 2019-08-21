@@ -7,7 +7,7 @@ import { StyleSheet } from 'react-native';
 const Card = ({ cardObject=null, backOfDeck=false }) => {
   // Cards are selected according to svg filename
   console.log(`inside Card`);
-  let key = backOfDeck !== false ? '1B' : cardToId(cardObject);
+  let key = backOfDeck ? '1B' : cardToId(cardObject);
   let source = ImageList[key];
   return (
     <Image
