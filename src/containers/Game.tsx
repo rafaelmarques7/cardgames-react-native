@@ -32,19 +32,21 @@ const Game = (props) => {
       <PlayerCards 
         cards={props.dealer.cards} 
         username={'Dealer'} 
-        displayCards={props.gameStatus.endMode}/>
+        displayCards={props.gameStatus.endMode}
+        numCardsPerHand={props.numCardsPerHand} />
       <BetDisplay 
         betMaximum={props.player.creditAmmount}
         onSetBet={(bet) => {props.actionGameBet([bet])}}
-        acceptBets={props.gameStatus.betMode}
-        
-        />
+        acceptBets={props.gameStatus.betMode} />
       <PlayerCards 
         cards={props.player.cards} 
-        username={props.player.username} />
+        username={props.player.username} 
+        displayCards={props.gameStatus.betMode || props.gameStatus.endMode}
+        numCardsPerHand={props.numCardsPerHand} />
     </View>
   );
 }
+
 
 const mapStateToProps = state => ({
   player: {
@@ -57,6 +59,7 @@ const mapStateToProps = state => ({
     cards: getDealerCards(state),
   },
   gameStatus: state.gameStatus,
+  numCardsPerHand: state.game.numCardsPerHand,
 });
 
 

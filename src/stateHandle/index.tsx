@@ -1,5 +1,8 @@
 import { HigherOrLower, PlayerHighLow } from 'card-games-typescript';
 
+const DEF_PLAYERS = [new PlayerHighLow('R7M')];
+const DEF_NUM_CARDS_PER_HAND = 2;
+
 export const initState = {
   game: {}, // class object for game HigherOrLower
   gameStatus: {
@@ -10,9 +13,9 @@ export const initState = {
 }
 
 export const startGame = (store) => {
-  const players = [new PlayerHighLow('R7M')];
-  const numCardsPerHand = 2;
-  store.dispatch(actionGameInit(players, numCardsPerHand));
+  // const players = [new PlayerHighLow('R7M')];
+  // const numCardsPerHand = 2;
+  store.dispatch(actionGameInit(DEF_PLAYERS, DEF_NUM_CARDS_PER_HAND));
 }
 
 export const rootReducer = (state=initState, action) => {
