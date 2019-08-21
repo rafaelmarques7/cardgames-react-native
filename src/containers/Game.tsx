@@ -28,14 +28,16 @@ const Game = (props) => {
         ammount={props.player.creditAmmount} />
       <DealButton 
         callbackFunction={props.actionGameDeal}
-        disabled={props.isGameOnGoing} /> 
+        disabled={!props.gameStatus.dealMode} /> 
       <PlayerCards 
         cards={props.dealer.cards} 
         username={'Dealer'} 
-        displayCards={false}/>
+        displayCards={props.gameStatus.endMode}/>
       <BetDisplay 
         betMaximum={props.player.creditAmmount}
         onSetBet={(bet) => {props.actionGameBet([bet])}}
+        acceptBets={props.gameStatus.betMode}
+        
         />
       <PlayerCards 
         cards={props.player.cards} 
@@ -54,7 +56,7 @@ const mapStateToProps = state => ({
   dealer: {
     cards: getDealerCards(state),
   },
-  isGameOnGoing: state.isGameOnGoing,
+  gameStatus: state.gameStatus,
 });
 
 
@@ -63,7 +65,7 @@ const mapDispatchToProps = dispatch => {
     actionGameDeal,
     actionGameInit,
     actionGameBet,
-    actionGamePayoff,
+    // actionGamePayoff,
   }, dispatch);
 };
 

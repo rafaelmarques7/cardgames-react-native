@@ -9,6 +9,7 @@ type BetState = {
 type BetProps = {
   betMaximum: number,
   onSetBet: Function,
+  acceptBets: boolean
 }
 
 class BetDisplay extends React.Component<BetProps, BetState> {
@@ -26,7 +27,7 @@ class BetDisplay extends React.Component<BetProps, BetState> {
     const delta = increase ? 1 : -1; // decide if we add or subtract
     const isValidBet = (increase && this.state.bet.ammount < this.props.betMaximum)
       || (!increase && this.state.bet.ammount > 1)
-    if (isValidBet) {
+    if (this.props.acceptBets && isValidBet) {
       this.setState({
         bet: {
           ammount: this.state.bet.ammount + delta,
@@ -38,13 +39,15 @@ class BetDisplay extends React.Component<BetProps, BetState> {
   onSelectBet(option) {
     const state = Object.assign({}, this.state); // copy state to object to be manipulated
     state.bet.on = option;
-    this.props.onSetBet(state.bet);
-    this.setState({
-      bet: {
-        on: 'pass',
-        ammount: 1,
-      }
-    })
+    if (this.props.acceptBets) {
+      this.props.onSetBet(state.bet); // callback function that dispatches action to set bet
+    }
+    // this.setState({
+    //   bet: {
+    //     on: 'pass',
+    //     ammount: 1,
+    //   }
+    // })
   }
 
   render() {
@@ -58,7 +61,10 @@ class BetDisplay extends React.Component<BetProps, BetState> {
         <View>
           <Button title="+" onPress={() => {this.onSetAmmount(true)}} />
           <Button title="-" onPress={() => {this.onSetAmmount(false)}} />
-          <Text>{this.state.bet.ammount}</Text>
+          <Text>Bet: {this.state.bet.ammount}$ on {this.state.bet.on !== 'pass' ? this.state.bet.on : 'playerToDecide'} </Text>
+        </View>
+        <View>
+          
         </View>
       </View>
     );    
