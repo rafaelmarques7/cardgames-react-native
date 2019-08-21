@@ -2,12 +2,14 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Card from './Card';
 
-const PlayersCards = ({ cards, numCardsPerHand, displayCards=true, username=''}) => {
+const PlayersCards = ({ cards, numCardsPerHand, displayCards=true, username='', positionTop=true}) => {
   if (cards && cards.length < 1) {
     cards = new Array(numCardsPerHand, true)
   }
+  const styleContainer = positionTop ? styles.top : styles.bottom;
+
   return (
-    <View style={styles.container}>
+    <View style={styleContainer}>
       <View style={styles.cards}>
       { cards.map((card, index) => {
           return (
@@ -26,6 +28,11 @@ const PlayersCards = ({ cards, numCardsPerHand, displayCards=true, username=''})
 }
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   cards: {
     flexDirection: 'row',
     marginLeft: 100,
@@ -34,7 +41,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   container: {
-    top: 150,
     margin: 10,
     borderTopColor: 'black',
     borderTopWidth: 1,
@@ -44,6 +50,15 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomLeftRadius: 70,
     borderBottomRightRadius: 70,
+  },
+  top: {
+    flexDirection: 'row',
+    position: 'absolute',
+    top: 0,
+  },
+  bottom: {
+    flex: 1,
+    justifyContent: 'flex-end',
   }
 });
 
