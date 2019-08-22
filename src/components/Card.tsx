@@ -19,9 +19,10 @@ const Card = ({ cardObject=null, backOfDeck=false }) => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 120,
-    width: 80,
-    margin: 5,
+    width: 440/4,
+    height: 600/4,
+    // marginLeft: 10, 
+    // marginRight: 10,
   },
 });
 

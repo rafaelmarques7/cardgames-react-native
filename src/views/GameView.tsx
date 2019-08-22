@@ -7,21 +7,21 @@ import DealButton from '../components/Deal';
 
 const GameView = (props) => {
   return(
-    <View>
-      <CreditPlayer 
-        ammount={props.player.creditAmmount} />
-      <DealButton 
+    <View style={styles.container}>
+      {/* <CreditPlayer 
+        ammount={props.player.creditAmmount} /> */}
+      {/* <DealButton 
         callbackFunction={props.actionGameDeal}
-        disabled={!props.gameStatus.dealMode} /> 
+        disabled={!props.gameStatus.dealMode} />  */}
       <PlayerCards 
         cards={props.dealer.cards} 
         username={'Dealer'} 
         displayCards={props.gameStatus.endMode}
         numCardsPerHand={props.numCardsPerHand} />
-      <BetDisplay 
+      {/* <BetDisplay 
         betMaximum={props.player.creditAmmount}
         onSetBet={(bet) => {props.actionGameBet([bet])}}
-        acceptBets={props.gameStatus.betMode} />
+        acceptBets={props.gameStatus.betMode} /> */}
       <PlayerCards 
         cards={props.player.cards} 
         username={props.player.username} 
@@ -30,5 +30,13 @@ const GameView = (props) => {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 40,
+  },
+})
+
 
 export default GameView;

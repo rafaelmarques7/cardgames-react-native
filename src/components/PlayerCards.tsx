@@ -3,48 +3,56 @@ import { View, Text, StyleSheet } from 'react-native';
 import Card from './Card';
 
 const PlayersCards = ({ cards, numCardsPerHand, displayCards=true, username=''}) => {
+  const position = username === 'Dealer' ? 'top' :'bottom';
+  console.log(position)
+
   if (cards && cards.length < 1) {
     cards = new Array(numCardsPerHand, true)
   }
+
   return (
-    <View style={styles.container}>
-      <View style={styles.cards}>
+    <View style={styles.container} >
+      <View style={[styles.cards, styles[position]]}>
       { cards.map((card, index) => {
           return (
-            <Card 
+            <View
               key={`card-${index}`}
-              cardObject={card} 
-              backOfDeck={!displayCards}
-            />
+              style={styles.cardContainer}>
+              <Card 
+                cardObject={card} 
+                backOfDeck={!displayCards}
+              />
+            </View>
           );
         })
       }
       </View>
-      <Text style={styles.text}>{username}</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  cards: {
-    flexDirection: 'row',
-    marginLeft: 100,
-  },
-  text: {
-    textAlign: 'center',
-  },
   container: {
-    top: 150,
-    margin: 10,
-    borderTopColor: 'black',
-    borderTopWidth: 1,
-    borderTopLeftRadius: 70,
-    borderTopRightRadius: 70,
-    borderBottomColor: 'black',
-    borderBottomWidth: 1,
-    borderBottomLeftRadius: 70,
-    borderBottomRightRadius: 70,
-  }
+    flex: 1,
+    flexDirection: 'row',
+    margin: 5,
+    backgroundColor: 'green'
+  },
+  top: {
+    marginTop: 20,
+  },
+  bottom: {
+    alignItems: 'flex-end',
+    marginBottom: 20,
+  },
+  cards: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  cardContainer: {
+    margin: 8,
+  },
 });
 
 export default PlayersCards;

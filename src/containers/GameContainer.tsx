@@ -12,11 +12,13 @@ import {
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 import GameView from '../views/GameView';
+import PlayerGround from '../views/PlayergroundView';
 
 const Game = (props) => {
   console.log('<Game /> props: ', props);
   return(
     <GameView {...props} />
+    // <PlayerGround />    
   );
 }
 
