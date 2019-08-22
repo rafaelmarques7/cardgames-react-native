@@ -1,5 +1,5 @@
 import React from 'react';
-import Game from './src/containers/Game';
+import Game from './src/containers/GameContainer';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
