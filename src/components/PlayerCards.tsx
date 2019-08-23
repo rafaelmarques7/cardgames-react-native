@@ -4,8 +4,6 @@ import Card from './Card';
 
 const PlayersCards = ({ cards, numCardsPerHand, displayCards=true, username=''}) => {
   const position = username === 'Dealer' ? 'top' :'bottom';
-  console.log(position)
-
   if (cards && cards.length < 1) {
     cards = new Array(numCardsPerHand, true)
   }
@@ -13,19 +11,20 @@ const PlayersCards = ({ cards, numCardsPerHand, displayCards=true, username=''})
   return (
     <View style={styles.container} >
       <View style={[styles.cards, styles[position]]}>
-      { cards.map((card, index) => {
-          return (
-            <View
-              key={`card-${index}`}
-              style={styles.cardContainer}>
-              <Card 
-                cardObject={card} 
-                backOfDeck={!displayCards}
-              />
-            </View>
-          );
-        })
-      }
+        { cards.map((card, index) => {
+            return (
+              <View
+                key={`card-${index}`}
+                style={styles.cardContainer}>
+                <Card 
+                  cardObject={card} 
+                  backOfDeck={!displayCards}
+                />
+              </View>
+            );
+          })
+        }
+        <Text style={styles.text}>{username}</Text>	
       </View>
     </View>
   );
@@ -52,6 +51,9 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     margin: 8,
+  },
+  text: {
+    textAlign: 'center',
   },
 });
 

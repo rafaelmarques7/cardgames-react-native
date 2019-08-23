@@ -46,7 +46,7 @@ class BetDisplay extends React.Component<BetProps, BetState> {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View>
         <View>
           <Button title="low" onPress={() => {this.onSelectBet('low')}} />
           <Button title="draw" onPress={() => {this.onSelectBet('draw')}} />
