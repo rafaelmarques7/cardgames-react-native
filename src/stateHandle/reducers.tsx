@@ -25,10 +25,12 @@ export const rootReducer = (state=initState, action) => {
 }
 
 function gameInit(state, action) {
+  const game = new HigherOrLower(
+    action.payload.players, 
+    action.payload.numCardsPerHand)
   return {
     ...state,
-    game: new HigherOrLower(
-      action.payload.players, action.payload.numCardsPerHand)
+    game: game 
   }
 }
 
