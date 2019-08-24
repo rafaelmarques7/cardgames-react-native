@@ -27,10 +27,9 @@ const GameView = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: (screen.heightScreen - screen.heightWindow)/2,
+    paddingTop: (screen.heightScreen - screen.heightWindow) / 2,
     backgroundColor: 'green',
   },
 })
-
 
 export default GameView;

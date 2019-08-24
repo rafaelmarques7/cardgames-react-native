@@ -55,11 +55,12 @@ class BetDisplay extends React.Component<BetProps, BetState> {
   }
 
   render() {
+    const stringBet = `Bet ${this.state.bet.ammount}\$ on ${this.state.bet.on !== 'pass' ? this.state.bet.on : '?'}`;
     return (
       <View style={styles.container}>
         <View style={styles.containerAction}>
           <MyButton 
-            title={`Bet ${this.state.bet.ammount}\$ on ${this.state.bet.on !== 'pass' ? this.state.bet.on : '?'}`}
+            title={stringBet}
             onPress={() => {this.onSetBet()}} />
         </View>
         <View style={styles.containerSelection}>
@@ -83,11 +84,9 @@ class BetDisplay extends React.Component<BetProps, BetState> {
               onPress={() => {this.onSelectBet('high')}} />
           </View>
         </View>
-
       </View>
     );    
   }
-
 }
 
 const styles = StyleSheet.create({
