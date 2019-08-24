@@ -1,8 +1,7 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import CreditPlayer from '../components/Credit';
 import BetDisplay from '../components/Bet';
-import DealButton from '../components/Deal'; 
+import DeckOfCardsImg from './DeckOfCards';
 
 
 const ActionDisplay = (props) => {
@@ -15,9 +14,19 @@ const ActionDisplay = (props) => {
           acceptBets={props.gameStatus.betMode} />
       </View>
       <View style={styles.containerDeal}>
-        <DealButton 
+        {
+        props.cardsInDeck < 52 &&
+        <DeckOfCardsImg
+          callbackFunction={()=>{}}
+          disabled={true} 
+          deckScrambled={true}
+          fullDeck={false} />
+        }
+        <DeckOfCardsImg
           callbackFunction={props.actionGameDeal}
-          disabled={!props.gameStatus.dealMode} /> 
+          disabled={!props.gameStatus.dealMode} 
+          deckScrambled={false}
+          fullDeck={props.cardsInDeck > 26? true : false} />
       </View>
     </View>
   )

@@ -3,13 +3,13 @@ import { TouchableOpacity, Image, StyleSheet } from 'react-native';
 
 const DealButton = ({ callbackFunction, disabled }) => {
   return (
-      <TouchableOpacity
-        onPress={() => {callbackFunction()}}
-        disabled={disabled}>
-        <Image
-          style={styles.imageCard}
-          source={require('../../assets/deck_full_ordered.png')} />
-      </TouchableOpacity>
+    <TouchableOpacity
+      onPress={() => {callbackFunction()}}
+      disabled={disabled}>
+      <Image
+        style={styles.imageCard}
+        source={require('../../assets/deck_full_ordered.png')} />
+    </TouchableOpacity>
   )
 }
 

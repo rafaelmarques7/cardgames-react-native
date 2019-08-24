@@ -32,6 +32,7 @@ const mapStateToProps = state => ({
   },
   gameStatus: state.gameStatus,
   numCardsPerHand: state.game.numCardsPerHand,
+  cardsInDeck: state.cardsInDeck,
 });
 
 const mapDispatchToProps = dispatch => {

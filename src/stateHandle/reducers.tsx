@@ -6,7 +6,8 @@ export const initState = {
     dealMode: true,
     betMode: false,
     endMode: false,
-  }
+  },
+  cardsInDeck: 52,
 }
 
 export const rootReducer = (state=initState, action) => {
@@ -74,6 +75,7 @@ function gamePayoff(state) {
       endMode: false,
       dealMode: true 
     },
+    cardsInDeck: state.cardsInDeck - 4,
   }
 }
 

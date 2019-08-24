@@ -58,7 +58,7 @@ class BetDisplay extends React.Component<BetProps, BetState> {
     return (
       <View style={styles.container}>
         <View style={styles.containerAction}>
-          <Button 
+          <MyButton 
             title={`Bet ${this.state.bet.ammount}\$ on ${this.state.bet.on !== 'pass' ? this.state.bet.on : '?'}`}
             onPress={() => {this.onSetBet()}} />
         </View>
@@ -101,12 +101,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   containerAction: {
+    flex: 2/5,
     paddingBottom: 7,
   },
   containerBetAmmount: {
     flex: 1,
     flexDirection: 'column',
-    paddingRight: 7,
+    paddingRight: 5,
   },
   containerBetType: {
     flex: 1,
