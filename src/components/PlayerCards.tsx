@@ -2,12 +2,21 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Card from './Card';
 import { screen } from '../config';
+import CreditPlayer from './Credit';
 
-const PlayersCards = ({ cards, numCardsPerHand, displayCards=true, username=''}) => {
+const PlayersCards = ({ 
+  cards, 
+  numCardsPerHand, 
+  displayCards=true, 
+  username='',
+  credit=null,
+  }) => {
+  
   const position = username === 'Dealer' ? 'top' :'bottom';
   if (cards && cards.length < 1) {
     cards = new Array(numCardsPerHand, true)
   }
+  const renderCredit = username !== 'Dealer' ? true : false;
 
   const styles = createStyle(position==='bottom');
 
@@ -15,6 +24,7 @@ const PlayersCards = ({ cards, numCardsPerHand, displayCards=true, username=''})
     <View style={styles.container} >
       <View style={styles.textContainer}>
         <Text style={styles.text}>{username}</Text>	
+        { renderCredit && <CreditPlayer ammount={credit}/>}
       </View>
       <View style={styles.handContainer}>
         { cards.map((card, index) => {
@@ -53,11 +63,13 @@ const createStyle = (bottom=false) => {
       margin: 8,
     },
     textContainer: {
+      flexDirection: 'row',
+      justifyContent: 'center',
       alignSelf: 'center',
       borderTopColor: 'white',
       borderBottomColor: 'white',
-      borderBottomWidth: bottom ? 2*StyleSheet.hairlineWidth : null,
-      borderTopWidth: !bottom ? 2*StyleSheet.hairlineWidth : null,
+      borderBottomWidth: bottom ? 2 * StyleSheet.hairlineWidth : null,
+      borderTopWidth: !bottom ? 2 * StyleSheet.hairlineWidth : null,
       width: screen.width * 0.8,
     },
     text: {

@@ -1,33 +1,25 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import CreditPlayer from '../components/Credit';
 import PlayerCards from '../components/PlayerCards';
-import BetDisplay from '../components/Bet';
-import DealButton from '../components/Deal'; 
+import ActionDisplay from '../components/ActionDisplay';
 import { screen } from '../config';
 
 const GameView = (props) => {
   return(
     <View style={styles.container}>
-      <CreditPlayer 
-        ammount={props.player.creditAmmount} />
-      <DealButton 
-        callbackFunction={props.actionGameDeal}
-        disabled={!props.gameStatus.dealMode} /> 
       <PlayerCards 
         cards={props.dealer.cards} 
         username={'Dealer'} 
         displayCards={props.gameStatus.endMode}
         numCardsPerHand={props.numCardsPerHand} />
-      <BetDisplay 
-        betMaximum={props.player.creditAmmount}
-        onSetBet={(bet) => {props.actionGameBet([bet])}}
-        acceptBets={props.gameStatus.betMode} />
+      <ActionDisplay 
+        {...props} />
       <PlayerCards 
         cards={props.player.cards} 
         username={props.player.username} 
         displayCards={props.gameStatus.betMode || props.gameStatus.endMode}
-        numCardsPerHand={props.numCardsPerHand} />
+        numCardsPerHand={props.numCardsPerHand} 
+        credit={props.player.creditAmmount} />
     </View>
   );
 }
@@ -35,11 +27,9 @@ const GameView = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    paddingTop: screen.heightScreen - screen.heightWindow,
+    paddingTop: (screen.heightScreen - screen.heightWindow) / 2,
     backgroundColor: 'green',
   },
 })
-
 
 export default GameView;

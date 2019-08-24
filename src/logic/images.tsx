@@ -1,4 +1,8 @@
 export const ImageList = {
+  'deck_full_ordered': require('../../assets/deck_full_ordered.png'),
+  'deck_full_ordered_png': require('../../assets/deck_full_ordered.svg'),
+  'deck_half_ordered': require('../../assets/deck_half_ordered.png'),
+  'deck_half_scrambled': require('../../assets/deck_half_scrambled.png'),
   '1B': require('../../assets/1B.svg'),
   '7C': require('../../assets/7C.svg'),
   'QH': require('../../assets/QH.svg'),
