@@ -4,10 +4,11 @@ import CreditPlayer from '../components/Credit';
 import PlayerCards from '../components/PlayerCards';
 import BetDisplay from '../components/Bet';
 import DealButton from '../components/Deal'; 
+import { screen } from '../config';
 
 const GameView = (props) => {
   return(
-    <View>
+    <View style={styles.container}>
       <CreditPlayer 
         ammount={props.player.creditAmmount} />
       <DealButton 
@@ -30,5 +31,15 @@ const GameView = (props) => {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    paddingTop: screen.heightScreen - screen.heightWindow,
+    backgroundColor: 'green',
+  },
+})
+
 
 export default GameView;

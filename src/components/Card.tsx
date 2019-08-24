@@ -6,22 +6,20 @@ import { StyleSheet } from 'react-native';
 
 const Card = ({ cardObject=null, backOfDeck=false }) => {
   // Cards are selected according to svg filename
-  console.log(`inside Card`);
   let key = backOfDeck ? '1B' : cardToId(cardObject);
   let source = ImageList[key];
   return (
     <Image
       source={source}
-      style={styles.container}
+      style={styles.imageCard}
     />
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    height: 120,
-    width: 80,
-    margin: 5,
+  imageCard: {
+    width: 440/4,
+    height: 600/4,
   },
 });
 

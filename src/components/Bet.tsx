@@ -65,7 +65,7 @@ class BetDisplay extends React.Component<BetProps, BetState> {
 
 const styles = StyleSheet.create({
   container: {
-    top: 200,
+    flex: 1,
   }
 });
 
