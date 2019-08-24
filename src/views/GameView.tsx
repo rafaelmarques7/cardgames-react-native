@@ -1,28 +1,22 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import CreditPlayer from '../components/Credit';
 import PlayerCards from '../components/PlayerCards';
-import BetDisplay from '../components/Bet';
-import DealButton from '../components/Deal'; 
+import ActionDisplay from '../components/ActionDisplay';
 import { screen } from '../config';
+import CreditPlayer from '../components/Credit';
 
 const GameView = (props) => {
   return(
     <View style={styles.container}>
       <CreditPlayer 
-        ammount={props.player.creditAmmount} />
-      <DealButton 
-        callbackFunction={props.actionGameDeal}
-        disabled={!props.gameStatus.dealMode} /> 
+          ammount={props.player.creditAmmount} />
       <PlayerCards 
         cards={props.dealer.cards} 
         username={'Dealer'} 
         displayCards={props.gameStatus.endMode}
         numCardsPerHand={props.numCardsPerHand} />
-      <BetDisplay 
-        betMaximum={props.player.creditAmmount}
-        onSetBet={(bet) => {props.actionGameBet([bet])}}
-        acceptBets={props.gameStatus.betMode} />
+      <ActionDisplay 
+        {...props} />
       <PlayerCards 
         cards={props.player.cards} 
         username={props.player.username} 
@@ -35,8 +29,8 @@ const GameView = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    paddingTop: screen.heightScreen - screen.heightWindow,
+    // alignItems: "center",
+    paddingTop: (screen.heightScreen - screen.heightWindow)/2,
     backgroundColor: 'green',
   },
 })

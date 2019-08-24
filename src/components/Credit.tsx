@@ -15,17 +15,11 @@ const CreditPlayer = ({ ammount }) => (
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
-    flexDirection: 'row',
-    top: 60,
-    right: 10,
-    width: 60,
   },
   text: {
     fontWeight: 'bold',
   },
   image: {
-    // flex: 1,
     height: 20,
     width: 20,
     marginLeft: 5,

@@ -1,24 +1,24 @@
 import React from 'react';
-import { Button, StyleSheet, View } from 'react-native';
+import { TouchableOpacity, Image, StyleSheet } from 'react-native';
 
 const DealButton = ({ callbackFunction, disabled }) => {
   return (
-    // <View style={styles.container}>
-      <Button 
-        title="Deal" 
+      <TouchableOpacity
         onPress={() => {callbackFunction()}}
-        disabled={disabled}
-        />
-    // </View>
+        disabled={disabled}>
+        <Image
+          style={styles.imageCard}
+          source={require('../../assets/deck_full_ordered.png')} />
+      </TouchableOpacity>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // top: 100,
-    // margin: 10,
-  }
+  imageCard: {
+    width: 440/5,
+    height: 600/5,
+    transform: [{ rotate: '-90deg'}]
+  },
 });
 
 export default DealButton;
