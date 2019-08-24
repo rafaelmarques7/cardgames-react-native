@@ -1,8 +1,7 @@
-import React from 'react';
 import { Dimensions } from 'react-native';
 
 export const screen = {
   width: Dimensions.get('window').width,
-  height: Dimensions.get('window').height,
+  heightWindow: Dimensions.get('window').height,
+  heightScreen: Dimensions.get('screen').height,
 }
-

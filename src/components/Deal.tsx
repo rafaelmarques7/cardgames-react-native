@@ -16,8 +16,8 @@ const DealButton = ({ callbackFunction, disabled }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    top: 100,
-    margin: 10,
+    // top: 100,
+    // margin: 10,
   }
 });
 

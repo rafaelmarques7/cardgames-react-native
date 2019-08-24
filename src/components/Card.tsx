@@ -11,13 +11,13 @@ const Card = ({ cardObject=null, backOfDeck=false }) => {
   return (
     <Image
       source={source}
-      style={styles.container}
+      style={styles.imageCard}
     />
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  imageCard: {
     width: 440/4,
     height: 600/4,
   },

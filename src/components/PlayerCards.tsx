@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Card from './Card';
+import { screen } from '../config';
 
 const PlayersCards = ({ cards, numCardsPerHand, displayCards=true, username=''}) => {
   const position = username === 'Dealer' ? 'top' :'bottom';
@@ -37,11 +38,8 @@ const createStyle = (bottom=false) => {
   return StyleSheet.create({
     container: {
       flex: 1,
-      // if bottom, reverse the direction of container childs
-      // leading the username to the bottom of the container
-      flexDirection: bottom ? 'column-reverse' : 'column',
+      flexDirection: bottom ? 'column-reverse' : 'column', // if bottom, reverse the direction of childs views
       margin: 5,
-      backgroundColor: 'green',
       paddingBottom: bottom ? 20 : 0,
       paddingTop: !bottom ? 20: 0,
     },
@@ -49,18 +47,22 @@ const createStyle = (bottom=false) => {
       flex: 1,
       flexDirection: 'row',
       justifyContent: 'center',
-      // if bottom, move cards to bottom of their containers flex
-      alignItems: bottom ? 'flex-end' : 'flex-start',
+      alignItems: bottom ? 'flex-end' : 'flex-start', // if bottom, move cards to bottom of their containers flex
     },
     cardContainer: {
       margin: 8,
     },
     textContainer: {
-      alignSelf: 'stretch',
-      // backgroundColor: 'yellow',
+      alignSelf: 'center',
+      borderTopColor: 'white',
+      borderBottomColor: 'white',
+      borderBottomWidth: bottom ? 2*StyleSheet.hairlineWidth : null,
+      borderTopWidth: !bottom ? 2*StyleSheet.hairlineWidth : null,
+      width: screen.width * 0.8,
     },
     text: {
       textAlign: 'center',
+      fontWeight: 'bold',
     },
   });
 }
