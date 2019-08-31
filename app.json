@@ -9,9 +9,9 @@
       "android",
       "web"
     ],
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/highlow.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -24,7 +24,13 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.highlow.cardgames",
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.highlow.cardgames",
+      "permissions": [],
+      "versionCode": 2
     }
   }
 }
