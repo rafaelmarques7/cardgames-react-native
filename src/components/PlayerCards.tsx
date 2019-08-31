@@ -71,6 +71,7 @@ const createStyle = (bottom=false) => {
       borderBottomWidth: bottom ? 2 * StyleSheet.hairlineWidth : null,
       borderTopWidth: !bottom ? 2 * StyleSheet.hairlineWidth : null,
       width: screen.width * 0.8,
+      height: 25,
     },
     text: {
       textAlign: 'center',
