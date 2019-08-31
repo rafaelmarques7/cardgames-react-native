@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { animated, useSpring } from 'react-spring';
 
@@ -15,7 +15,7 @@ const CreditPlayer = ({ ammount }) => {
     }
   })
 
-  // declare possible animations
+  // declare the two possible animations
   const springLarger = useSpring({
     from: { width: 20, height: 20 },
     to: async (next) => {
@@ -65,6 +65,5 @@ const styles = StyleSheet.create({
     marginBottom: 7,
   }
 });
-
 
 export default CreditPlayer;
