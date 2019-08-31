@@ -26,17 +26,43 @@ export const actionBet = (bets) => ({
   }
 })
 
+export const actionGameShowdown = () => ({
+  type: 'GAME_SHOWDOWN',
+})
+
+
 export const actionGamePayoff = () => ({
   type: 'GAME_PAYOFF',
 })
 
+export const actionGameRestart = () => ({
+  type: 'GAME_RESTART',
+})
+
 export const actionGameBet = (bets) => {
   return dispatch => {
+    console.log(`inside dispatch`)
     // set bet action
-    dispatch(actionBet(bets));
+    // dispatch(actionGameShowdown());
+    setTimeout(() => {
+      console.log(`inside dispatch game showdown`)
+      dispatch(actionGameShowdown());
+    }, 100);
+    
+    // set showdown action, but delay it
+    setTimeout(() => {
+      console.log(`inside dispatch action BET`)
+      dispatch(actionBet(bets));
+    }, 200);
+    
     // set payoff action, but delay it
     setTimeout(() => {
+      console.log(`\n\ninside dispatch action  payoff`)
       dispatch(actionGamePayoff());
     }, 3000);
+
+    setTimeout(() => {
+      dispatch(actionGameRestart());
+    }, 5000);
   }
 }

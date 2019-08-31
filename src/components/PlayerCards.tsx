@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import Card from './Card';
 import { screen } from '../config';
 import CreditPlayer from './Credit';
+import CardWithFlip from './CardWithFlip';
 
 const PlayersCards = ({ 
   cards, 
@@ -10,11 +11,14 @@ const PlayersCards = ({
   displayCards=true, 
   username='',
   credit=null,
+  flipCards=false,
   }) => {
+
+  // console.log(`${username} flipCards: ${flipCards}`)
   
   const position = username === 'Dealer' ? 'top' :'bottom';
   if (cards && cards.length < 1) {
-    cards = new Array(numCardsPerHand, true)
+    cards = new Array(numCardsPerHand).fill(0)
   }
   const renderCredit = username !== 'Dealer' ? true : false;
 
@@ -24,7 +28,7 @@ const PlayersCards = ({
     <View style={styles.container} >
       <View style={styles.textContainer}>
         <Text style={styles.text}>{username}</Text>	
-        { renderCredit && <CreditPlayer ammount={credit}/>}
+        { renderCredit && <CreditPlayer ammount={credit}/> }
       </View>
       <View style={styles.handContainer}>
         { cards.map((card, index) => {
@@ -32,9 +36,10 @@ const PlayersCards = ({
               <View
                 key={`card-${index}`}
                 style={styles.cardContainer}>
-                <Card 
+                <CardWithFlip
                   cardObject={card} 
-                  backOfDeck={!displayCards} />
+                  backOfDeck={!displayCards} 
+                  flipCards={flipCards}/>
               </View>
             );
           })
