@@ -1,13 +1,12 @@
 import React from 'react';
-import Image from 'react-native-remote-svg';
 import { cardToId } from '../logic/misc';
 import { ImageList } from '../logic/images';
-import { StyleSheet } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 
 const Card = ({ cardObject=null, backOfDeck=false }) => {
-  // Cards are selected according to svg filename
-  let key = backOfDeck ? '1B' : cardToId(cardObject);
-  let source = ImageList[key];
+  // Cards are selected according to their filename
+  let cardId = backOfDeck ? '1B' : cardToId(cardObject);
+  let source = ImageList[cardId];
   return (
     <Image
       source={source}
