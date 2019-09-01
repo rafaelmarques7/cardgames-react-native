@@ -54,7 +54,6 @@ function gameDeal(state) {
 }
 
 function gameBet(state, action) {
-  console.log(`setting bet`)
   state.game.setBets(action.payload.bets);  // changes happen inside the class object
   const newGame = Object.assign(  // this preserves the class methods
     Object.create(Object.getPrototypeOf(state.game)), state.game);
@@ -69,7 +68,6 @@ function gameBet(state, action) {
 }
 
 function gameShowdown(state) {
-  console.log(`setting showdown mode`)
   return {
     ...state,
     gameStatus: {
@@ -92,14 +90,12 @@ function gamePayoff(state) {
       ...state.gameStatus,
       endMode: true,
       showMode: false,
-      // dealMode: true 
     },
     cardsInDeck: state.cardsInDeck - 4,
   }
 }
 
 function gameRestart(state) {
-  console.log(`setting game restart`)
   return {
     ...state,
     gameStatus: {
