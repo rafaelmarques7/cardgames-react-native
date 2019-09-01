@@ -32,3 +32,8 @@ const gameState = {
   endMode: false,
 }
 ```
+
+## Flip card animation
+
+The flip card animation was achieved by following a sample tutorial, together with some minor refactors and cleanups. [Video](https://codedaily.io/screencasts/12/Create-a-Flip-Card-Animation-with-React-Native) and [code](https://github.com/browniefed/examples/tree/animated_basic/flip) for further reference.
+

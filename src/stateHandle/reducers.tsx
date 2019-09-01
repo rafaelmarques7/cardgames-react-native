@@ -5,6 +5,7 @@ export const initState = {
   gameStatus: {
     dealMode: true,
     betMode: false,
+    showMode: false,
     endMode: false,
   },
   cardsInDeck: 52,
@@ -18,8 +19,12 @@ export const rootReducer = (state=initState, action) => {
       return gameDeal(state);
     case 'GAME_BET':
       return gameBet(state, action);
+    case 'GAME_SHOWDOWN':
+      return gameShowdown(state);
     case 'GAME_PAYOFF':
       return gamePayoff(state);
+    case 'GAME_RESTART':
+      return gameRestart(state);
     default:
       return state;  
   }
@@ -58,12 +63,23 @@ function gameBet(state, action) {
     gameStatus: {
       ...state.gameStatus,
       betMode: false,
-      endMode: true,
     }
   }
 }
 
+function gameShowdown(state) {
+  return {
+    ...state,
+    gameStatus: {
+      ...state.gameStatus,
+      betMode: false,
+      showMode: true
+    },
+  }
+}
+
 function gamePayoff(state) {
+  console.log(`setting game payoff`)
   state.game.payoff()  // changes happen inside the class object
   const newGame = Object.assign(  // this preserves the class methods
     Object.create(Object.getPrototypeOf(state.game)), state.game);
@@ -72,10 +88,21 @@ function gamePayoff(state) {
     game: newGame,
     gameStatus: {
       ...state.gameStatus,
-      endMode: false,
-      dealMode: true 
+      endMode: true,
+      showMode: false,
     },
     cardsInDeck: state.cardsInDeck - 4,
   }
 }
 
+function gameRestart(state) {
+  return {
+    ...state,
+    gameStatus: {
+      ...state.gameStatus,
+      endMode: false,
+      showMode: false,
+      dealMode: true
+    }
+  }
+}
