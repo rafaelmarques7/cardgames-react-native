@@ -13,21 +13,19 @@ const ActionDisplay = (props) => {
           acceptBets={props.gameStatus.betMode} />
       </View>
       <View style={styles.containerDeal}>
-        {
-          props.cardsInDeck < 52 &&
+        { props.cardsInDeck < 52 &&
           <DeckOfCardsImg
             callbackFunction={()=>{}}
             disabled={true} 
             deckScrambled={true}
             fullDeck={false} />
-          }
-        {/* This serves as the dealer button 
-            @TODO make deck stand out, so player knows it's an action button */}
+        }
         <DeckOfCardsImg
           callbackFunction={props.actionGameDeal}
           disabled={!props.gameStatus.dealMode} 
           deckScrambled={false}
-          fullDeck={props.cardsInDeck > 26 ? true : false} />
+          fullDeck={props.cardsInDeck > 26 ? true : false} 
+          shakeAnimation={props.gameStatus.dealMode} />
       </View>
     </View>
   )
