@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import Card from './Card';
 import { screen } from '../config';
 import CreditPlayer from './Credit';
 import CardWithFlip from './CardWithFlip';
@@ -29,22 +28,16 @@ const PlayersCards = ({
         { renderCredit && <CreditPlayer ammount={credit}/> }
       </View>
       <View style={styles.handContainer}>
-        { cards.map((card, index) => {
-            return (
-                // <CardWithFlip
-                //   cardObject={card} 
-                //   backOfDeck={!displayCards} 
-                //   flipCards={flipCards}/>
-              <View
-                key={`card-${index}`}
-                style={styles.cardContainer}>
-                <CardWithFlip
-                  cardObject={card} 
-                  backOfDeck={!displayCards} 
-                  flipCards={flipCards}/>
-              </View>
-            );
-          })
+        { cards.map((card, index) => (
+            <View
+              key={`card-${index}`}
+              style={styles.cardContainer}>
+              <CardWithFlip
+                cardObject={card} 
+                backOfDeck={!displayCards} 
+                flipCards={flipCards}/>
+            </View>
+          ))
         }
       </View>
     </View>
