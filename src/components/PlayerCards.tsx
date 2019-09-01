@@ -13,8 +13,6 @@ const PlayersCards = ({
   credit=null,
   flipCards=false,
   }) => {
-
-  // console.log(`${username} flipCards: ${flipCards}`)
   
   const position = username === 'Dealer' ? 'top' :'bottom';
   if (cards && cards.length < 1) {
@@ -33,6 +31,10 @@ const PlayersCards = ({
       <View style={styles.handContainer}>
         { cards.map((card, index) => {
             return (
+                // <CardWithFlip
+                //   cardObject={card} 
+                //   backOfDeck={!displayCards} 
+                //   flipCards={flipCards}/>
               <View
                 key={`card-${index}`}
                 style={styles.cardContainer}>
@@ -76,7 +78,7 @@ const createStyle = (bottom=false) => {
       borderBottomWidth: bottom ? 2 * StyleSheet.hairlineWidth : null,
       borderTopWidth: !bottom ? 2 * StyleSheet.hairlineWidth : null,
       width: screen.width * 0.8,
-      height: 25,
+      height: 30,
     },
     text: {
       textAlign: 'center',

@@ -1,6 +1,5 @@
 import React from 'react';
 import Card from './Card';
-import { ImageList } from '../logic/images';
 import { StyleSheet, View, Animated } from 'react-native';
 
 /**
@@ -9,10 +8,6 @@ import { StyleSheet, View, Animated } from 'react-native';
  * 
  */
 class CardWithFlip extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
   componentWillMount() {
     this.animatedValue = new Animated.Value(0);
     this.animatedValue.addListener(({ value }) => {
@@ -52,18 +47,13 @@ class CardWithFlip extends React.Component {
     }
   }
 
-  // componentWillUpdate() {
-  componentDidUpdate(prevProps) {
-    // console.log(`will update`)
-    // console.log(this.props, prevProps)
+  componentDidUpdate() {
     if (this.props.flipCards) {
-      // console.log(`will flip`)
       this.flipCard()
     }
   }
 
   render() {
-    const { cardObject, backOfDeck } = this.props;
     const frontAnimatedStyle = {
       transform: [
         { rotateY: this.frontInterpolate }
@@ -74,46 +64,38 @@ class CardWithFlip extends React.Component {
         { rotateY: this.backInterpolate }
       ]
     }
-
+    const { cardObject } = this.props;
 
     return (
-      <View style={styles.container}>
-        <View style={styles.card}>
-          <Animated.View 
-            style={{...styles.cardFront, ...frontAnimatedStyle, ...{opacity: this.frontOpacity}}}>
-            <Card 
-              cardObject={null} 
-              backOfDeck={true} />
-          </Animated.View>
-          <Animated.View 
-            style={{...styles.cardBack, ...backAnimatedStyle, ...{opacity: this.backOpacity}}}>
-            <Card 
-              cardObject={cardObject} 
-              backOfDeck={cardObject ? false : true} />
-          </Animated.View>
-        </View>
+      <View>
+        <Animated.View 
+          style={{
+            ...frontAnimatedStyle, 
+            ...{opacity: this.frontOpacity}}}>
+          <Card 
+            cardObject={null} 
+            backOfDeck={true} />
+        </Animated.View>
+
+        <Animated.View 
+          style={{
+            ...styles.cardBack, 
+            ...backAnimatedStyle, 
+            ...{opacity: this.backOpacity}}}>
+          <Card 
+            cardObject={cardObject} 
+            backOfDeck={cardObject ? false : true} />
+        </Animated.View>
       </View>
     )
   }
 } 
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  card: {
-    flex: 1,
-    backfaceVisibility: 'hidden',
-
-  },
-  cardFront: {
-
-  },
   cardBack: {
     position: 'absolute',
     top: 0,
   },
-  cardIsFlipped: {},
 });
 
 export default CardWithFlip;
