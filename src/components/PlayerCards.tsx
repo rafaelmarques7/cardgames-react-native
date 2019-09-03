@@ -11,15 +11,16 @@ const PlayersCards = ({
   displayCards=true, 
   username='',
   credit=null,
-  flipCards=false,
+  showCards=false,
   valueHand=null,
   gameStatus={},
 }) => {
-  
   const position = username === 'Dealer' ? 'top' :'bottom';
+
   if (cards && cards.length < 1) {
-    cards = new Array(numCardsPerHand).fill(0)
+    cards = Array.from({length: numCardsPerHand}, () => 0);
   }
+
   const renderCredit = username !== 'Dealer' ? true : false;
   let renderStrength = false
   // const renderStrength = username !== 'Dealer' ? true : false; 
@@ -46,7 +47,7 @@ const PlayersCards = ({
               <CardWithFlip
                 cardObject={card} 
                 backOfDeck={!displayCards} 
-                flipCards={flipCards}/>
+                showCards={showCards}/>
             </View>
           ))
         }
@@ -91,7 +92,7 @@ const createStyle = (bottom=false) => {
       borderBottomColor: 'white',
       borderBottomWidth: bottom ? 2 * StyleSheet.hairlineWidth : null,
       borderTopWidth: !bottom ? 2 * StyleSheet.hairlineWidth : null,
-      width: screen.width * 0.8,
+      width: screen.width * 0.7,
       height: 30,
     },
     text: {

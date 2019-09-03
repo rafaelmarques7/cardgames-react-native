@@ -1,4 +1,5 @@
 import { HigherOrLower } from "card-games-typescript";
+import { DEF_PLAYERS } from "./actions";
 
 export const initState = {
   game: {}, // class object for game HigherOrLower
@@ -25,6 +26,8 @@ export const rootReducer = (state=initState, action) => {
       return gamePayoff(state);
     case 'GAME_RESTART':
       return gameRestart(state);
+    case 'SET_NUMBER_OF_CARDS':
+      return gameSetNumberOfCards(state, action);
     default:
       return state;  
   }
@@ -104,5 +107,17 @@ function gameRestart(state) {
       showMode: false,
       dealMode: true
     }
+  }
+}
+
+function gameSetNumberOfCards(state, action) {
+  console.log(`game set number of cards`, action.payload.value);
+  state.game.numCardsPerHand = action.payload.value;
+  const newGame = Object.assign(
+    Object.create(Object.getPrototypeOf(state.game)), state.game);
+  // const newGame = new HigherOrLower(DEF_PLAYERS, action.payload.value);
+    return {
+    ...state,
+    game: newGame,
   }
 }

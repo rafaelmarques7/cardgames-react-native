@@ -1,4 +1,5 @@
 export const ImageList = {
+  'gearConfig': require('../../assets/gearConfiguration.png'),
   'deck_full_ordered': require('../../assets/deck/deck_full_ordered.png'),
   'deck_half_ordered': require('../../assets/deck/deck_half_ordered.png'),
   'deck_half_scrambled': require('../../assets/deck/deck_half_scrambled.png'),
