@@ -20,3 +20,11 @@ export function getPlayersCreditAmmount(state, indexPlayer=0) {
 export function getPlayersUsername(state, indexPlayer=0) {
   return state.game.players[indexPlayer].username;
 }
+
+export function getCardsStrength(state, indexPlayer=0) {
+  return state.game.players[indexPlayer].cards.valueHand;
+}
+
+export function getDealerCardsStrength(state) {
+  return state.game.dealer.cards.valueHand;
+}
