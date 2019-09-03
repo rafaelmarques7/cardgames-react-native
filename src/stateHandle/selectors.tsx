@@ -7,7 +7,6 @@ export const getPlayersBet = (state) => {
 } 
 
 export function getPlayersCards(state, indexPlayer=0) {
-  console.log(`inside getPlayerCards`)
   if (state.game.players && state.game.players[indexPlayer]) {
     if (state.gameStatus.dealMode) {
       return [];

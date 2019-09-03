@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import { Button, Text, View, TouchableOpacity, Image } from "react-native";
-import Modal from "react-native-modal";
-import { ImageList } from "../logic/images";
-import { Picker } from "react-native";
-import { StyleSheet } from "react-native";
-import Icon from 'react-native-vector-icons/AntDesign'
+import { Text, Picker, StyleSheet, View, TouchableOpacity } from 'react-native';
+import Modal from 'react-native-modal';
 import { screen } from '../config';
+import Icon from 'react-native-vector-icons/AntDesign'
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
 
 export default class ModalConfiguration extends Component {
   state = {
@@ -53,18 +51,17 @@ export default class ModalConfiguration extends Component {
     </Modal>
   )
 
+  renderModalButton = () => (
+    <TouchableOpacity
+      onPress={this.toggleModal}>
+      <EvilIcons name='gear' size={40} />
+    </TouchableOpacity>    
+  )
+
   render() {
-    const imageSource = ImageList['gearConfig'];
-    const sizeImage = 40;
-    const styleImage = {height: sizeImage, width: sizeImage};
     return (
       <View style={styles.container}>
-        <TouchableOpacity
-          onPress={this.toggleModal}>
-          <Image
-            style={styleImage}
-            source={imageSource} />
-        </TouchableOpacity>        
+        { this.renderModalButton() }
         { this.renderModal() }
       </View>
     );
