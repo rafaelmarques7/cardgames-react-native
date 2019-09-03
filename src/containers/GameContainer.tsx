@@ -8,6 +8,8 @@ import {
   actionGameBet,
   getDealerCards,
   getPlayersBet,
+  getCardsStrength,
+  getDealerCardsStrength,
 } from '../stateHandle';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
@@ -29,10 +31,12 @@ const mapStateToProps = state => ({
   },
   dealer: {
     cards: getDealerCards(state),
+    valueHand: getDealerCardsStrength(state),
   },
   gameStatus: state.gameStatus,
   numCardsPerHand: state.game.numCardsPerHand,
   cardsInDeck: state.cardsInDeck,
+  valueHand: getCardsStrength(state),
 });
 
 const mapDispatchToProps = dispatch => {

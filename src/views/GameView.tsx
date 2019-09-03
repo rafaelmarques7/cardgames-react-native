@@ -13,7 +13,8 @@ const GameView = (props) => {
         displayCards={props.gameStatus.endMode}
         numCardsPerHand={props.numCardsPerHand}
         gameStatus={props.gameStatus} 
-        flipCards={props.gameStatus.showMode || props.gameStatus.endMode ? true : false} />
+        flipCards={props.gameStatus.showMode || props.gameStatus.endMode ? true : false}
+        valueHand={props.dealer.valueHand} />
       <ActionDisplay 
         {...props} />
       <PlayerCards 
@@ -23,7 +24,8 @@ const GameView = (props) => {
         numCardsPerHand={props.numCardsPerHand} 
         credit={props.player.creditAmmount}
         gameStatus={props.gameStatus} 
-        flipCards={props.gameStatus.betMode || props.gameStatus.endMode ? true : false} />
+        flipCards={props.gameStatus.betMode || props.gameStatus.endMode ? true : false} 
+        valueHand={props.valueHand} />
     </View>
   );
 }

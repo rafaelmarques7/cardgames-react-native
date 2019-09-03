@@ -39,26 +39,21 @@ export const actionGameRestart = () => ({
 })
 
 export const actionGameBet = (bets) => {
-  return dispatch => {
-    console.log(`inside dispatch`)
-    
+  return dispatch => {  
     // set showdown action so that dealer shows their cards
     setTimeout(() => {
-      console.log(`inside dispatch game showdown`)
       dispatch(actionGameShowdown());
     }, 100);
     
     // set bet action after initiating showdown
     setTimeout(() => {
-      console.log(`inside dispatch action BET`)
       dispatch(actionBet(bets));
     }, 200);
     
     // set payoff action, but delay it
     setTimeout(() => {
-      console.log(`\n\ninside dispatch action  payoff`)
       dispatch(actionGamePayoff());
-    }, 3000);
+    }, 5000);
 
     // restart game
     setTimeout(() => {
