@@ -10,13 +10,14 @@ import {
   getPlayersBet,
   getCardsStrength,
   getDealerCardsStrength,
+  getNumberOfCardsPerHand,
 } from '../stateHandle';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 import GameView from '../views/GameView';
 
 const Game = (props) => {
-  console.log('<Game /> props: ', props);
+  // console.log('<Game /> props: ', props);
   return(
     <GameView {...props} />
   );
@@ -34,7 +35,7 @@ const mapStateToProps = state => ({
     valueHand: getDealerCardsStrength(state),
   },
   gameStatus: state.gameStatus,
-  numCardsPerHand: state.game.numCardsPerHand,
+  numCardsPerHand: getNumberOfCardsPerHand(state),
   cardsInDeck: state.cardsInDeck,
   valueHand: getCardsStrength(state),
 });

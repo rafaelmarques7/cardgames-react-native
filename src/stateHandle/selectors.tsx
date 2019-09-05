@@ -1,3 +1,5 @@
+import get from 'lodash.get';
+
 export const getDealerCards = (state) => { 
   return state.game.dealer.cards.cards
 } 
@@ -7,10 +9,7 @@ export const getPlayersBet = (state) => {
 } 
 
 export function getPlayersCards(state, indexPlayer=0) {
-  if (state.game.players && state.game.players[indexPlayer]) {
-    return state.game.players[indexPlayer].cards.cards
-  }
-  return [];
+  return get(state, `game.players[${indexPlayer}].cards.cards`, [])
 }
 
 export function getPlayersCreditAmmount(state, indexPlayer=0) {
@@ -27,4 +26,8 @@ export function getCardsStrength(state, indexPlayer=0) {
 
 export function getDealerCardsStrength(state) {
   return state.game.dealer.cards.valueHand;
+}
+
+export function getNumberOfCardsPerHand(state) {
+  return state.game.numCardsPerHand;
 }

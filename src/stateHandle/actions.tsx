@@ -1,11 +1,18 @@
 import { PlayerHighLow } from 'card-games-typescript';
 
-const DEF_PLAYERS = [new PlayerHighLow('R7M')];
-const DEF_NUM_CARDS_PER_HAND = 2;
+export const DEF_PLAYERS = [new PlayerHighLow('Player')];
+export const DEF_NUM_CARDS_PER_HAND = 1;
 
 export const startGame = (store) => {
   store.dispatch(actionGameInit(DEF_PLAYERS, DEF_NUM_CARDS_PER_HAND));
 }
+
+export const actionSetNumberOfCards = (value) => ({
+  type: 'SET_NUMBER_OF_CARDS',
+  payload: {
+    value: value,
+  }
+})
 
 export const actionGameInit = (players, numCardsPerHand) => ({
   type: 'GAME_INIT',
@@ -42,22 +49,26 @@ export const actionGameBet = (bets) => {
   return dispatch => {  
     // set showdown action so that dealer shows their cards
     setTimeout(() => {
+      console.log(`dispatch showdown`)
       dispatch(actionGameShowdown());
     }, 100);
     
     // set bet action after initiating showdown
     setTimeout(() => {
+      console.log(`dispatch bet`)
       dispatch(actionBet(bets));
     }, 200);
     
     // set payoff action, but delay it
     setTimeout(() => {
+      console.log(`dispatch payoff`)
       dispatch(actionGamePayoff());
-    }, 5000);
+    }, 1500);
 
     // restart game
     setTimeout(() => {
+      console.log(`dispatch gameRestart`)
       dispatch(actionGameRestart());
-    }, 5000);
+    }, 7500);
   }
 }
