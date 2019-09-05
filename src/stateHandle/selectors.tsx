@@ -9,6 +9,7 @@ export const getPlayersBet = (state) => {
 } 
 
 export function getPlayersCards(state, indexPlayer=0) {
+  // it may be a good idea to default to array with length equal to num cards
   return get(state, `game.players[${indexPlayer}].cards.cards`, [])
 }
 
@@ -30,4 +31,24 @@ export function getDealerCardsStrength(state) {
 
 export function getNumberOfCardsPerHand(state) {
   return state.game.numCardsPerHand;
+}
+
+export function getPlayerInfo(state) {
+  return {
+    username: getPlayersUsername(state),
+    cards: getPlayersCards(state),
+    creditAmmount: getPlayersCreditAmmount(state),
+    valueHand: getCardsStrength(state),
+    bet: getPlayersBet(state),
+  }
+}
+
+export function getDealerInfo(state) {
+  return {
+    username: 'Dealer',
+    cards: getDealerCards(state),
+    creditAmmount: null,
+    valueHand: getDealerCardsStrength(state),
+    bet: null,
+  }
 }
