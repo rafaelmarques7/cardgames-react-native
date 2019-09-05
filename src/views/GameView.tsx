@@ -37,10 +37,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: (screen.heightScreen - screen.heightWindow) / 2,
     backgroundColor: 'green',
-  },
-  modalConfiguration: {
-    position: 'absolute',
-    paddingTop: (screen.heightScreen - screen.heightWindow) / 2,
   }
 })
 

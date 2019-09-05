@@ -9,13 +9,7 @@ type cProps = {
   colorTo: string,
 }
 
-const style = StyleSheet.create({
-  container: {
-    flex: 1,
-  }
-})
-
-export default class ContainerColorGradient extends React.Component<cProps> {
+class ContainerColorGradient extends React.Component<cProps> {
   constructor(props) {
     super(props)
   }
@@ -41,3 +35,11 @@ export default class ContainerColorGradient extends React.Component<cProps> {
     )
   }
 }
+
+const style = StyleSheet.create({
+  container: {
+    flex: 1,
+  }
+})
+
+export default ContainerColorGradient;

@@ -5,7 +5,11 @@ import { screen } from '../config';
 import Icon from 'react-native-vector-icons/AntDesign'
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 
-export default class ModalConfiguration extends Component {
+type cProps = {
+  actionSetNumberOfCards: Function,
+} 
+
+export default class ModalConfiguration extends Component<cProps> {
   state = {
     isModalVisible: false,
     numCards: 2
@@ -46,7 +50,6 @@ export default class ModalConfiguration extends Component {
             <Icon name='checkcircleo' size={30} />
           </TouchableOpacity>
         </View>
-
       </View>
     </Modal>
   )
@@ -61,8 +64,8 @@ export default class ModalConfiguration extends Component {
   render() {
     return (
       <View style={styles.container}>
-        { this.renderModalButton() }
-        { this.renderModal() }
+        {this.renderModalButton()}
+        {this.renderModal()}
       </View>
     );
   }
@@ -83,7 +86,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-   },
+  },
   valuePicker: { 
     flex: 1/2,
   },
@@ -92,6 +95,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
-    backgroundColor: '#efc050',
+    backgroundColor: '#efc050', // cream colour. @TODO Refactor colors in the future
   }
 })
