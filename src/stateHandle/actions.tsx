@@ -49,11 +49,13 @@ export const actionGameBet = (bets) => {
   return dispatch => {  
     // set showdown action so that dealer shows their cards
     setTimeout(() => {
+      console.log(`dispatch showdown`)
       dispatch(actionGameShowdown());
     }, 100);
     
     // set bet action after initiating showdown
     setTimeout(() => {
+      console.log(`dispatch bet`)
       dispatch(actionBet(bets));
     }, 200);
     
@@ -67,11 +69,6 @@ export const actionGameBet = (bets) => {
     setTimeout(() => {
       console.log(`dispatch gameRestart`)
       dispatch(actionGameRestart());
-    }, 10000);
-
-    setTimeout(() => {
-      console.log(`dispatch number of cards`)
-      dispatch(actionSetNumberOfCards(2))
-    }, 6000);
+    }, 7500);
   }
 }

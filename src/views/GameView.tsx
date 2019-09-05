@@ -3,7 +3,6 @@ import { View, StyleSheet } from 'react-native'
 import PlayerCards from '../components/PlayerCards';
 import ActionDisplay from '../components/ActionDisplay';
 import { screen } from '../config';
-import ModalExample from '../components/ModalConfiguration';
 import ConfigContainer from '../containers/ConfigContainer';
 
 const GameView = (props) => {
@@ -27,7 +26,7 @@ const GameView = (props) => {
         numCardsPerHand={props.numCardsPerHand} 
         credit={props.player.creditAmmount}
         gameStatus={props.gameStatus} 
-        showCards={props.gameStatus.betMode || props.gameStatus.endMode ? true : false} 
+        showCards={!props.gameStatus.dealMode ? true : false} 
         valueHand={props.valueHand} />
     </View>
   );
