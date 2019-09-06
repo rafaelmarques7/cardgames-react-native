@@ -1,23 +1,29 @@
 import get from 'lodash.get';
 
-export const getDealerCards = (state) => { 
-  const numCards = getNumberOfCardsPerHand(state);
-  const defCards =  Array.from({length: numCards}, () => 0);
-  const cardsDealer = state.game.dealer.cards.cards;
-  return cardsDealer.length > 0 ? cardsDealer : defCards;
-} 
-
-export const getPlayersBet = (state) => { 
-  return state.game.players[0].bet
-} 
-
+/**
+ * This selects the cards of the player.
+ * If the player has no cards, it defaults 
+ * to an array with length equal to the number of cards per hand.
+ * This allows the handOfPlayer component to 
+ * render the apropriate number of cards, in all situations.
+ */
 export function getPlayersCards(state, indexPlayer=0) {
-  // it may be a good idea to default to array with length equal to num cards
   const numCards = getNumberOfCardsPerHand(state);
   const defCards =  Array.from({length: numCards}, () => 0);
   const cardsPlayer = get(state, `game.players[${indexPlayer}].cards.cards`);
   return cardsPlayer.length > 0 ? cardsPlayer : defCards;
 }
+
+export const getDealerCards = (state) => { 
+  const numCards = getNumberOfCardsPerHand(state);
+  const defCards =  Array.from({length: numCards}, () => 0);
+  const cardsDealer = state.game.dealer.cards.cards;
+  return cardsDealer.length > 0 ? cardsDealer : defCards;
+}
+
+export const getPlayersBet = (state) => { 
+  return state.game.players[0].bet
+} 
 
 export function getPlayersCreditAmmount(state, indexPlayer=0) {
   return state.game.players[indexPlayer].credit;
@@ -36,7 +42,6 @@ export function getDealerCardsStrength(state) {
 }
 
 export function getNumberOfCardsPerHand(state) {
-  console.log('getNumCardsPerHand is returning: ', state.game.numCardsPerHand)
   return state.game.numCardsPerHand;
 }
 

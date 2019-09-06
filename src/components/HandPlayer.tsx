@@ -5,7 +5,7 @@ import CreditPlayer from './Credit';
 import CardWithFlip from './CardWithFlip';
 import StrengthOfHand from './StrengthOfHand';
 
-const HandPlayer = ({
+const HandOfPlayer = ({
   player,
   positionOnTop=false,
   renderCredit=false,
@@ -90,4 +90,4 @@ const createStyle = (bottom=false) => {
   });
 }
 
-export default HandPlayer;
+export default HandOfPlayer;

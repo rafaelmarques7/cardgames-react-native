@@ -110,11 +110,9 @@ function gameRestart(state) {
 }
 
 function gameSetNumberOfCards(state, action) {
-  console.log(`setting number of cards: `, action.payload.value)
   state.game.numCardsPerHand = action.payload.value;
   const newGame = Object.assign(
     Object.create(Object.getPrototypeOf(state.game)), state.game);
-  console.log(newGame)
   return {
     ...state,
     game: newGame,

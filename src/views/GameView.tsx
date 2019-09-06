@@ -3,13 +3,13 @@ import { View, StyleSheet } from 'react-native'
 import { screen } from '../config';
 import ConfigContainer from '../containers/ConfigContainer';
 import ActionDisplay from '../components/ActionDisplay';
-import HandPlayer from '../components/HandPlayer';
+import HandOfPlayer from '../components/HandPlayer';
 
 const GameView = (props) => {
   return(
     <View style={styles.container}>
       <ConfigContainer />
-      <HandPlayer
+      <HandOfPlayer
         player={props.dealer}
         positionOnTop={true}
         displayCards={props.gameStatus.showMode || props.gameStatus.endMode}
@@ -17,7 +17,7 @@ const GameView = (props) => {
       />
       <ActionDisplay 
         {...props} />
-      <HandPlayer
+      <HandOfPlayer
         player={props.player}
         positionOnTop={false}
         renderCredit={true}
