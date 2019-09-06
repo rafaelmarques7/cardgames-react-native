@@ -4,6 +4,7 @@ import { screen } from '../config';
 import ConfigContainer from '../containers/ConfigContainer';
 import ActionDisplay from '../components/ActionDisplay';
 import HandOfPlayer from '../components/HandPlayer';
+import Heart from '../components/Heart';
 
 const GameView = (props) => {
   return(
@@ -24,6 +25,8 @@ const GameView = (props) => {
         displayCards={!props.gameStatus.dealMode}
         renderStrength={!props.gameStatus.dealMode}
        />
+      <Heart />
+      <Heart isLive={false} />
     </View>
   );
 }
