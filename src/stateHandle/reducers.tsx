@@ -1,5 +1,4 @@
 import { HigherOrLower } from "card-games-typescript";
-import { DEF_PLAYERS } from "./actions";
 
 export const initState = {
   game: {}, // class object for game HigherOrLower

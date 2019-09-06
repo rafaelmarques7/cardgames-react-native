@@ -5,60 +5,42 @@ import CreditPlayer from './Credit';
 import CardWithFlip from './CardWithFlip';
 import StrengthOfHand from './StrengthOfHand';
 
-const PlayersCards = ({ 
-  cards, 
-  numCardsPerHand, 
-  displayCards=true, 
-  username='',
-  credit=null,
-  showCards=false,
-  valueHand=null,
-  gameStatus={},
+const HandOfPlayer = ({
+  player,
+  positionOnTop=false,
+  renderCredit=false,
+  renderStrength=false,
+  displayCards=false,
 }) => {
-  const position = username === 'Dealer' ? 'top' :'bottom';
-
-  if (cards && cards.length < 1) {
-    cards = Array.from({length: numCardsPerHand}, () => 0);
-  }
-
-  const renderCredit = username !== 'Dealer' ? true : false;
-  let renderStrength = false
-  // const renderStrength = username !== 'Dealer' ? true : false; 
-  if (username === 'Dealer' && gameStatus.showMode) {
-    renderStrength = true;
-  }
-  if (username !== 'Dealer' && !gameStatus.dealMode) {
-    renderStrength = true;
-  }
-
-  const styles = createStyle(position==='bottom');
+  // deconstruct props
+  const { username, cards, creditAmmount, valueHand } = player;
+  // create stylesheet based on position
+  const styles = createStyle(!positionOnTop);
 
   return (
     <View style={styles.container} >
-     <View style={styles.textContainer}>
+      <View style={styles.textContainer}>
         <Text style={styles.text}>{username}</Text>	
-        { renderCredit && <CreditPlayer ammount={credit}/> }
+        { renderCredit && <CreditPlayer ammount={creditAmmount}/> }
       </View>
       <View style={styles.handContainer}>     
-        { cards.map((card, index) => (
-            <View
-              key={`card-${index}`}
-              style={styles.cardContainer}>
-              <CardWithFlip
-                cardObject={card} 
-                backOfDeck={!displayCards} 
-                showCards={showCards}/>
-            </View>
-          ))
-        }
+        {cards.map((card, index) => (
+          <View
+            key={`card-${index}`}
+            style={styles.cardContainer}>
+            <CardWithFlip
+              cardObject={card} 
+              backOfDeck={!displayCards} 
+              showCards={displayCards}/>
+          </View>
+        ))}
       </View>
       <View style={styles.strengthContainer}>
         { renderStrength && 
           <StrengthOfHand 
             valueHand={valueHand} 
-            numCardsPerHand={numCardsPerHand} /> }
+            numCardsPerHand={cards.length} /> }
       </View>
- 
     </View>
   );
 }
@@ -108,4 +90,4 @@ const createStyle = (bottom=false) => {
   });
 }
 
-export default PlayersCards;
+export default HandOfPlayer;

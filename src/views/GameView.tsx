@@ -1,33 +1,29 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import PlayerCards from '../components/PlayerCards';
-import ActionDisplay from '../components/ActionDisplay';
 import { screen } from '../config';
 import ConfigContainer from '../containers/ConfigContainer';
+import ActionDisplay from '../components/ActionDisplay';
+import HandOfPlayer from '../components/HandPlayer';
 
 const GameView = (props) => {
   return(
     <View style={styles.container}>
       <ConfigContainer />
-      <PlayerCards 
-        cards={props.dealer.cards} 
-        username={'Dealer'} 
-        displayCards={props.gameStatus.endMode}
-        numCardsPerHand={props.numCardsPerHand}
-        gameStatus={props.gameStatus} 
-        showCards={props.gameStatus.showMode || props.gameStatus.endMode ? true : false}
-        valueHand={props.dealer.valueHand} />
+      <HandOfPlayer
+        player={props.dealer}
+        positionOnTop={true}
+        displayCards={props.gameStatus.showMode || props.gameStatus.endMode}
+        renderStrength={props.gameStatus.showMode || props.gameStatus.endMode}
+      />
       <ActionDisplay 
         {...props} />
-      <PlayerCards 
-        cards={props.player.cards} 
-        username={props.player.username} 
-        displayCards={props.gameStatus.betMode || props.gameStatus.endMode}
-        numCardsPerHand={props.numCardsPerHand} 
-        credit={props.player.creditAmmount}
-        gameStatus={props.gameStatus} 
-        showCards={!props.gameStatus.dealMode ? true : false} 
-        valueHand={props.valueHand} />
+      <HandOfPlayer
+        player={props.player}
+        positionOnTop={false}
+        renderCredit={true}
+        displayCards={!props.gameStatus.dealMode}
+        renderStrength={!props.gameStatus.dealMode}
+       />
     </View>
   );
 }
