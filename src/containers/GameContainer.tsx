@@ -1,16 +1,8 @@
 import React from 'react';
 import { 
-  getPlayersCards,
-  getPlayersUsername,
-  getPlayersCreditAmmount, 
   actionGameDeal, 
   actionGameInit,
   actionGameBet,
-  getDealerCards,
-  getPlayersBet,
-  getCardsStrength,
-  getDealerCardsStrength,
-  getNumberOfCardsPerHand,
   getPlayerInfo,
   getDealerInfo,
 } from '../stateHandle';
@@ -19,7 +11,7 @@ import { bindActionCreators } from 'redux';
 import GameView from '../views/GameView';
 
 const Game = (props) => {
-  // console.log('<Game /> props: ', props);
+  console.log('<Game /> props: ', props);
   return(
     <GameView {...props} />
   );
@@ -28,10 +20,8 @@ const Game = (props) => {
 const mapStateToProps = state => ({
   player: getPlayerInfo(state),
   dealer: getDealerInfo(state),
-  // gameStatus: state.gameStatus,
-  // numCardsPerHand: getNumberOfCardsPerHand(state),
+  gameStatus: state.gameStatus,
   cardsInDeck: state.cardsInDeck,
-  // valueHand: getCardsStrength(state),
 });
 
 const mapDispatchToProps = dispatch => {

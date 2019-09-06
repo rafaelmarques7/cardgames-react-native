@@ -5,45 +5,42 @@ import CreditPlayer from './Credit';
 import CardWithFlip from './CardWithFlip';
 import StrengthOfHand from './StrengthOfHand';
 
-const PlayersCards = ({ 
-  cards, 
-  numCardsPerHand, 
-  displayCards=true, 
-  username='',
-  credit=null,
-  showCards=false,
-  valueHand=null,
-  gameStatus={},
-  position,
+const HandPlayer = ({
+  player,
+  positionOnTop=false,
+  renderCredit=false,
+  renderStrength=false,
+  displayCards=false,
 }) => {
-  const styles = createStyle(position);
+  // deconstruct props
+  const { username, cards, creditAmmount, valueHand } = player;
+  // create stylesheet based on position
+  const styles = createStyle(!positionOnTop);
 
   return (
     <View style={styles.container} >
-     <View style={styles.textContainer}>
+      <View style={styles.textContainer}>
         <Text style={styles.text}>{username}</Text>	
-        { renderCredit && <CreditPlayer ammount={credit}/> }
+        { renderCredit && <CreditPlayer ammount={creditAmmount}/> }
       </View>
       <View style={styles.handContainer}>     
-        { cards.map((card, index) => (
-            <View
-              key={`card-${index}`}
-              style={styles.cardContainer}>
-              <CardWithFlip
-                cardObject={card} 
-                backOfDeck={!displayCards} 
-                showCards={showCards}/>
-            </View>
-          ))
-        }
+        {cards.map((card, index) => (
+          <View
+            key={`card-${index}`}
+            style={styles.cardContainer}>
+            <CardWithFlip
+              cardObject={card} 
+              backOfDeck={!displayCards} 
+              showCards={displayCards}/>
+          </View>
+        ))}
       </View>
       <View style={styles.strengthContainer}>
         { renderStrength && 
           <StrengthOfHand 
             valueHand={valueHand} 
-            numCardsPerHand={numCardsPerHand} /> }
+            numCardsPerHand={cards.length} /> }
       </View>
- 
     </View>
   );
 }
@@ -93,4 +90,4 @@ const createStyle = (bottom=false) => {
   });
 }
 
-export default PlayersCards;
+export default HandPlayer;

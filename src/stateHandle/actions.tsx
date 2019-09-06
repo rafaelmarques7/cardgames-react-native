@@ -1,7 +1,7 @@
 import { PlayerHighLow } from 'card-games-typescript';
 
 export const DEF_PLAYERS = [new PlayerHighLow('Player')];
-export const DEF_NUM_CARDS_PER_HAND = 1;
+export const DEF_NUM_CARDS_PER_HAND = 2;
 
 export const startGame = (store) => {
   store.dispatch(actionGameInit(DEF_PLAYERS, DEF_NUM_CARDS_PER_HAND));

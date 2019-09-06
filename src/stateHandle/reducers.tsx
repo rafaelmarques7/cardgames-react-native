@@ -1,5 +1,4 @@
 import { HigherOrLower } from "card-games-typescript";
-import { DEF_PLAYERS } from "./actions";
 
 export const initState = {
   game: {}, // class object for game HigherOrLower
@@ -111,9 +110,11 @@ function gameRestart(state) {
 }
 
 function gameSetNumberOfCards(state, action) {
+  console.log(`setting number of cards: `, action.payload.value)
   state.game.numCardsPerHand = action.payload.value;
   const newGame = Object.assign(
     Object.create(Object.getPrototypeOf(state.game)), state.game);
+  console.log(newGame)
   return {
     ...state,
     game: newGame,
