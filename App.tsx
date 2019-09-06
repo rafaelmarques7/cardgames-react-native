@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { rootReducer } from './src/stateHandle';
 import { startGame } from './src/stateHandle';
+import HomeView from './src/views/HomeView';
 
 const store = createStore(
   rootReducer,
@@ -15,7 +16,8 @@ startGame(store); // dispatch initial action to start the game state
 export default function App() {
   return (
     <Provider store={store}>
-      <Game />
+      {/* <Game /> */}
+      <HomeView />
     </Provider>
   );
 }
