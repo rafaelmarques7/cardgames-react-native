@@ -16,8 +16,8 @@ startGame(store); // dispatch initial action to start the game state
 export default function App() {
   return (
     <Provider store={store}>
-      {/* <Game /> */}
-      <HomeView />
+      <Game />
+      {/* <HomeView /> */}
     </Provider>
   );
 }

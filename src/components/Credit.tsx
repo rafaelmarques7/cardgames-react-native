@@ -39,13 +39,14 @@ const CreditPlayer = ({ ammount }) => {
 
   return (
     <View style={styles.container}>
-      <AnimatedImage
-        style={{...styles.image, ...spring}}
-        source={require('../../assets/gold-coins.png')} />
-      <Text 
-        style={styles.text}>
-        {ammount}
-      </Text>
+      <View>
+        <Text style={styles.text}>{ammount}</Text>        
+      </View>
+      <View style={styles.imageContainer}>
+        <AnimatedImage
+          style={{...styles.image, ...spring}}
+          source={require('../../assets/gold-coins.png')} />
+      </View>
     </View>
   )
 }
@@ -53,17 +54,23 @@ const CreditPlayer = ({ ammount }) => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    marginLeft: 30,
+    alignItems: 'center',
   },
   text: {
     fontWeight: 'bold',
-    marginLeft: 7,
+    fontSize: 17,
+    marginRight: 5,
+    marginBottom: 3,
   },
   image: {
     height: 20,
     width: 20,
-    marginBottom: 7,
-  }
+  },
+  imageContainer: {
+    width: 35,                    // by fixing the width of the container, 
+    height: 35,                   // it does not interfere with the other components
+    justifyContent: 'center',
+  },
 });
 
 export default CreditPlayer;

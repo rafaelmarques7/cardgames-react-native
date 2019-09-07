@@ -57,7 +57,7 @@ export default class ModalConfiguration extends Component<cProps> {
   renderModalButton = () => (
     <TouchableOpacity
       onPress={this.toggleModal}>
-      <EvilIcons name='gear' size={40} />
+      <EvilIcons name='gear' size={35} />
     </TouchableOpacity>    
   )
 
@@ -73,9 +73,9 @@ export default class ModalConfiguration extends Component<cProps> {
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
-    paddingTop: (screen.heightScreen - screen.heightWindow) / 2,
-    paddingLeft: 3,
+    // position: 'absolute',
+    // paddingTop: (screen.heightScreen - screen.heightWindow) / 2,
+    // paddingLeft: 3,
   },
   modal: {
     flex: 1/4,
