@@ -1,19 +1,17 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { screen } from '../config';
-import CreditPlayer from './Credit';
 import CardWithFlip from './CardWithFlip';
 import StrengthOfHand from './StrengthOfHand';
 
 const HandOfPlayer = ({
   player,
   positionOnTop=false,
-  renderCredit=false,
   renderStrength=false,
   displayCards=false,
 }) => {
   // deconstruct props
-  const { username, cards, creditAmmount, valueHand } = player;
+  const { username, cards, valueHand } = player;
   // create stylesheet based on position
   const styles = createStyle(!positionOnTop);
 
@@ -21,7 +19,6 @@ const HandOfPlayer = ({
     <View style={styles.container} >
       <View style={styles.textContainer}>
         <Text style={styles.text}>{username}</Text>	
-        { renderCredit && <CreditPlayer ammount={creditAmmount}/> }
       </View>
       <View style={styles.handContainer}>     
         {cards.map((card, index) => (

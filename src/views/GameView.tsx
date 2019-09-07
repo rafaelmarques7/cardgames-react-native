@@ -1,14 +1,14 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import { screen } from '../config';
-import ConfigContainer from '../containers/ConfigContainer';
 import ActionDisplay from '../components/ActionDisplay';
 import HandOfPlayer from '../components/HandPlayer';
+import StatusBarContainer from '../containers/StatusBarContainer';
 
 const GameView = (props) => {
   return(
     <View style={styles.container}>
-      <ConfigContainer />
+      <StatusBarContainer />
       <HandOfPlayer
         player={props.dealer}
         positionOnTop={true}
