@@ -1,5 +1,5 @@
 import { PlayerHighLow } from 'card-games-typescript' 
-import { getRoundWinner } from './selectors';
+import { getRoundWinner, getNumberOfCardsPerHand } from './selectors';
 
 export const DEF_PLAYERS = [new PlayerHighLow('Player')];
 export const DEF_NUM_CARDS_PER_HAND = 1;
@@ -42,48 +42,44 @@ export const actionGamePayoff = () => ({
   type: 'GAME_PAYOFF',
 })
 
-export const actionGameRestart = () => ({
-  type: 'GAME_RESTART',
+export const actionGameRestartRound = () => ({
+  type: 'GAME_RESTART_ROUND',
 })
 
 export const actionGameBet = (bets) => {
   return (dispatch, getState) => {  
-    // set showdown action so that dealer shows their cards
-    setTimeout(() => {
-      console.log(`dispatch showdown`)
-      dispatch(actionGameShowdown());
-    }, 100);
-    
-    // set bet action after initiating showdown
-    setTimeout(() => {
-      console.log(`dispatch bet`)
-      dispatch(actionBet(bets));
-    }, 200);
-    
-    // set payoff action, but delay it
-    setTimeout(() => {
-      console.log(`dispatch payoff`)
-      dispatch(actionGamePayoff());
-    }, 1500);
+    const TIMEOUT_RESTART_ROUND = 5000;
 
-    // life management
+    console.log('dispatching actionGameShowdown\ndispatching actionBet');
+    dispatch(actionGameShowdown());
+    dispatch(actionBet(bets));
+
+    console.log(`set timeout ${TIMEOUT_RESTART_ROUND} ms to dispatch round management actions`);
     setTimeout(() => {
       const playerIsWinner = getRoundWinner(getState())
-      console.log('playerIsWinner', playerIsWinner)
       if (!playerIsWinner) {
-        console.log('dispatching reduce lives')
+        console.log('dispatch reduce lives')
         dispatch(actionReduceLives())
       }
-    }, 1500)
+      console.log(`dispatch payoff`)
+      dispatch(actionGamePayoff());
+      dispatch(actionGameRestartRound());
+    }, TIMEOUT_RESTART_ROUND);
 
-    // restart game
-    setTimeout(() => {
-      console.log(`dispatch gameRestart`)
-      dispatch(actionGameRestart());
-    }, 7500);
   }
 }
 
 export const actionReduceLives = () => ({
   type: 'GAME_REDUCE_LIVES'
 })
+
+export const actionGameRestart = () => {
+  return (dispatch, getState) => {
+    // get number of cards so that user preferences are not overwritten
+    const numCards = getNumberOfCardsPerHand(getState())
+    // re-declare user; this is necessary to reset the credit 
+    const players = [new PlayerHighLow('Player')];
+    console.log('dispatch actionGameInit (restart)')
+    dispatch(actionGameInit(players, numCards))
+  }
+}
