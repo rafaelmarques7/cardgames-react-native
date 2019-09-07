@@ -64,3 +64,7 @@ export function getDealerInfo(state) {
     bet: null,
   }
 }
+
+export const getPlayersLives = state => state.gameStatus.numLives;
+
+export const getPlayersDeaths = state => state.gameStatus.numDeaths;
