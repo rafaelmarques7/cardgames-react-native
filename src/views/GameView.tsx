@@ -22,8 +22,7 @@ const GameView = (props) => {
         positionOnTop={false}
         renderCredit={true}
         displayCards={!props.gameStatus.dealMode}
-        renderStrength={!props.gameStatus.dealMode}
-       />
+        renderStrength={!props.gameStatus.dealMode} />
     </View>
   );
 }
