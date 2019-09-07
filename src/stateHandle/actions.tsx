@@ -1,4 +1,5 @@
-import { PlayerHighLow } from 'card-games-typescript';
+import { PlayerHighLow } from 'card-games-typescript' 
+import { getRoundWinner } from './selectors';
 
 export const DEF_PLAYERS = [new PlayerHighLow('Player')];
 export const DEF_NUM_CARDS_PER_HAND = 1;
@@ -46,7 +47,7 @@ export const actionGameRestart = () => ({
 })
 
 export const actionGameBet = (bets) => {
-  return dispatch => {  
+  return (dispatch, getState) => {  
     // set showdown action so that dealer shows their cards
     setTimeout(() => {
       console.log(`dispatch showdown`)
@@ -64,6 +65,16 @@ export const actionGameBet = (bets) => {
       console.log(`dispatch payoff`)
       dispatch(actionGamePayoff());
     }, 1500);
+
+    // life management
+    setTimeout(() => {
+      const playerIsWinner = getRoundWinner(getState())
+      console.log('playerIsWinner', playerIsWinner)
+      if (!playerIsWinner) {
+        console.log('dispatching reduce lives')
+        dispatch(actionReduceLives())
+      }
+    }, 1500)
 
     // restart game
     setTimeout(() => {

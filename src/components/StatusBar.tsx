@@ -7,7 +7,6 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import Heart from './Heart';
-import Icon from 'react-native-vector-icons/FontAwesome5'
 import ConfigContainer from '../containers/ConfigContainer';
 import CreditPlayer from './Credit';
 
@@ -57,7 +56,7 @@ const styles = StyleSheet.create({
   highscore: {
     flex: 2,
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'flex-end',
     alignItems: 'center',
   },
   numPoints: {

@@ -60,7 +60,9 @@ function gameDeal(state) {
 }
 
 function gameBet(state, action) {
-  state.game.setBets(action.payload.bets);  // changes happen inside the class object
+   // changes happen inside the class object
+   // the 2nd parameter has the effect of not decreasing the credit upon betting
+  state.game.setBets(action.payload.bets, false); 
   const newGame = Object.assign(  // this preserves the class methods
     Object.create(Object.getPrototypeOf(state.game)), state.game);
   return {

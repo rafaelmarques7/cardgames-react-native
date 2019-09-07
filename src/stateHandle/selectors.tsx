@@ -68,3 +68,5 @@ export function getDealerInfo(state) {
 export const getPlayersLives = state => state.gameStatus.numLives;
 
 export const getPlayersDeaths = state => state.gameStatus.numDeaths;
+
+export const getRoundWinner = state => state.game.isWinner(state.game.players[0])
