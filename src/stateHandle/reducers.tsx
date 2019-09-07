@@ -1,9 +1,12 @@
 import { HigherOrLower } from "card-games-typescript";
 
+export const NUM_LIVES_INITIAL = 3
+
 export const initState = {
   game: {}, // class object for game HigherOrLower
   gameStatus: {
-    numLives: 3,
+    numRounds: 0,
+    numLives: NUM_LIVES_INITIAL,
     numDeaths: 0,
     dealMode: true,
     betMode: false,
@@ -25,8 +28,8 @@ export const rootReducer = (state=initState, action) => {
       return gameShowdown(state);
     case 'GAME_PAYOFF':
       return gamePayoff(state);
-    case 'GAME_RESTART':
-      return gameRestart(state);
+    case 'GAME_RESTART_ROUND':
+      return gameRestartRound(state);
     case 'SET_NUMBER_OF_CARDS':
       return gameSetNumberOfCards(state, action);
     case 'GAME_REDUCE_LIVES':
@@ -38,7 +41,7 @@ export const rootReducer = (state=initState, action) => {
 
 function gameInit(state, action) {
   return {
-    ...state,
+    ...initState,
     game: new HigherOrLower(
       action.payload.players, action.payload.numCardsPerHand)
   }
@@ -104,14 +107,15 @@ function gamePayoff(state) {
   }
 }
 
-function gameRestart(state) {
+function gameRestartRound(state) {
   return {
     ...state,
     gameStatus: {
       ...state.gameStatus,
       endMode: false,
       showMode: false,
-      dealMode: true
+      dealMode: true,
+      numRounds: state.gameStatus.numRounds + 1
     }
   }
 }

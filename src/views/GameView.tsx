@@ -4,11 +4,13 @@ import { screen } from '../config';
 import ActionDisplay from '../components/ActionDisplay';
 import HandOfPlayer from '../components/HandPlayer';
 import StatusBarContainer from '../containers/StatusBarContainer';
+import LooseModalContainer from '../containers/LooseModalContainer';
 
 const GameView = (props) => {
   return(
     <View style={styles.container}>
       <StatusBarContainer />
+      <LooseModalContainer />
       <HandOfPlayer
         player={props.dealer}
         positionOnTop={true}
