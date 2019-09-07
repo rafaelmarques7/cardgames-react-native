@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button, TouchableOpacity } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Bet } from 'card-games-typescript';
 import { screen } from '../config';
 import MyButton from './MyButton';
@@ -9,7 +9,7 @@ type BetState = {
 }
 
 type BetProps = {
-  betMaximum: number,
+  betValue: number,
   onSetBet: Function,
   acceptBets: boolean
 }
@@ -20,29 +20,22 @@ class BetDisplay extends React.Component<BetProps, BetState> {
     this.state = {
       bet: {
         on: 'pass',
-        ammount: 1,
+        ammount: props.betValue,
       }
     }
   }
 
-  onSetAmmount(increase=true) {
-    const delta = increase ? 1 : -1; // decide if we add or subtract
-    const isValidBet = (increase && this.state.bet.ammount < this.props.betMaximum)
-      || (!increase && this.state.bet.ammount > 1)
-    if (this.props.acceptBets && isValidBet) {
-      this.setState({
-        bet: {
-          ...this.state.bet,
-          ammount: this.state.bet.ammount + delta,
-        }
-      })
+  componentDidUpdate(prevProps) {
+    // resets the bet type if betValue (credit) changes
+    if(prevProps.betValue !== this.props.betValue) {
+      this.onSelectBet('pass')
     }
-  }
+  }  
 
   onSelectBet(option) {
     this.setState({
       bet: {
-        ...this.state.bet,
+        ammount: this.props.betValue,
         on: option
       }
     });
@@ -64,24 +57,16 @@ class BetDisplay extends React.Component<BetProps, BetState> {
             onPress={() => {this.onSetBet()}} />
         </View>
         <View style={styles.containerSelection}>
-          <View style={styles.containerBetAmmount}>
-            <MyButton 
-              title="+" 
-              onPress={() => {this.onSetAmmount(true)}} />            
-            <MyButton 
-              title="-" 
-              onPress={() => {this.onSetAmmount(false)}} />
-          </View>
           <View style={styles.containerBetType}>
             <MyButton 
-              title="low" 
-              onPress={() => {this.onSelectBet('low')}} />
+              title="High" 
+              onPress={() => {this.onSelectBet('high')}} />
             <MyButton 
-              title="draw" 
+              title="Draw" 
               onPress={() => {this.onSelectBet('draw')}} />
             <MyButton 
-              title="high" 
-              onPress={() => {this.onSelectBet('high')}} />
+              title="Low" 
+              onPress={() => {this.onSelectBet('low')}} />
           </View>
         </View>
       </View>
@@ -102,11 +87,6 @@ const styles = StyleSheet.create({
   containerAction: {
     flex: 2/5,
     paddingBottom: 7,
-  },
-  containerBetAmmount: {
-    flex: 1,
-    flexDirection: 'column',
-    paddingRight: 5,
   },
   containerBetType: {
     flex: 1,

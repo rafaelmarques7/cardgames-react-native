@@ -8,7 +8,7 @@ const ActionDisplay = (props) => {
     <View style={styles.container}>
       <View style={styles.containerBet}>
         <BetDisplay 
-          betMaximum={props.player.creditAmmount}
+          betValue={props.player.creditAmmount}
           onSetBet={(bet) => {props.actionGameBet([bet])}}
           acceptBets={props.gameStatus.betMode} />
       </View>

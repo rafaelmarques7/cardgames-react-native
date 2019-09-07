@@ -88,7 +88,8 @@ function gameShowdown(state) {
 
 function gamePayoff(state) {
   console.log(`setting game payoff`)
-  state.game.payoff()  // changes happen inside the class object
+  // changes happen inside the class object
+  state.game.payoff(false) // the bool is to rectify the payoff, as to not include the discount rate 
   const newGame = Object.assign(  // this preserves the class methods
     Object.create(Object.getPrototypeOf(state.game)), state.game);
   return {

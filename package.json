@@ -8,7 +8,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "card-games-typescript": "^1.2.1",
+    "card-games-typescript": "^1.2.2",
     "expo": "^34.0.1",
     "lodash.get": "^4.4.2",
     "react": "16.8.3",
