@@ -72,3 +72,7 @@ export const actionGameBet = (bets) => {
     }, 7500);
   }
 }
+
+export const actionReduceLives = () => ({
+  type: 'GAME_REDUCE_LIVES'
+})

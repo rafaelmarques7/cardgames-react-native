@@ -1,7 +1,10 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { getPlayersCreditAmmount } from '../stateHandle'
 import StatusBar from '../components/StatusBar';
+import { 
+  getPlayersLives, 
+  getPlayersDeaths, 
+  getPlayersCreditAmmount } from '../stateHandle'
 
 const StatusBarContainer = (props) => {
   return (
@@ -10,8 +13,8 @@ const StatusBarContainer = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-  numLives: 3,
-  numDeaths: 0,
+  numLives: getPlayersLives(state),
+  numDeaths: getPlayersDeaths(state),
   numPoints: getPlayersCreditAmmount(state),
 })
 
