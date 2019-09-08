@@ -6,6 +6,10 @@ import thunk from 'redux-thunk';
 import { rootReducer } from './src/stateHandle';
 import { startGame } from './src/stateHandle';
 import HomeView from './src/views/HomeView';
+import Amplify from 'aws-amplify';
+import aws_exports from './aws-exports';
+
+Amplify.configure(aws_exports);
 
 const store = createStore(
   rootReducer,
@@ -16,8 +20,8 @@ startGame(store); // dispatch initial action to start the game state
 export default function App() {
   return (
     <Provider store={store}>
-      <Game />
-      {/* <HomeView /> */}
+      {/* <Game /> */}
+      <HomeView />
     </Provider>
   );
 }
