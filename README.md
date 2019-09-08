@@ -77,3 +77,7 @@ Given the current state of the application, what is necessary to achieve this?
 User authentication will be managed by AWS Amplify.
 [This article](https://alligator.io/react/react-native-authentication/) is a good reference.
 
+
+## Animable
+
+https://github.com/oblador/react-native-animatable

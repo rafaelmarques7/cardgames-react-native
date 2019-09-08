@@ -13,6 +13,9 @@ import LogoutButton from '../components/LogoutButton';
 import { screen } from '../config';
 
 type cProps = {
+  isLoggedIn: boolean,
+  actionSetUserUsername: Function,
+  actionSetUserEmail: Function,
   navigation: {
     navigate: Function,
   }
@@ -40,13 +43,20 @@ export default class AuthView extends React.Component<cProps, cState> {
     };
   }
 
+  componentDidMount() {
+    if (this.props.isLoggedIn) {
+      this.props.navigation.navigate('Home')
+    }
+  }
+
   // authentication
   handeLogin = () => {
     const { email, password } = this.state;
     Auth.signIn(email, password)
       // If we are successful, navigate to Home screen
       .then(user => {
-        console.log(user)
+        console.log('Auth.signIn successfull')
+        this.props.actionSetUserEmail(email)
         this.props.navigation.navigate('Home')
       })
       // On failure, display error in console
