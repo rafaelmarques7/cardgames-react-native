@@ -71,11 +71,11 @@ export const getPlayersDeaths = state => state.gameStatus.numDeaths;
 
 export const getRoundWinner = state => state.game.isWinner(state.game.players[0])
 
-export const isPlayerLooser = state => state.gameStatus.numLives === 0
+export const isPlayerLooser = state => true //state.gameStatus.numLives === 0
 
 export const numRoundsPlayed = state => state.gameStatus.numRounds
 
-export const isUserLoggedIn = state => state.user.email !== null
+export const isUserLoggedIn = state => true//state.user.email !== null
 
 export const getUserUsername = state => state.user.username
 
