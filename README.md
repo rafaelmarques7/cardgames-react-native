@@ -71,3 +71,9 @@ Given the current state of the application, what is necessary to achieve this?
   * reset deck;
 * add redux persist;
 * add testing for state management and basic game logic;
+
+## User authentication
+
+User authentication will be managed by AWS Amplify.
+[This article](https://alligator.io/react/react-native-authentication/) is a good reference.
+
