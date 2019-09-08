@@ -9,6 +9,7 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import { Auth } from 'aws-amplify';
+import LogoutButton from '../components/LogoutButton';
 
 type cProps = {
   navigation: {
@@ -43,7 +44,10 @@ export default class AuthView extends React.Component<cProps, cState> {
     const { email, password } = this.state;
     Auth.signIn(email, password)
       // If we are successful, navigate to Home screen
-      .then(user => this.props.navigation.navigate('Home'))
+      .then(user => {
+        console.log(user)
+        this.props.navigation.navigate('Home')
+      })
       // On failure, display error in console
       .catch(err => console.log(err));
   }
@@ -166,6 +170,7 @@ export default class AuthView extends React.Component<cProps, cState> {
   render() {
     return (
       <View style={styles.container}>
+        <LogoutButton navigation={this.props.navigation}/>
         {this.renderAuthOptions()}
         {this.state.displayLogin && this.renderLoginForm()}
         {!this.state.displayLogin && this.renderRegistrationForm()}
