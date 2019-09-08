@@ -5,7 +5,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import GameInfoView from './GameInfo';
 import HighScoreView from './Highscores';
 import GameContainer from '../containers/GameContainer';
-import AuthView from './AuthView';
+import AuthContainer from '../containers/AuthContainer';
 
 class HomeScreen extends React.Component {
   render() {
@@ -34,7 +34,7 @@ class HomeScreen extends React.Component {
  * ref: https://facebook.github.io/react-native/docs/navigation
  */
 const AppNavigator = createStackNavigator({
-  AuthView: AuthView,
+  AuthView: AuthContainer,
   Home: {
     screen: HomeScreen, 
     navigationOptions: {

@@ -77,3 +77,9 @@ Given the current state of the application, what is necessary to achieve this?
 User authentication will be managed by AWS Amplify.
 [This article](https://alligator.io/react/react-native-authentication/) is a good reference.
 
+## Username
+
+When the user registers for the first time, they should be prompted to select a username.
+
+When the user logins, the username should be loaded from the database.
+

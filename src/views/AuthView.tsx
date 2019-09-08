@@ -12,6 +12,8 @@ import { Auth } from 'aws-amplify';
 import LogoutButton from '../components/LogoutButton';
 
 type cProps = {
+  actionSetUserUsername: Function,
+  actionSetUserEmail: Function,
   navigation: {
     navigate: Function,
   }
@@ -20,6 +22,7 @@ type cProps = {
 type cState = {
   email: string,
   password: string,
+  username: string,
   confirmPassword: string,
   confirmationCode: string,
   confirmationCodeVisible: boolean,
@@ -32,6 +35,7 @@ export default class AuthView extends React.Component<cProps, cState> {
     this.state = {
       email: '',
       password: '',
+      username: '',
       confirmPassword: '',
       confirmationCode: '',
       confirmationCodeVisible: false,
@@ -46,6 +50,7 @@ export default class AuthView extends React.Component<cProps, cState> {
       // If we are successful, navigate to Home screen
       .then(user => {
         console.log('loogged in successfully')
+        this.props.actionSetUserEmail(email)
         this.props.navigation.navigate('Home')
       })
       // On failure, display error in console
@@ -59,6 +64,7 @@ export default class AuthView extends React.Component<cProps, cState> {
       // If we are successful, navigate to Home screen
       .then(user => {
         console.log(user)
+        this.props.actionSetUserEmail(email)
         this.props.navigation.navigate('Home')
       })
       // On failure, display error in console
@@ -140,6 +146,17 @@ export default class AuthView extends React.Component<cProps, cState> {
         onChangeText={(value) => this.setState({ password: value })} />   
     </>
   )
+
+  renderSelectUsername = () => (
+    <>
+      <Input
+        placeholder="Username"
+        leftIcon={{ type: 'font-awesome', name: 'user' }}     
+        onChangeText={(value) => this.setState({ username: value })} /> 
+      <Button title='submit' onPress={() => this.props.actionSetUserUsername} />
+
+    </>
+  )
   
   renderSkipButton = () => {
     return(
@@ -204,3 +221,4 @@ const styles = StyleSheet.create({
     fontSize: 25
   },
 });
+

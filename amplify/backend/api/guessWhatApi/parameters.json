@@ -1,8 +1,4 @@
 {
-    "authRoleName": {
-        "Ref": "AuthRoleName"
-    },
-    "unauthRoleName": {
-        "Ref": "UnauthRoleName"
-    }
+    "AppSyncApiName": "guessWhatApi",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST"
 }

@@ -1,5 +1,0 @@
-{
-    "tableName": "usernameDb",
-    "partitionKeyName": "username",
-    "partitionKeyType": "S"
-}

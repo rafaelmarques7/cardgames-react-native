@@ -4,6 +4,10 @@ export const NUM_LIVES_INITIAL = 3
 
 export const initState = {
   game: {}, // class object for game HigherOrLower
+  user: {
+    email: null,
+    username: 'Player',
+  },
   gameStatus: {
     numRounds: 0,
     numLives: NUM_LIVES_INITIAL,
@@ -34,6 +38,10 @@ export const rootReducer = (state=initState, action) => {
       return gameSetNumberOfCards(state, action);
     case 'GAME_REDUCE_LIVES':
       return gameReduceLives(state);
+    case 'SET_USER_USERNAME':
+      return setUserUsername(state, action)
+    case 'SET_USER_EMAIL':
+      return setUserEmail(state, action)
     default:
       return state;  
   }
@@ -137,6 +145,28 @@ function gameReduceLives(state) {
       ...state.gameStatus,
       numLives: state.gameStatus.numLives - 1,
       numDeaths: state.gameStatus.numDeaths + 1
+    }
+  }
+}
+
+function setUserUsername(state, action) {
+  console.log('setUserUsername: ', action)
+  return {
+    ...state,
+    user: {
+      ...state.user,
+      username: action.payload.username
+    }
+  }
+}
+
+function setUserEmail(state, action) {
+  console.log('setUserEmail: ', action)
+  return {
+    ...state,
+    user: {
+      ...state.user,
+      email: action.payload.email
     }
   }
 }

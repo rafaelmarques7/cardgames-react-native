@@ -1,5 +1,5 @@
 import { PlayerHighLow } from 'card-games-typescript' 
-import { getRoundWinner, getNumberOfCardsPerHand } from './selectors';
+import { getRoundWinner, getNumberOfCardsPerHand, getUserEmail } from './selectors';
 import Amplify, { API } from 'aws-amplify';
 
 export const DEF_PLAYERS = [new PlayerHighLow('Player')];
@@ -50,10 +50,10 @@ export const actionGameRestartRound = () => ({
 export const actionGameBet = (bets) => {
   return (dispatch, getState) => {  
     const TIMEOUT_RESTART_ROUND = 5000;
-
+    // getData()
+    createUser(getUserEmail(getState()))
+    
     console.log('dispatching actionGameShowdown\ndispatching actionBet');
-    getData()
-    createUser()
     dispatch(actionGameShowdown());
     dispatch(actionBet(bets));
 
@@ -87,41 +87,48 @@ export const actionGameRestart = () => {
   }
 }
 
-// this function is not
-async function getData() {
-  console.log(`inside getData`)
-  let apiName = 'guessWhatApi';
-  let path = '/users'; 
-  let myInit = { // OPTIONAL
-    headers: {}, // OPTIONAL
-    // response: true, // OPTIONAL (return the entire Axios response object instead of only response.data)
-    queryStringParameters: {  // OPTIONAL
-      name: 'param'
-    }
+export const actionSetUserUsername = (username) => ({
+  type: 'SET_USER_USERNAME',
+  payload: {
+    username: username,
   }
-  API.get(apiName, path, myInit).then(response => {
-      // Add your code here
-      console.log('response ',response)
-  }).catch(error => {
-      console.log(error.response)
-  });  
-}
+})
 
-// this function is working
-async function createUser() {
-  console.log(`inside createUser`)
-  let apiName = 'guessWhatApi';
-  let path = '/users'; 
-  let myInit = { // OPTIONAL
-    headers: {}, // OPTIONAL
-    body: {
-      username: 'rafael123456789'
-    }
+export const actionSetUserEmail = (email) => ({
+  type: 'SET_USER_EMAIL',
+  payload: {
+    email: email,
   }
-  API.post(apiName, path, myInit).then(response => {
-      // Add your code here
-      console.log('response ',response)
-  }).catch(error => {
-      console.log(error.response)
-  });  
-}
+})
+
+// // this function is not
+// async function getUser(email) {
+//   console.log(`inside getData`)
+//   let apiName = 'guessWhatApi';
+//   let path = `/users/${email}`; 
+//   let myInit = {}
+//   API.get(apiName, path, myInit).then(response => {
+//       console.log('response ',response)
+//   }).catch(error => {
+//       console.log(error.response)
+//   });  
+// }
+
+// // this function is working
+// async function createUser(username) {
+//   console.log(`inside createUser`)
+//   let apiName = 'guessWhat';
+//   let path = '/users'; 
+//   let myInit = {
+//     body: {
+//       username: username
+//     }
+//   }
+//   API.post(apiName, path, myInit).then(response => {
+//       // Add your code here
+//       console.log('response ',response)
+//   }).catch(error => {
+//       console.log('createUser threw error: ')
+//       console.log(error)
+//   });  
+// }
