@@ -83,3 +83,17 @@ export const actionGameRestart = () => {
     dispatch(actionGameInit(players, numCards))
   }
 }
+
+export const actionSetUserUsername = (username) => ({
+  type: 'SET_USER_USERNAME',
+  payload: {
+    username: username,
+  }
+})
+
+ export const actionSetUserEmail = (email) => ({
+  type: 'SET_USER_EMAIL',
+  payload: {
+    email: email,
+  }
+})
