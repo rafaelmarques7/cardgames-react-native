@@ -1,5 +1,6 @@
 import { PlayerHighLow } from 'card-games-typescript' 
 import { getRoundWinner, getNumberOfCardsPerHand } from './selectors';
+import Amplify, { API } from 'aws-amplify';
 
 export const DEF_PLAYERS = [new PlayerHighLow('Player')];
 export const DEF_NUM_CARDS_PER_HAND = 1;
@@ -51,6 +52,8 @@ export const actionGameBet = (bets) => {
     const TIMEOUT_RESTART_ROUND = 5000;
 
     console.log('dispatching actionGameShowdown\ndispatching actionBet');
+    getData()
+    createUser()
     dispatch(actionGameShowdown());
     dispatch(actionBet(bets));
 
@@ -82,4 +85,43 @@ export const actionGameRestart = () => {
     console.log('dispatch actionGameInit (restart)')
     dispatch(actionGameInit(players, numCards))
   }
+}
+
+// this function is not
+async function getData() {
+  console.log(`inside getData`)
+  let apiName = 'guessWhatApi';
+  let path = '/users'; 
+  let myInit = { // OPTIONAL
+    headers: {}, // OPTIONAL
+    // response: true, // OPTIONAL (return the entire Axios response object instead of only response.data)
+    queryStringParameters: {  // OPTIONAL
+      name: 'param'
+    }
+  }
+  API.get(apiName, path, myInit).then(response => {
+      // Add your code here
+      console.log('response ',response)
+  }).catch(error => {
+      console.log(error.response)
+  });  
+}
+
+// this function is working
+async function createUser() {
+  console.log(`inside createUser`)
+  let apiName = 'guessWhatApi';
+  let path = '/users'; 
+  let myInit = { // OPTIONAL
+    headers: {}, // OPTIONAL
+    body: {
+      username: 'rafael123456789'
+    }
+  }
+  API.post(apiName, path, myInit).then(response => {
+      // Add your code here
+      console.log('response ',response)
+  }).catch(error => {
+      console.log(error.response)
+  });  
 }

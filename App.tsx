@@ -7,8 +7,9 @@ import { rootReducer } from './src/stateHandle';
 import { startGame } from './src/stateHandle';
 import HomeView from './src/views/HomeView';
 import Amplify from 'aws-amplify';
-import aws_exports from './aws-exports';
 
+// this connects the AWS resources created with Amplify
+import aws_exports from './aws-exports';
 Amplify.configure(aws_exports);
 
 const store = createStore(

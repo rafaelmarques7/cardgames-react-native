@@ -39,6 +39,19 @@ export default class AuthView extends React.Component<cProps, cState> {
     };
   }
 
+  componentDidMount(){
+    const email =  'rafaelmarques76076@gmail.com';
+    const password = '123456789'
+    Auth.signIn(email, password)
+      // If we are successful, navigate to Home screen
+      .then(user => {
+        console.log('loogged in successfully')
+        this.props.navigation.navigate('Home')
+      })
+      // On failure, display error in console
+      .catch(err => console.log(err));
+  }
+
   // authentication
   handeLogin = () => {
     const { email, password } = this.state;
