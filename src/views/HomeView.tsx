@@ -34,7 +34,12 @@ class HomeScreen extends React.Component {
  * ref: https://facebook.github.io/react-native/docs/navigation
  */
 const AppNavigator = createStackNavigator({
-  AuthView: AuthView,
+  AuthView: {
+    screen: AuthView, 
+    navigationOptions: {
+        header: null,
+    },
+  },
   Home: {
     screen: HomeScreen, 
     navigationOptions: {
