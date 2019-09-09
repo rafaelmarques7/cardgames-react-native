@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, TouchableOpacity, StyleSheet } from 'react-native';
-
+import { brown } from '../styles';
 
 // This is a button that uses flex
 // to expand to match the parent container
@@ -25,10 +25,11 @@ const MyButton = ({ title, onPress, style={}, disabled=false }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    elevation: 4,
-    backgroundColor: '#00203FFF',
+    elevation: 8,
+    backgroundColor: brown,
     borderRadius: 2,
     alignContent: 'center',
+    margin: 7,
   },
   disabled: {
     backgroundColor: '#dfdfdf',

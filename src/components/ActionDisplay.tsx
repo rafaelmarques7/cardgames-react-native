@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import BetDisplay from '../components/Bet';
+// import BetDisplay from '../components/Bet';
+import BetDisplay from '../components/BetRow';
 import DeckOfCardsImg from './DeckOfCards';
 import AnimationContainer from './AnimationContainer';
 
@@ -8,14 +9,14 @@ const ActionDisplay = (props) => {
   return (
     <View style={styles.container}>
       <View style={styles.containerBet}>
-        <AnimationContainer
+        {/* <AnimationContainer
           animate={props.gameStatus.betMode}
-          animationType='rubberBand' count='infinite' delay={2000}>
-          <BetDisplay 
+          animationType='rubberBand' count='infinite' delay={2000}> */}
+          {/* <BetDisplay 
             betValue={props.player.creditAmmount}
             onSetBet={(bet) => {props.actionGameBet([bet])}}
-            acceptBets={props.gameStatus.betMode} />
-        </AnimationContainer>
+            acceptBets={props.gameStatus.betMode} /> */}
+        {/* </AnimationContainer> */}
       </View>
       <View style={styles.containerDeal}>
         { props.cardsInDeck < 52 &&

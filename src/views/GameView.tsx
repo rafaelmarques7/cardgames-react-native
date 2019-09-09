@@ -5,6 +5,7 @@ import ActionDisplay from '../components/ActionDisplay';
 import HandOfPlayer from '../components/HandPlayer';
 import StatusBarContainer from '../containers/StatusBarContainer';
 import LooseModalContainer from '../containers/LooseModalContainer';
+import BetDisplay from '../components/BetRow';
 
 const GameView = (props) => {
   return(
@@ -25,6 +26,10 @@ const GameView = (props) => {
         displayCards={!props.gameStatus.dealMode}
         renderStrength={!props.gameStatus.dealMode}
         actionSetUserUsername={props.actionSetUserUsername}/>
+      <BetDisplay
+        betValue={props.player.creditAmmount}
+        onSetBet={(bet) => {props.actionGameBet([bet])}}
+        acceptBets={props.gameStatus.betMode} />
     </View>
   );
 }

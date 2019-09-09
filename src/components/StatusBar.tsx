@@ -9,6 +9,7 @@ import { StyleSheet, View, Text } from 'react-native';
 import Heart from './Heart';
 import ConfigContainer from '../containers/ConfigContainer';
 import CreditPlayer from './Credit';
+import { brown } from '../styles';
 
 /**
  * numLives - renders $numLives red hearts
@@ -40,7 +41,7 @@ const styles = StyleSheet.create({
   container: {
     height: 50,
     flexDirection: 'row',
-    backgroundColor: '#7F3912',
+    backgroundColor: brown,
   },
   config: {
     flex: 2,

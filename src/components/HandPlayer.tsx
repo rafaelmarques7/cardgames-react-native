@@ -63,8 +63,8 @@ const createStyle = (bottom=false) => {
       flex: 1,
       flexDirection: bottom ? 'column-reverse' : 'column', // if bottom, reverse the direction of childs views
       margin: 5,
-      paddingBottom: bottom ? 20 : 0,
-      paddingTop: !bottom ? 20: 0,
+      paddingBottom: bottom ? 5 : 0,
+      paddingTop: !bottom ? 5 : 0,
     },
     handContainer: {
       flex: 4,
@@ -81,7 +81,7 @@ const createStyle = (bottom=false) => {
       alignSelf: 'center',
       borderTopColor: 'white',
       borderBottomColor: 'white',
-      borderBottomWidth: bottom ? 2 * StyleSheet.hairlineWidth : null,
+      borderBottomWidth: bottom ? 3 * StyleSheet.hairlineWidth : null,
       borderTopWidth: !bottom ? 2 * StyleSheet.hairlineWidth : null,
       width: screen.width * 0.7,
       height: 30,
