@@ -120,7 +120,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    // marginBottom: 10,
   },
   textWin: {
     fontSize: 20,

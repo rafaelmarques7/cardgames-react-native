@@ -11,7 +11,7 @@ import HomeCardAnimation from '../components/HomeCardAnimation';
 
 class HomeScreen extends React.Component {
   componentDidMount() {
-    this.props.navigation.push('Game')
+    // this.props.navigation.push('Game')
   }
   render() {
     return (
