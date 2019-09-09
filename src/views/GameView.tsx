@@ -16,15 +16,15 @@ const GameView = (props) => {
         positionOnTop={true}
         displayCards={props.gameStatus.showMode || props.gameStatus.endMode}
         renderStrength={props.gameStatus.showMode || props.gameStatus.endMode}
-      />
+        actionSetUserUsername={props.actionSetUserUsername}/>
       <ActionDisplay 
         {...props} />
       <HandOfPlayer
         player={props.player}
         positionOnTop={false}
-        renderCredit={true}
         displayCards={!props.gameStatus.dealMode}
-        renderStrength={!props.gameStatus.dealMode} />
+        renderStrength={!props.gameStatus.dealMode}
+        actionSetUserUsername={props.actionSetUserUsername}/>
     </View>
   );
 }

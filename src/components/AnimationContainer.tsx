@@ -19,7 +19,6 @@ const DEF_COUNT = 1;
 class AnimationContainer extends React.Component<cProps> {  
   render() {
     let { animate, animationType, delay, duration, count, style } = this.props
-    console.log(animationType, delay, duration, count)
 
     animationType = animationType ? animationType : DEF_ANIMATION;
     delay = delay !== undefined ? delay : DEF_DELAY;

@@ -30,7 +30,8 @@ export function getPlayersCreditAmmount(state, indexPlayer=0) {
 }
 
 export function getPlayersUsername(state, indexPlayer=0) {
-  return state.game.players[indexPlayer].username;
+  return getUserUsername(state)
+  // return state.game.players[indexPlayer].username;
 }
 
 export function getCardsStrength(state, indexPlayer=0) {

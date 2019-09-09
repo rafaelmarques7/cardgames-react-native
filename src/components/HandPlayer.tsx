@@ -1,24 +1,39 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TextInput } from 'react-native';
 import { screen } from '../config';
 import CardWithFlip from './CardWithFlip';
 import StrengthOfHand from './StrengthOfHand';
+import { Input } from 'react-native-elements';
+import { actionSetUserEmail } from '../stateHandle';
 
 const HandOfPlayer = ({
   player,
   positionOnTop=false,
   renderStrength=false,
   displayCards=false,
+  actionSetUserUsername
 }) => {
   // deconstruct props
   const { username, cards, valueHand } = player;
   // create stylesheet based on position
   const styles = createStyle(!positionOnTop);
 
+  const [value, onChangeText] = React.useState('Useless Placeholder');
+
   return (
     <View style={styles.container} >
       <View style={styles.textContainer}>
-        <Text style={styles.text}>{username}</Text>	
+        { positionOnTop && 
+          <Text 
+            style={styles.text}>{username}</Text>	        
+        }
+        {
+          !positionOnTop &&
+          <TextInput 
+            onChangeText={text => onChangeText(text)}
+            onSubmitEditing={() => actionSetUserUsername(value)}
+            style={styles.text}>{username}</TextInput>	
+        }
       </View>
       <View style={styles.handContainer}>     
         {cards.map((card, index) => (

@@ -5,6 +5,7 @@ import {
   actionGameBet,
   getPlayerInfo,
   getDealerInfo,
+  actionSetUserUsername,
 } from '../stateHandle';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
@@ -29,6 +30,7 @@ const mapDispatchToProps = dispatch => {
     actionGameDeal,
     actionGameInit,
     actionGameBet,
+    actionSetUserUsername,
   }, dispatch);
 };
 

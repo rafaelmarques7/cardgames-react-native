@@ -20,7 +20,6 @@ class LooseModal extends React.Component<cProps, cState> {
   }
 
   toggleState = () => {
-    console.log('inside toggleState')
     this.setState({animationComplete: !this.state.animationComplete})
   }
 
