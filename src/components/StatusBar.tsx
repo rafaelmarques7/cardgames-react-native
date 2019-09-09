@@ -38,7 +38,7 @@ const StatusBar = ({ numLives=0, numDeaths=3, numPoints=2 }) => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 35,
+    height: 50,
     flexDirection: 'row',
     backgroundColor: '#7F3912',
   },

@@ -50,20 +50,17 @@ const createStyle = (bottom=false) => {
       margin: 5,
       paddingBottom: bottom ? 20 : 0,
       paddingTop: !bottom ? 20: 0,
-      // backgroundColor: 'white',
     },
     handContainer: {
       flex: 4,
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: bottom ? 'flex-end' : 'flex-start', // if bottom, move cards to bottom of their containers flex
-      // backgroundColor: 'red',
     },
     cardContainer: {
       margin: 8,
     },
     textContainer: {
-      // backgroundColor: 'blue',
       flexDirection: 'row',
       justifyContent: 'center',
       alignSelf: 'center',
@@ -75,14 +72,16 @@ const createStyle = (bottom=false) => {
       height: 30,
     },
     text: {
+      fontSize: 17,
+      color: 'white',
       textAlign: 'center',
-      fontWeight: 'bold',
+      fontWeight: '600',
+      fontFamily: 'Roboto',
     },
     strengthContainer: {
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-      // backgroundColor: 'black',
     }
   });
 }

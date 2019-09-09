@@ -23,7 +23,7 @@ const DeckOfCardsImg = ({
   const source = ImageList[selectDeckImg(fullDeck, deckScrambled)];
   return (
     <Animatable.View
-      animation={shakeAnimation ? 'bounce' : null}
+      animation={shakeAnimation ? 'rubberBand' : null}
       duration={1500}
       iterationCount={"infinite"}
       iterationDelay={2500}>

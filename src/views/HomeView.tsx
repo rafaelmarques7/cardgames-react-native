@@ -12,7 +12,7 @@ import AnimationContainer from '../components/AnimationContainer';
 
 class HomeScreen extends React.Component {
   componentDidMount() {
-    // this.props.navigation.push('Game')
+    this.props.navigation.push('Game')
   }
   render() {
     return (
@@ -44,22 +44,6 @@ class HomeScreen extends React.Component {
           animate={true} animationType='bounceInDown'>
           <HomeCardAnimation />
         </AnimationContainer>
- 
-        {/* <View style={styles.containerTitle}>
-          <Text style={styles.title}>Guess What?</Text>
-        </View>
-        <View style={styles.containerSubTitle}>
-          <Text style={styles.subTitle}>High, Low or Draw?</Text>
-          <Text style={styles.subTitle}>You choose!</Text>
-        </View>
-        <View style={styles.containerRemaining}>
-          <Button title="Play Game" onPress={()=>this.props.navigation.push('Game')} />
-          <Button title="Information" onPress={() => this.props.navigation.push('Info')} />
-          <Button title="Highscores" onPress={() => this.props.navigation.push('Highscore')} />
-        </View>
-        <View style={styles.containerExample}>
-          <HomeCardAnimation />
-        </View>*/}
       </View> 
     )
   }

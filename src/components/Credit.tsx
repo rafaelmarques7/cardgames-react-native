@@ -58,9 +58,9 @@ const styles = StyleSheet.create({
   },
   text: {
     fontWeight: 'bold',
-    fontSize: 17,
-    marginRight: 5,
-    marginBottom: 3,
+    fontSize: 20,
+    marginRight: 10,
+    color: 'white'
   },
   image: {
     height: 20,

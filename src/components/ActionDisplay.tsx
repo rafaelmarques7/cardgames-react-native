@@ -2,15 +2,20 @@ import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import BetDisplay from '../components/Bet';
 import DeckOfCardsImg from './DeckOfCards';
+import AnimationContainer from './AnimationContainer';
 
 const ActionDisplay = (props) => {
   return (
     <View style={styles.container}>
       <View style={styles.containerBet}>
-        <BetDisplay 
-          betValue={props.player.creditAmmount}
-          onSetBet={(bet) => {props.actionGameBet([bet])}}
-          acceptBets={props.gameStatus.betMode} />
+        <AnimationContainer
+          animate={props.gameStatus.betMode}
+          animationType='rubberBand' count='infinite' delay={2000}>
+          <BetDisplay 
+            betValue={props.player.creditAmmount}
+            onSetBet={(bet) => {props.actionGameBet([bet])}}
+            acceptBets={props.gameStatus.betMode} />
+        </AnimationContainer>
       </View>
       <View style={styles.containerDeal}>
         { props.cardsInDeck < 52 &&

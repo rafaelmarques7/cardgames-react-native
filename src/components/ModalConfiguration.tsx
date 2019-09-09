@@ -57,7 +57,7 @@ export default class ModalConfiguration extends Component<cProps> {
   renderModalButton = () => (
     <TouchableOpacity
       onPress={this.toggleModal}>
-      <EvilIcons name='gear' size={35} />
+      <EvilIcons name='gear' size={35} color='grey' />
     </TouchableOpacity>    
   )
 
