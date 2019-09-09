@@ -10,6 +10,9 @@ import { screen } from '../config';
 import HomeCardAnimation from '../components/HomeCardAnimation';
 
 class HomeScreen extends React.Component {
+  componentDidMount() {
+    // this.props.navigation.push('Game')
+  }
   render() {
     return (
       <View style={styles.container}>
@@ -93,6 +96,7 @@ const styles = StyleSheet.create({
     fontSize: 80,
     fontWeight: '900',
     textAlign: 'center',
+    // textTransform: 'uppercase',
     color: 'white',
   },
   subTitle: {
