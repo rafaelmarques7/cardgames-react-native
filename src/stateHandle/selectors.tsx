@@ -75,7 +75,7 @@ export const isPlayerLooser = state => state.gameStatus.numLives === 0
 
 export const numRoundsPlayed = state => state.gameStatus.numRounds
 
-export const isUserLoggedIn = state => state.user.email !== null
+export const isUserLoggedIn = state => true//state.user.email !== null
 
 export const getUserUsername = state => state.user.username
 

@@ -8,6 +8,7 @@ import GameContainer from '../containers/GameContainer';
 import AuthContainer from '../containers/AuthContainer';
 import { screen } from '../config';
 import HomeCardAnimation from '../components/HomeCardAnimation';
+import AnimationContainer from '../components/AnimationContainer';
 
 class HomeScreen extends React.Component {
   componentDidMount() {
@@ -16,7 +17,35 @@ class HomeScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.containerTitle}>
+        <AnimationContainer
+          style={styles.containerTitle}
+          animate={true} animationType='bounceInUp'>
+          <Text style={styles.title}>Guess What?</Text>
+        </AnimationContainer>
+        <AnimationContainer
+          style={styles.containerSubTitle}
+          animate={true} animationType='slideInLeft' delay={800}>
+          <Text style={styles.subTitle}>High, Low or Draw?</Text>
+          <Text style={styles.subTitle}>You choose!</Text>
+        </AnimationContainer>
+        <AnimationContainer
+          style={styles.containerRemaining}
+          animate={true} animationType='slideInRight' delay={1600}>
+          <Button title="Information" onPress={() => this.props.navigation.push('Info')} />
+          <AnimationContainer
+            style={{flex:0}}
+            animate={true} animationType='rubberBand' delay={3200} count='infinite'>
+            <Button title="Play Game" onPress={()=>this.props.navigation.push('Game')} />
+          </AnimationContainer>
+          <Button title="Highscores" onPress={() => this.props.navigation.push('Highscore')} />
+        </AnimationContainer>
+        <AnimationContainer 
+          style={styles.containerExample}
+          animate={true} animationType='bounceInDown'>
+          <HomeCardAnimation />
+        </AnimationContainer>
+ 
+        {/* <View style={styles.containerTitle}>
           <Text style={styles.title}>Guess What?</Text>
         </View>
         <View style={styles.containerSubTitle}>
@@ -30,8 +59,8 @@ class HomeScreen extends React.Component {
         </View>
         <View style={styles.containerExample}>
           <HomeCardAnimation />
-        </View>
-      </View>
+        </View>*/}
+      </View> 
     )
   }
 }
@@ -96,7 +125,6 @@ const styles = StyleSheet.create({
     fontSize: 80,
     fontWeight: '900',
     textAlign: 'center',
-    // textTransform: 'uppercase',
     color: 'white',
   },
   subTitle: {
