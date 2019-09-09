@@ -41,7 +41,7 @@ class LooseModal extends React.Component<cProps, cState> {
             <AnimationContainer 
               animate={true} animationType='bounceIn' delay={1000}>
               <Text 
-                style={{...styles.text, ...styles.titleText}}>You loose!</Text>
+                style={{...styles.text, ...styles.titleText}}>You lose!</Text>
               </AnimationContainer>
             </View>
             <View style={styles.containerInfo}>
@@ -59,7 +59,7 @@ class LooseModal extends React.Component<cProps, cState> {
                 <Text 
                   style={styles.text}>And scored </Text>
                 <Text 
-                  style={{...styles.text, fontWeight: 'bold'}}>{highscore} points.</Text>
+                  style={{...styles.text, fontWeight: 'bold'}}>{highscore} coins.</Text>
               </AnimationContainer>
             {
               !this.state.animationComplete &&

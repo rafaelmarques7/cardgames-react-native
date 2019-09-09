@@ -11,6 +11,7 @@ import { Input, Button } from 'react-native-elements';
 import { Auth } from 'aws-amplify';
 import LogoutButton from '../components/LogoutButton';
 import { screen } from '../config';
+import { blueLightBackground, greyMedium } from '../styles';
 
 type cProps = {
   isLoggedIn: boolean,
@@ -100,16 +101,19 @@ export default class AuthView extends React.Component<cProps, cState> {
     <>
       <Input
         placeholder="   Email address"
-        leftIcon={{ type: 'font-awesome', name: 'user' }}     
+        leftIcon={{ type: 'font-awesome', name: 'user' }}    
+        placeholderTextColor={greyMedium} 
         onChangeText={(value) => this.setState({ email: value })} />
       <Input
         placeholder="   Password"
         secureTextEntry
+        placeholderTextColor={greyMedium} 
         leftIcon={{ type: 'font-awesome', name: 'lock' }}
         onChangeText={(value) => this.setState({ password: value })} />
       <Input
         placeholder="   Confirm Password"
         secureTextEntry
+        placeholderTextColor={greyMedium} 
         leftIcon={{ type: 'font-awesome', name: 'lock' }}
         onChangeText={(value) => this.setState({ confirmPassword: value })} />
     </>
@@ -128,11 +132,13 @@ export default class AuthView extends React.Component<cProps, cState> {
     <>
       <Input
         placeholder="   Email address"
+        placeholderTextColor={greyMedium} 
         leftIcon={{ type: 'font-awesome', name: 'user' }}     
         onChangeText={(value) => this.setState({ email: value })} />
       <Input
         placeholder="   Password"
         secureTextEntry
+        placeholderTextColor={greyMedium} 
         leftIcon={{ type: 'font-awesome', name: 'lock' }}
         onChangeText={(value) => this.setState({ password: value })} />   
     </>
@@ -174,7 +180,7 @@ export default class AuthView extends React.Component<cProps, cState> {
         onPress={this.toggleSignType}
         style={{
           ...styles.optionItem, 
-          backgroundColor: this.state.displayLogin ? '#1e88e5' : '#e3f2fd'
+          backgroundColor: this.state.displayLogin ? 'white' : blueLightBackground 
         }}>
         <Text>Sign in</Text>
       </TouchableOpacity>
@@ -182,7 +188,7 @@ export default class AuthView extends React.Component<cProps, cState> {
         onPress={this.toggleSignType}
         style={{
           ...styles.optionItem, 
-          backgroundColor: !this.state.displayLogin ? '#1e88e5' : '#e3f2fd'
+          backgroundColor: !this.state.displayLogin ? 'white' : blueLightBackground 
         }}>
         <Text>Sign up</Text>
       </TouchableOpacity>
@@ -196,14 +202,16 @@ export default class AuthView extends React.Component<cProps, cState> {
           <Text style={styles.textTitle}>Welcome!</Text>
           <Text style={styles.textSubtitle}>Please take a minute to sign-in or to register an account.</Text>
         </View>
-        <View style={styles.containerOptions}>
-          {this.renderAuthOptions()}
-        </View>
-        <View style={styles.actionContainer}>
-          {this.state.displayLogin && this.renderLoginForm()}
-          {!this.state.displayLogin && this.renderRegistrationForm()}
-          {this.state.confirmationCodeVisible && this.renderConfirmationCodeForm()}
-          {this.renderActionButton()}
+        <View style={styles.containerMain}>
+          <View style={styles.containerOptions}>
+            {this.renderAuthOptions()}
+          </View>
+          <View style={styles.actionContainer}>
+            {this.state.displayLogin && this.renderLoginForm()}
+            {!this.state.displayLogin && this.renderRegistrationForm()}
+            {this.state.confirmationCodeVisible && this.renderConfirmationCodeForm()}
+            {this.renderActionButton()}
+          </View>
         </View>
         <View style={styles.skipContainer}>
           {this.renderSkipButton()}
@@ -217,13 +225,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: (screen.heightScreen - screen.heightWindow) / 2,
-    backgroundColor: '#e3f2fd',
+    backgroundColor: 'white',
     fontSize: 25
   },
   containerOptions: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-around',
+    borderBottomColor: 'white',
+    borderBottomWidth: 1,
   },
   optionItem: {
     flex: 1,
@@ -249,5 +259,14 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontFamily: 'Roboto',
     textAlign: 'center', 
+  },
+  containerPlaceholder: {
+    flex: 4,
+  },
+  containerMain: {
+    flex: 8,
+    margin: 10,
+    borderRadius: 20,
+    alignContent: 'center',
   }
 });

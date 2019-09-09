@@ -64,7 +64,7 @@ class HomeCardAnimation extends React.Component {
   }
 
   displayTextWinner() {
-    const text = this.state.playerIsWinner ? 'You win!' : 'You loose.'
+    const text = this.state.playerIsWinner ? 'You win!' : 'You lose.'
     return (
       <AnimationContainer 
         animate={true} 
@@ -89,7 +89,7 @@ class HomeCardAnimation extends React.Component {
               showCards={this.state.showPlayerCard}/>
           </View>
           <View>
-            <AnimationContainer animate={true}>
+            <AnimationContainer animate={true} duration={2000} delay={2000} count='infinite'>
               <BetDisplay 
                 betValue={2}
                 onSetBet={(bet) => this.handleSetBet(bet)}
