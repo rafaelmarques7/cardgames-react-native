@@ -53,6 +53,7 @@ export function getPlayerInfo(state) {
     creditAmmount: getPlayersCreditAmmount(state),
     valueHand: getCardsStrength(state),
     bet: getPlayersBet(state),
+    betOn: state.betOn,
   }
 }
 

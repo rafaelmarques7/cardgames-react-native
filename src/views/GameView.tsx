@@ -29,7 +29,8 @@ const GameView = (props) => {
       <BetDisplay
         betValue={props.player.creditAmmount}
         onSetBet={(bet) => {props.actionGameBet([bet])}}
-        acceptBets={props.gameStatus.betMode} />
+        acceptBets={props.gameStatus.betMode} 
+        betOn={props.player.betOn} />
     </View>
   );
 }

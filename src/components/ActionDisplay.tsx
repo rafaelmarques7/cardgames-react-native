@@ -8,16 +8,6 @@ import AnimationContainer from './AnimationContainer';
 const ActionDisplay = (props) => {
   return (
     <View style={styles.container}>
-      <View style={styles.containerBet}>
-        {/* <AnimationContainer
-          animate={props.gameStatus.betMode}
-          animationType='rubberBand' count='infinite' delay={2000}> */}
-          {/* <BetDisplay 
-            betValue={props.player.creditAmmount}
-            onSetBet={(bet) => {props.actionGameBet([bet])}}
-            acceptBets={props.gameStatus.betMode} /> */}
-        {/* </AnimationContainer> */}
-      </View>
       <View style={styles.containerDeal}>
         { props.cardsInDeck < 52 &&
           <DeckOfCardsImg
@@ -48,7 +38,7 @@ const styles = StyleSheet.create({
     marginLeft: 25,
   },
   containerDeal: {
-    marginRight: 25,
+    marginLeft: 25,
   },
 });
 

@@ -17,6 +17,7 @@ export const initState = {
     showMode: false,
     endMode: false,
   },
+  betOn: 'pass',
   cardsInDeck: 52,
 }
 
@@ -79,6 +80,7 @@ function gameBet(state, action) {
   return {
     ...state,
     game: newGame,
+    betOn: action.payload.bets[0].on, 
     gameStatus: {
       ...state.gameStatus,
       betMode: false,
@@ -116,8 +118,10 @@ function gamePayoff(state) {
 }
 
 function gameRestartRound(state) {
+  console.log('inside gameRestartRound')
   return {
     ...state,
+    betOn: 'pass',
     gameStatus: {
       ...state.gameStatus,
       endMode: false,
