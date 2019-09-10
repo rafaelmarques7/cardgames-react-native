@@ -27,7 +27,7 @@ const ActionDisplay = (props) => {
         <AnimationContainer
           animate={true} animationType='bounceIn' delay={500}>
           <Text style={styles.text}>
-            {props.player.isWinner ? 'You win!' : 'You Lose!'}
+            {props.player.isWinner ? 'Nice!' : 'Nope!'}
           </Text>
         </AnimationContainer>
       }

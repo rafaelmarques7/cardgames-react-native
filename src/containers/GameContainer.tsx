@@ -12,7 +12,7 @@ import { bindActionCreators } from 'redux';
 import GameView from '../views/GameView';
 
 const Game = (props) => {
-  console.log('<Game /> props: ', props.gameStatus);
+  // console.log('<Game /> props: ', props.gameStatus);
   return(
     <GameView {...props} />
   );
