@@ -67,13 +67,16 @@ export const actionGameBet = (bets) => {
     dispatch(actionGameShowdown());
     dispatch(actionBet(bets));
 
-    console.log(`set timeout ${TIMEOUT_RESTART_ROUND} ms to dispatch round management actions`);
     setTimeout(() => {
       const playerIsWinner = getRoundWinner(getState())
       if (!playerIsWinner) {
         console.log('dispatch reduce lives')
         dispatch(actionReduceLives())
       }
+    }, TIMEOUT_RESTART_ROUND/2);
+
+    console.log(`set timeout ${TIMEOUT_RESTART_ROUND} ms to dispatch payoff and restart`);
+    setTimeout(() => {
       console.log(`dispatch payoff`)
       dispatch(actionGamePayoff());
       dispatch(actionGameRestartRound());

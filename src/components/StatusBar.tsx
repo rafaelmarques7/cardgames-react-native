@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   },
   lifes: {
     flex: 4,
-    flexDirection: 'row',
+    flexDirection: 'row-reverse',
     justifyContent: 'space-around',
     alignItems: 'center',
   },
