@@ -8,12 +8,23 @@ export const startGame = (store) => {
   store.dispatch(actionGameInit(DEF_PLAYERS, DEF_NUM_CARDS_PER_HAND));
 }
 
-export const actionSetNumberOfCards = (value) => ({
+export const setNumberOfCards = (value) => ({
   type: 'SET_NUMBER_OF_CARDS',
   payload: {
     value: value,
   }
 })
+
+export const actionSetNumberOfCards = (value) => {
+  return dispatch => {
+    dispatch(actionGameRestartRound())
+    setTimeout(() => {
+      dispatch(setNumberOfCards(value))
+    }, 100);
+  }
+}
+
+
 
 export const actionGameInit = (players, numCardsPerHand) => ({
   type: 'GAME_INIT',
@@ -46,6 +57,8 @@ export const actionGameRestartRound = () => ({
   type: 'GAME_RESTART_ROUND',
 })
 
+
+
 export const actionGameBet = (bets) => {
   return (dispatch, getState) => {  
     const TIMEOUT_RESTART_ROUND = 5000;
@@ -77,10 +90,10 @@ export const actionGameRestart = () => {
   return (dispatch, getState) => {
     // get number of cards so that user preferences are not overwritten
     const numCards = getNumberOfCardsPerHand(getState())
-    // re-declare user; this is necessary to reset the credit 
-    const player = new PlayerHighLow(getUserUsername(getState()))
-    console.log(player)
-    const players = [player];
+    // get username so it is not overwritten
+    const username = getUserUsername(getState())
+    // re-declare players; this is necessary to reset the credit 
+    const players = [new PlayerHighLow(username)]
     console.log('dispatch actionGameInit (restart)')
     dispatch(actionGameInit(players, numCards))
   }

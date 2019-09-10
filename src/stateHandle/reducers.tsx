@@ -61,6 +61,7 @@ function gameInit(state, action) {
 }
 
 function gameDeal(state) {
+  console.log('inside deal');
   state.game.deal();  // changes happen inside the class object
   const newGame = Object.assign(  // this preserves the class methods
     Object.create(Object.getPrototypeOf(state.game)), state.game);
@@ -128,18 +129,24 @@ function gameRestartRound(state) {
     betOn: 'pass',
     gameStatus: {
       ...state.gameStatus,
-      endMode: false,
-      showMode: false,
       dealMode: true,
+      endMode: false,
+      betMode: false,
+      showMode: false,
       numRounds: state.gameStatus.numRounds + 1
     }
   }
 }
 
 function gameSetNumberOfCards(state, action) {
+  console.log('inside gameSetNumberOfCards')
   state.game.numCardsPerHand = action.payload.value;
+  // overwrite the cards, so that it triggers re-render
+  state.game.players[0].cards.cards = [];
+  state.game.dealer.cards.cards = [];
   const newGame = Object.assign(
     Object.create(Object.getPrototypeOf(state.game)), state.game);
+  console.log(newGame.players)
   return {
     ...state,
     game: newGame,

@@ -49,12 +49,17 @@ class CardWithFlip extends React.Component {
 
   componentDidMount(){
     if (this.props.showCards) {
+      console.log('flip inside mount')
       this.flipCard()
     }
   }
 
   componentDidUpdate(prevProps) {
+    console.log(`card: `, this.props.cardObject.unicode)
+    console.log(`prevProps: `, prevProps.showCards)
+    console.log('props:', this.props.showCards)
     if (this.props.showCards !== prevProps.showCards) {
+      console.log('flip inside update')
       this.flipCard()
     }
   }

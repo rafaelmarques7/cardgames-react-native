@@ -1,33 +1,37 @@
 import React from 'react'
 import { Text, View, Button, StyleSheet } from 'react-native'
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
-import GameInfoView from './GameInfo';
-import HighScoreView from './Highscores';
-import GameContainer from '../containers/GameContainer';
-import AuthContainer from '../containers/AuthContainer';
 import { screen } from '../config';
 import HomeCardAnimation from '../components/HomeCardAnimation';
 import AnimationContainer from '../components/AnimationContainer';
 
-class HomeScreen extends React.Component {
+type cProps = {
+  navigation: {
+    push: Function,
+  },
+}
+
+export default class HomeScreen extends React.Component<cProps> {
   componentDidMount() {
     // this.props.navigation.push('Game')
   }
+
   render() {
     return (
       <View style={styles.container}>
+
         <AnimationContainer
           style={styles.containerTitle}
           animate={true} animationType='bounceInUp'>
           <Text style={styles.title}>Guess What?</Text>
         </AnimationContainer>
+        
         <AnimationContainer
           style={styles.containerSubTitle}
           animate={true} animationType='slideInLeft' delay={800}>
           <Text style={styles.subTitle}>High, Low or Draw?</Text>
           <Text style={styles.subTitle}>You choose!</Text>
         </AnimationContainer>
+        
         <AnimationContainer
           style={styles.containerRemaining}
           animate={true} animationType='slideInRight' delay={1600}>
@@ -39,43 +43,17 @@ class HomeScreen extends React.Component {
           </AnimationContainer>
           <Button title="Highscores" onPress={() => this.props.navigation.push('Highscore')} />
         </AnimationContainer>
+        
         <AnimationContainer 
           style={styles.containerExample}
           animate={true} animationType='bounceInDown'>
           <HomeCardAnimation />
         </AnimationContainer>
+    
       </View> 
     )
   }
 }
-
-/**
- * All components rendered with this createStackNavigator function
- * it will be given a 'navigation' prop
- * ref: https://facebook.github.io/react-native/docs/navigation
- */
-const AppNavigator = createStackNavigator({
-  AuthView: {
-    screen: AuthContainer, 
-    navigationOptions: {
-        header: null,
-    },
-  },
-  Home: {
-    screen: HomeScreen, 
-    navigationOptions: {
-        header: null,
-    },
-  },
-  Game: {
-    screen: GameContainer, 
-    navigationOptions: {
-        header: null,
-    },
-  },
-  Info: GameInfoView,
-  Highscore: HighScoreView,
-});
 
 const styles = StyleSheet.create({
   container: {
@@ -118,5 +96,3 @@ const styles = StyleSheet.create({
     color: 'white',
   }
 })
-
-export default createAppContainer(AppNavigator);
