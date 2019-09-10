@@ -1,5 +1,5 @@
 import { PlayerHighLow } from 'card-games-typescript' 
-import { getRoundWinner, getNumberOfCardsPerHand } from './selectors';
+import { getRoundWinner, getNumberOfCardsPerHand, getUserUsername } from './selectors';
 
 export const DEF_PLAYERS = [new PlayerHighLow('Player')];
 export const DEF_NUM_CARDS_PER_HAND = 1;
@@ -78,7 +78,9 @@ export const actionGameRestart = () => {
     // get number of cards so that user preferences are not overwritten
     const numCards = getNumberOfCardsPerHand(getState())
     // re-declare user; this is necessary to reset the credit 
-    const players = [new PlayerHighLow('Player')];
+    const player = new PlayerHighLow(getUserUsername(getState()))
+    console.log(player)
+    const players = [player];
     console.log('dispatch actionGameInit (restart)')
     dispatch(actionGameInit(players, numCards))
   }

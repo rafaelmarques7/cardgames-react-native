@@ -38,6 +38,7 @@ class LooseModal extends React.Component<cProps, cState> {
         <View style={styles.modal}>
             <View style={styles.containerTitle}>
             <AnimationContainer 
+              style={{flex: 1}}
               animate={true} animationType='bounceIn' delay={1000}>
               <Text 
                 style={{...styles.text, ...styles.titleText}}>You lose!</Text>
@@ -45,7 +46,7 @@ class LooseModal extends React.Component<cProps, cState> {
             </View>
             <View style={styles.containerInfo}>
               <AnimationContainer 
-                style={styles.subTitleContainer}   
+                style={{...styles.subTitleContainer, flex: 1}}   
                 animate={true} animationType='bounceInRight' delay={1500}>
                 <Text 
                   style={styles.text}>You played </Text>
@@ -53,7 +54,7 @@ class LooseModal extends React.Component<cProps, cState> {
                   style={{...styles.text, fontWeight: 'bold'}}>{numRoundsPlayed} rounds.</Text>
               </AnimationContainer>
               <AnimationContainer 
-                style={styles.subTitleContainer}                 
+                style={{...styles.subTitleContainer, flex: 1}}                 
                 animate={true} animationType='bounceInLeft' delay={2500}>
                 <Text 
                   style={styles.text}>And scored </Text>
@@ -63,10 +64,10 @@ class LooseModal extends React.Component<cProps, cState> {
             {
               !this.state.animationComplete &&
               <AnimationContainer 
-                style={styles.subTitleContainer}   
+                style={{...styles.subTitleContainer, flex: 1}}   
                 animate={true} animationType='bounceIn' delay={3500} duration={3500} count={1}>
                 <TouchableOpacity
-                  onPress={() => {actionGameRestart}}>
+                  onPress={actionGameRestart}>
                   <Text 
                     style={styles.text}>Play again!</Text>
                 </TouchableOpacity>
@@ -74,10 +75,12 @@ class LooseModal extends React.Component<cProps, cState> {
             }
             {
               this.state.animationComplete && 
-              <AnimationContainer animate={true} 
-                animationType='bounceIn' delay={0} duration={4000} count={'infinite'}>
+              <AnimationContainer 
+                style={{flex: 1}}
+                animate={true} 
+                animationType='bounceIn' delay={4000} duration={4000} count={'infinite'}>
                 <TouchableOpacity style={styles.playAgainContainer}
-                  onPress={() => {actionGameRestart}}>
+                  onPress={actionGameRestart}>
                   <Text 
                     style={{...styles.text, ...styles.playAgainText}}>
                     Play again!</Text>

@@ -49,10 +49,14 @@ export const rootReducer = (state=initState, action) => {
 }
 
 function gameInit(state, action) {
+  const game = new HigherOrLower(action.payload.players, action.payload.numCardsPerHand)
   return {
     ...initState,
-    game: new HigherOrLower(
-      action.payload.players, action.payload.numCardsPerHand)
+    user: {
+      ...state.user,
+      username: game.players[0].username,
+    },
+    game: game 
   }
 }
 
