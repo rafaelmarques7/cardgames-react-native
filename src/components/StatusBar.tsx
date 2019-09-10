@@ -23,11 +23,8 @@ const StatusBar = ({ numLives=0, numDeaths=3, numPoints=2 }) => {
         <ConfigContainer />
       </View>
       <View style={styles.lifes}>
-        {[...Array(numLives)].map((e, i) => (
-          <Heart isLive={true} key={`liveHeart-${i}`}/>
-        ))}
-        {[...Array(numDeaths)].map((e, i) => (
-          <Heart isLive={false} key={`deadHeart-${i}`}/>
+        {[...Array(numLives + numDeaths)].map((e, i) => (
+          <Heart isLive={i<numLives} key={`heart-${i}`}/>
         ))}
       </View>
       <View style={styles.highscore}>
