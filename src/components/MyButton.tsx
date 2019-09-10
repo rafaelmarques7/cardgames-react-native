@@ -39,7 +39,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     padding: 8,
     color: 'white',
-    fontWeight: 'bold',
+    fontSize: 16,
+    fontWeight: '600',
+    fontFamily: 'Roboto',    
   }
 })
 

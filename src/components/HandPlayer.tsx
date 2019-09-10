@@ -87,7 +87,7 @@ const createStyle = (bottom=false) => {
       height: 30,
     },
     text: {
-      fontSize: 17,
+      fontSize: 18,
       color: 'white',
       textAlign: 'center',
       fontWeight: '600',
