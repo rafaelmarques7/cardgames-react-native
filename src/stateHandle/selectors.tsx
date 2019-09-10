@@ -54,6 +54,7 @@ export function getPlayerInfo(state) {
     valueHand: getCardsStrength(state),
     bet: getPlayersBet(state),
     betOn: state.betOn,
+    isWinner: getRoundWinner(state)
   }
 }
 

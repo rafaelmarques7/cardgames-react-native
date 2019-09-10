@@ -40,8 +40,8 @@ const DeckOfCardsImg = ({
 
 const styles = StyleSheet.create({
   imageCard: {
-    width: 440/5,
-    height: 600/5,
+    width: 440/6,
+    height: 600/6,
     transform: [{ rotate: '-90deg'}]
   },
 });

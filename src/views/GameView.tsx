@@ -5,7 +5,7 @@ import ActionDisplay from '../components/ActionDisplay';
 import HandOfPlayer from '../components/HandPlayer';
 import StatusBarContainer from '../containers/StatusBarContainer';
 import LooseModalContainer from '../containers/LooseModalContainer';
-import BetDisplay from '../components/BetRow';
+import BetDisplay from '../components/Bet';
 
 const GameView = (props) => {
   return(
