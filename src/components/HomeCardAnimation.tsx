@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, View, Button, StyleSheet } from 'react-native'
 import CardWithFlip from './CardWithFlip'
-import BetDisplay from './Bet'
+import BetDisplay from './BetColumn'
 import { randomCard } from '../logic/misc'
 import AnimationContainer from './AnimationContainer'
 import { Card } from 'card-games-typescript'
@@ -89,7 +89,9 @@ class HomeCardAnimation extends React.Component {
               showCards={this.state.showPlayerCard}/>
           </View>
           <View>
-            <AnimationContainer animate={true} duration={2000} delay={2000} count='infinite'>
+            <AnimationContainer 
+              style={{flex: 1}}
+              animate={true} duration={2000} delay={2000} count='infinite'>
               <BetDisplay 
                 betValue={2}
                 onSetBet={(bet) => this.handleSetBet(bet)}

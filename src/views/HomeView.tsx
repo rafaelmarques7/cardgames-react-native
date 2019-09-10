@@ -12,7 +12,7 @@ import AnimationContainer from '../components/AnimationContainer';
 
 class HomeScreen extends React.Component {
   componentDidMount() {
-    this.props.navigation.push('Game')
+    // this.props.navigation.push('Game')
   }
   render() {
     return (

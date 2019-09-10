@@ -29,7 +29,8 @@ const styles = StyleSheet.create({
     backgroundColor: brown,
     borderRadius: 2,
     alignContent: 'center',
-    margin: 7,
+    justifyContent: 'center',
+    margin: 3,
   },
   disabled: {
     backgroundColor: '#dfdfdf',

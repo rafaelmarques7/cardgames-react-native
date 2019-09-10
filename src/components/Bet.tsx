@@ -59,6 +59,7 @@ class BetDisplay extends React.Component<BetProps, BetState> {
         <View style={styles.containerAction}>
           { this.state.bet.on !== 'pass' &&
             <AnimationContainer
+              style={{flex: 1}}
               animate={this.props.acceptBets} 
               animationType='rubberBand' delay={2000} duration={2000} count='infinite'>
               <MyButton 

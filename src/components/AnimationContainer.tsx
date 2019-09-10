@@ -42,7 +42,7 @@ class AnimationContainer extends React.Component<cProps> {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
   }
 })
 
