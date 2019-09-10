@@ -61,7 +61,7 @@ export const actionGameRestartRound = () => ({
 
 export const actionGameBet = (bets) => {
   return (dispatch, getState) => {  
-    const TIMEOUT_RESTART_ROUND = 5000;
+    const TIMEOUT_RESTART_ROUND = 4000;
 
     console.log('dispatching actionGameShowdown\ndispatching actionBet');
     dispatch(actionGameShowdown());
