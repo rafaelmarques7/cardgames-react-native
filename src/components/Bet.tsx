@@ -1,15 +1,18 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import { Bet } from 'card-games-typescript';
 import { screen } from '../config';
 import MyButton from './MyButton';
+import AnimationContainer from './AnimationContainer';
 
 type BetState = {
   bet: Bet,
+  betOn: string,
 }
 
 type BetProps = {
   betValue: number,
+  betOn: string
   onSetBet: Function,
   acceptBets: boolean
 }
@@ -18,17 +21,19 @@ class BetDisplay extends React.Component<BetProps, BetState> {
   constructor(props) {
     super(props);
     this.state = {
+      betOn: props.betOn,
       bet: {
-        on: 'pass',
+        on: props.betOn,
         ammount: props.betValue,
-      }
+      },
     }
   }
 
   componentDidUpdate(prevProps) {
-    // resets the bet type if betValue (credit) changes
-    if(prevProps.betValue !== this.props.betValue) {
-      this.onSelectBet('pass')
+    // resets the bet type if the store state changed
+    if (this.props.betOn !== prevProps.betOn) {
+      this.setState({ betOn: this.props.betOn})
+      this.onSelectBet(this.props.betOn)
     }
   }  
 
@@ -52,22 +57,30 @@ class BetDisplay extends React.Component<BetProps, BetState> {
     return (
       <View style={styles.container}>
         <View style={styles.containerAction}>
-          <MyButton 
-            title={stringBet}
-            onPress={() => {this.onSetBet()}} />
+          { this.state.bet.on !== 'pass' &&
+            <AnimationContainer
+              style={{flex: 1}}
+              animate={this.props.acceptBets} 
+              animationType='rubberBand' delay={2000} duration={2000} count='infinite'>
+              <MyButton 
+                title={stringBet}
+                onPress={() => {this.onSetBet()}} />
+            </AnimationContainer>
+          } 
         </View>
-        <View style={styles.containerSelection}>
-          <View style={styles.containerBetType}>
-            <MyButton 
-              title="High" 
-              onPress={() => {this.onSelectBet('high')}} />
-            <MyButton 
-              title="Draw" 
-              onPress={() => {this.onSelectBet('draw')}} />
-            <MyButton 
-              title="Low" 
-              onPress={() => {this.onSelectBet('low')}} />
-          </View>
+        <View style={styles.containerOptions}>
+          <MyButton 
+            title="Low" 
+            style={this.state.bet.on === 'low' ? styles.active : null}
+            onPress={() => {this.onSelectBet('low')}} />
+          <MyButton 
+            title="Draw" 
+            style={this.state.bet.on === 'draw' ? styles.active : null}
+            onPress={() => {this.onSelectBet('draw')}} />
+          <MyButton 
+            title="High" 
+            style={this.state.bet.on === 'high' ? styles.active : null}
+            onPress={() => {this.onSelectBet('high')}} />
         </View>
       </View>
     );    
@@ -76,24 +89,20 @@ class BetDisplay extends React.Component<BetProps, BetState> {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 2/5,
     flexDirection: 'column',
-    width: screen.width * 0.4,
+    width: screen.width,
   },
-  containerSelection: {
+  containerOptions: {
     flex: 1,
     flexDirection: 'row',
   },
   containerAction: {
-    flex: 2/5,
-    paddingBottom: 7,
-  },
-  containerBetType: {
     flex: 1,
   },
-  containerButton:{
-    flex: 1,
-  },
+  active: {
+    backgroundColor: 'green'
+  }
 });
 
 export default BetDisplay;

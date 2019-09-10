@@ -9,6 +9,7 @@ import { StyleSheet, View, Text } from 'react-native';
 import Heart from './Heart';
 import ConfigContainer from '../containers/ConfigContainer';
 import CreditPlayer from './Credit';
+import { brown } from '../styles';
 
 /**
  * numLives - renders $numLives red hearts
@@ -22,11 +23,8 @@ const StatusBar = ({ numLives=0, numDeaths=3, numPoints=2 }) => {
         <ConfigContainer />
       </View>
       <View style={styles.lifes}>
-        {[...Array(numLives)].map((e, i) => (
-          <Heart isLive={true} key={`liveHeart-${i}`}/>
-        ))}
-        {[...Array(numDeaths)].map((e, i) => (
-          <Heart isLive={false} key={`deadHeart-${i}`}/>
+        {[...Array(numLives + numDeaths)].map((e, i) => (
+          <Heart isLive={i<numLives} key={`heart-${i}`}/>
         ))}
       </View>
       <View style={styles.highscore}>
@@ -38,9 +36,9 @@ const StatusBar = ({ numLives=0, numDeaths=3, numPoints=2 }) => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 35,
+    height: 50,
     flexDirection: 'row',
-    backgroundColor: '#7F3912',
+    backgroundColor: brown,
   },
   config: {
     flex: 2,
@@ -49,7 +47,7 @@ const styles = StyleSheet.create({
   },
   lifes: {
     flex: 4,
-    flexDirection: 'row',
+    flexDirection: 'row-reverse',
     justifyContent: 'space-around',
     alignItems: 'center',
   },

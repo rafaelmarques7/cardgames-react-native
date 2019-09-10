@@ -1,24 +1,39 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TextInput } from 'react-native';
 import { screen } from '../config';
 import CardWithFlip from './CardWithFlip';
 import StrengthOfHand from './StrengthOfHand';
+import { Input } from 'react-native-elements';
+import { actionSetUserEmail } from '../stateHandle';
 
 const HandOfPlayer = ({
   player,
   positionOnTop=false,
   renderStrength=false,
   displayCards=false,
+  actionSetUserUsername
 }) => {
   // deconstruct props
   const { username, cards, valueHand } = player;
   // create stylesheet based on position
   const styles = createStyle(!positionOnTop);
 
+  const [value, onChangeText] = React.useState('Useless Placeholder');
+
   return (
     <View style={styles.container} >
       <View style={styles.textContainer}>
-        <Text style={styles.text}>{username}</Text>	
+        { positionOnTop && 
+          <Text 
+            style={styles.text}>{username}</Text>	        
+        }
+        {
+          !positionOnTop &&
+          <TextInput 
+            onChangeText={text => onChangeText(text)}
+            onSubmitEditing={() => actionSetUserUsername(value)}
+            style={styles.text}>{username}</TextInput>	
+        }
       </View>
       <View style={styles.handContainer}>     
         {cards.map((card, index) => (
@@ -48,41 +63,40 @@ const createStyle = (bottom=false) => {
       flex: 1,
       flexDirection: bottom ? 'column-reverse' : 'column', // if bottom, reverse the direction of childs views
       margin: 5,
-      paddingBottom: bottom ? 20 : 0,
-      paddingTop: !bottom ? 20: 0,
-      // backgroundColor: 'white',
+      paddingBottom: bottom ? 5 : 0,
+      paddingTop: !bottom ? 5 : 0,
     },
     handContainer: {
       flex: 4,
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: bottom ? 'flex-end' : 'flex-start', // if bottom, move cards to bottom of their containers flex
-      // backgroundColor: 'red',
     },
     cardContainer: {
       margin: 8,
     },
     textContainer: {
-      // backgroundColor: 'blue',
       flexDirection: 'row',
       justifyContent: 'center',
       alignSelf: 'center',
       borderTopColor: 'white',
       borderBottomColor: 'white',
-      borderBottomWidth: bottom ? 2 * StyleSheet.hairlineWidth : null,
+      borderBottomWidth: bottom ? 3 * StyleSheet.hairlineWidth : null,
       borderTopWidth: !bottom ? 2 * StyleSheet.hairlineWidth : null,
       width: screen.width * 0.7,
       height: 30,
     },
     text: {
+      fontSize: 18,
+      color: 'white',
       textAlign: 'center',
-      fontWeight: 'bold',
+      fontWeight: '600',
+      fontFamily: 'Roboto',
     },
     strengthContainer: {
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-      // backgroundColor: 'black',
     }
   });
 }

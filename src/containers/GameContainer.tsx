@@ -5,13 +5,14 @@ import {
   actionGameBet,
   getPlayerInfo,
   getDealerInfo,
+  actionSetUserUsername,
 } from '../stateHandle';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 import GameView from '../views/GameView';
 
 const Game = (props) => {
-  // console.log('<Game /> props: ', props);
+  // console.log('<Game /> props: ', props.gameStatus);
   return(
     <GameView {...props} />
   );
@@ -29,6 +30,7 @@ const mapDispatchToProps = dispatch => {
     actionGameDeal,
     actionGameInit,
     actionGameBet,
+    actionSetUserUsername,
   }, dispatch);
 };
 

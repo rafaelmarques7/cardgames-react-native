@@ -17,6 +17,7 @@ export const initState = {
     showMode: false,
     endMode: false,
   },
+  betOn: 'pass',
   cardsInDeck: 52,
 }
 
@@ -48,14 +49,19 @@ export const rootReducer = (state=initState, action) => {
 }
 
 function gameInit(state, action) {
+  const game = new HigherOrLower(action.payload.players, action.payload.numCardsPerHand)
   return {
     ...initState,
-    game: new HigherOrLower(
-      action.payload.players, action.payload.numCardsPerHand)
+    user: {
+      ...state.user,
+      username: game.players[0].username,
+    },
+    game: game 
   }
 }
 
 function gameDeal(state) {
+  console.log('inside deal');
   state.game.deal();  // changes happen inside the class object
   const newGame = Object.assign(  // this preserves the class methods
     Object.create(Object.getPrototypeOf(state.game)), state.game);
@@ -79,6 +85,7 @@ function gameBet(state, action) {
   return {
     ...state,
     game: newGame,
+    betOn: action.payload.bets[0].on, 
     gameStatus: {
       ...state.gameStatus,
       betMode: false,
@@ -116,22 +123,30 @@ function gamePayoff(state) {
 }
 
 function gameRestartRound(state) {
+  console.log('inside gameRestartRound')
   return {
     ...state,
+    betOn: 'pass',
     gameStatus: {
       ...state.gameStatus,
-      endMode: false,
-      showMode: false,
       dealMode: true,
+      endMode: false,
+      betMode: false,
+      showMode: false,
       numRounds: state.gameStatus.numRounds + 1
     }
   }
 }
 
 function gameSetNumberOfCards(state, action) {
+  console.log('inside gameSetNumberOfCards')
   state.game.numCardsPerHand = action.payload.value;
+  // overwrite the cards, so that it triggers re-render
+  state.game.players[0].cards.cards = [];
+  state.game.dealer.cards.cards = [];
   const newGame = Object.assign(
     Object.create(Object.getPrototypeOf(state.game)), state.game);
+  console.log(newGame.players)
   return {
     ...state,
     game: newGame,

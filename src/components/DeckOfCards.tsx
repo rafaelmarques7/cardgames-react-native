@@ -23,7 +23,7 @@ const DeckOfCardsImg = ({
   const source = ImageList[selectDeckImg(fullDeck, deckScrambled)];
   return (
     <Animatable.View
-      animation={shakeAnimation ? 'bounce' : null}
+      animation={shakeAnimation ? 'rubberBand' : null}
       duration={1500}
       iterationCount={"infinite"}
       iterationDelay={2500}>
@@ -40,8 +40,8 @@ const DeckOfCardsImg = ({
 
 const styles = StyleSheet.create({
   imageCard: {
-    width: 440/5,
-    height: 600/5,
+    width: 440/6,
+    height: 600/6,
     transform: [{ rotate: '-90deg'}]
   },
 });

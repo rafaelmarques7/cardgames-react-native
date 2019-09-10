@@ -81,3 +81,7 @@ User authentication will be managed by AWS Amplify.
 ## Animable
 
 https://github.com/oblador/react-native-animatable
+
+## Navigation
+
+https://facebook.github.io/react-native/docs/navigation

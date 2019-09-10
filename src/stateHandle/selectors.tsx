@@ -30,7 +30,8 @@ export function getPlayersCreditAmmount(state, indexPlayer=0) {
 }
 
 export function getPlayersUsername(state, indexPlayer=0) {
-  return state.game.players[indexPlayer].username;
+  return getUserUsername(state)
+  // return state.game.players[indexPlayer].username;
 }
 
 export function getCardsStrength(state, indexPlayer=0) {
@@ -52,6 +53,8 @@ export function getPlayerInfo(state) {
     creditAmmount: getPlayersCreditAmmount(state),
     valueHand: getCardsStrength(state),
     bet: getPlayersBet(state),
+    betOn: state.betOn,
+    isWinner: getRoundWinner(state)
   }
 }
 
@@ -65,9 +68,9 @@ export function getDealerInfo(state) {
   }
 }
 
-export const getPlayersLives = state => state.gameStatus.numLives;
+export const getPlayersLives = state => state.gameStatus.numLives
 
-export const getPlayersDeaths = state => state.gameStatus.numDeaths;
+export const getPlayersDeaths = state => state.gameStatus.numDeaths
 
 export const getRoundWinner = state => state.game.isWinner(state.game.players[0])
 
@@ -76,6 +79,7 @@ export const isPlayerLooser = state => state.gameStatus.numLives === 0
 export const numRoundsPlayed = state => state.gameStatus.numRounds
 
 export const isUserLoggedIn = state => state.user.email !== null
+// export const isUserLoggedIn = state => true
 
 export const getUserUsername = state => state.user.username
 
