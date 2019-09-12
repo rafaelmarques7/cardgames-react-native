@@ -30,7 +30,7 @@
     "android": {
       "package": "com.highlow.cardgames",
       "permissions": [],
-      "versionCode": 2
+      "versionCode": 3
     }
   }
 }
