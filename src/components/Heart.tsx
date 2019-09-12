@@ -13,7 +13,7 @@ const Heart = ({ isLive=true, style={}, size=30 }) => {
 }
 
 const HeartAnimated = (props) => {
-  const animationType = props.isLive ? 'bounceInUp' :  'fadeInUp'
+  const animationType = props.isLive ? 'bounceInUp' :  'fadeInUpBig'//'fadeInUp'
   return(
     <AnimationContainer
       animate={true}

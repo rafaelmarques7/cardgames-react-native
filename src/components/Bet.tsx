@@ -57,7 +57,7 @@ class BetDisplay extends React.Component<BetProps, BetState> {
     return (
       <View style={styles.container}>
         <View style={styles.containerAction}>
-          { this.state.bet.on !== 'pass' &&
+          { this.state.bet.on !== 'pass' && 
             <AnimationContainer
               style={{flex: 1}}
               animate={this.props.acceptBets} 
@@ -68,7 +68,27 @@ class BetDisplay extends React.Component<BetProps, BetState> {
             </AnimationContainer>
           } 
         </View>
-        <View style={styles.containerOptions}>
+        <AnimationContainer 
+          style={styles.containerOptions}
+          animate={this.props.acceptBets && this.state.betOn === 'pass'} 
+          animationType='rubberBand' 
+          duration={1500}
+          iterationCount='infinite'
+          iterationDelay={2500}>
+          <MyButton 
+              title="Low" 
+              style={this.state.bet.on === 'low' ? styles.active : null}
+              onPress={() => {this.onSelectBet('low')}} />
+            <MyButton 
+              title="Draw" 
+              style={this.state.bet.on === 'draw' ? styles.active : null}
+              onPress={() => {this.onSelectBet('draw')}} />
+            <MyButton 
+              title="High" 
+              style={this.state.bet.on === 'high' ? styles.active : null}
+              onPress={() => {this.onSelectBet('high')}} />
+        </AnimationContainer>
+        {/* <View style={styles.containerOptions}>
           <MyButton 
             title="Low" 
             style={this.state.bet.on === 'low' ? styles.active : null}
@@ -81,7 +101,7 @@ class BetDisplay extends React.Component<BetProps, BetState> {
             title="High" 
             style={this.state.bet.on === 'high' ? styles.active : null}
             onPress={() => {this.onSelectBet('high')}} />
-        </View>
+        </View> */}
       </View>
     );    
   }

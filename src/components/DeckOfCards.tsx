@@ -23,8 +23,8 @@ const DeckOfCardsImg = ({
   const source = ImageList[selectDeckImg(fullDeck, deckScrambled)];
   return (
     <Animatable.View
-      animation={shakeAnimation ? 'rubberBand' : null}
-      duration={1500}
+      animation={shakeAnimation ? 'wobble' : null}
+      duration={2000}
       iterationCount={"infinite"}
       iterationDelay={2500}>
       <TouchableOpacity

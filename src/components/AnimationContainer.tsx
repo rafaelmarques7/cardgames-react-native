@@ -5,9 +5,9 @@ import { StyleSheet } from 'react-native';
 type cProps = {
   animate?: boolean,
   animationType?: string,
-  delay?: number,
+  iterationDelay?: number,
   duration?: number,
-  count?: any,
+  iterationCount?: any,
   style?: object,
 }
 
@@ -18,20 +18,20 @@ const DEF_COUNT = 1;
 
 class AnimationContainer extends React.Component<cProps> {  
   render() {
-    let { animate, animationType, delay, duration, count, style } = this.props
+    let { animate, animationType, iterationDelay, duration, iterationCount, style } = this.props
 
     animationType = animationType ? animationType : DEF_ANIMATION;
-    delay = delay !== undefined ? delay : DEF_DELAY;
+    iterationDelay = iterationDelay ? iterationDelay : DEF_DELAY;
     duration = duration ? duration : DEF_DURATION;
-    count = count ? count : DEF_COUNT;
+    iterationCount = iterationCount ? iterationCount : DEF_COUNT;
 
     return (
       <Animatable.View
         style={{...styles.container, ...style}}
         animation={animate ? animationType : null}
         duration={duration}
-        iterationCount={count}
-        iterationDelay={delay}>
+        iterationCount={iterationCount}
+        iterationDelay={iterationDelay}>
         {
           this.props.children
         }
