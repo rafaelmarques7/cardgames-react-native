@@ -3,8 +3,6 @@ import { View, Text, StyleSheet, TextInput } from 'react-native';
 import { screen } from '../config';
 import CardWithFlip from './CardWithFlip';
 import StrengthOfHand from './StrengthOfHand';
-import { Input } from 'react-native-elements';
-import { actionSetUserEmail } from '../stateHandle';
 
 const HandOfPlayer = ({
   player,

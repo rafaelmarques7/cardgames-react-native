@@ -3,6 +3,7 @@ import { Text, View, Button, StyleSheet } from 'react-native'
 import { screen } from '../config';
 import HomeCardAnimation from '../components/HomeCardAnimation';
 import AnimationContainer from '../components/AnimationContainer';
+import TitleApp from '../components/TitleApp';
 
 type cProps = {
   navigation: {
@@ -20,26 +21,27 @@ export default class HomeScreen extends React.Component<cProps> {
     return (
       <View style={styles.container}>
 
-        <AnimationContainer
+        <TitleApp />
+        {/* <AnimationContainer
           style={styles.containerTitle}
           animate={true} animationType='bounceInUp'>
           <Text style={styles.title}>Guess What?</Text>
-        </AnimationContainer>
+        </AnimationContainer> */}
         
         <AnimationContainer
           style={styles.containerSubTitle}
-          animate={true} animationType='slideInLeft' delay={800}>
+          animate={true} animationType='slideInLeft' iterationDelay={800}>
           <Text style={styles.subTitle}>High, Low or Draw?</Text>
           <Text style={styles.subTitle}>You choose!</Text>
         </AnimationContainer>
         
         <AnimationContainer
           style={styles.containerRemaining}
-          animate={true} animationType='slideInRight' delay={1600}>
+          animate={true} animationType='slideInRight' iterationDelay={1600}>
           <Button title="Information" onPress={() => this.props.navigation.push('Info')} />
           <AnimationContainer
             style={{flex:0}}
-            animate={true} animationType='rubberBand' delay={3200} count='infinite'>
+            animate={true} animationType='rubberBand' iterationDelay={3200} iterationCount='infinite'>
             <Button title="Play Game" onPress={()=>this.props.navigation.push('Game')} />
           </AnimationContainer>
           <Button title="Highscores" onPress={() => this.props.navigation.push('Highscore')} />

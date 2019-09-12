@@ -69,7 +69,7 @@ class HomeCardAnimation extends React.Component {
       <AnimationContainer 
         animate={true} 
         animationType="bounceIn"
-        delay={0}>
+        iterationDelay={0}>
         <Text style={styles.textWin}>{text}</Text>
       </AnimationContainer>
     )  
