@@ -99,7 +99,7 @@ class GameInfoView extends React.Component {
               }
               { (this.state.showCardsPlayer && this.state.player.bet.betOn === 'high') &&  
                 <Text style={styles.textInfo}>
-                  Congratulations. You guessed right</Text>
+                  Congratulations, you guessed right.</Text>
               }
               { (this.state.showCardsPlayer && this.state.player.bet.betOn !== 'high') &&  
                 <Text style={styles.textInfo}>
