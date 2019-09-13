@@ -35,7 +35,12 @@ const AppNavigator = createStackNavigator({
         header: null,
     },
   },
-  Highscore: HighScoreView,
+  Highscore: {
+    screen: HighScoreView, 
+    navigationOptions: {
+        header: null,
+    },
+  },
 });
 
 export default createAppContainer(AppNavigator);

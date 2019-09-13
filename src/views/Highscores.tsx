@@ -1,8 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-import { stylesApp, brown, colorsApp } from '../styles'
+import { stylesApp, colorsApp } from '../styles'
 import AnimationContainer from '../components/AnimationContainer'
-import { screen } from '../config'
 
 const scoresList = [
   { numRounds: 3, points: 8, dateStr: '13/09/19' },
@@ -16,10 +15,13 @@ const HighScoreView = ({ scores=scoresList }) => {
   return (
     <View style={stylesApp.fullScreen}>
       <View style={styles.containerHighscore}>
+        <View style={styles.containerTitle}>
+          <Text style={styles.titleScore}>Highscores</Text>
+        </View>
         <AnimationContainer
           style={styles.containerHeader}
           animate={true} 
-          delay={300}
+          iterationDelay={300}
           animationType='fadeInUp'>
           <View style={styles.containerCell}>
             <Text style={styles.textScore}># Rounds</Text>
@@ -36,6 +38,7 @@ const HighScoreView = ({ scores=scoresList }) => {
             .sort((a, b) => a.points > b.points)
             .map((score, index) => (
             <AnimationContainer 
+              key={`score=${index}`}
               style={styles.containerRow}
               animate={true} 
               iterationDelay={500 + index*200}
@@ -60,6 +63,21 @@ const HighScoreView = ({ scores=scoresList }) => {
 const styles = StyleSheet.create({
   containerHighscore: {
     flex: 1,
+    marginLeft: 20,
+    marginRight: 20,
+  },
+  containerTitle: {
+    flex: 1/5,
+    marginTop: 20,
+    marginBottom: 20,
+    borderBottomWidth: 3,
+    borderTopWidth: 3,
+    borderBottomColor: 'white',
+    borderTopColor: 'white',
+    justifyContent: 'center'
+  },
+  titleScore: {
+    ...stylesApp.textSubTitle
   },
   containerHeader: {
     flexDirection: 'row',
@@ -67,8 +85,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: 3,
     borderBottomColor: colorsApp.cream,
     marginBottom: 10,
+    marginTop: 10,
     paddingBottom: 5,
-    width: screen.width*0.9,
     alignSelf: 'center',
   },
   containerScores: {
