@@ -14,7 +14,7 @@ const selectDeckImg = (fullDeck, deckScrambled) => {
 }
 
 const DeckOfCardsImg = ({ 
-  callbackFunction, 
+  callbackFunction = ()=>{}, 
   disabled=true, 
   fullDeck=true, 
   deckScrambled=false,

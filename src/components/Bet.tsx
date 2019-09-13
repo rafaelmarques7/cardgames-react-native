@@ -61,7 +61,7 @@ class BetDisplay extends React.Component<BetProps, BetState> {
             <AnimationContainer
               style={{flex: 1}}
               animate={this.props.acceptBets} 
-              animationType='rubberBand' delay={2000} duration={2000} count='infinite'>
+              animationType='rubberBand' iterationDelay={2000} duration={2000} iterationCount='infinite'>
               <MyButton 
                 title={stringBet}
                 onPress={() => {this.onSetBet()}} />
@@ -88,20 +88,6 @@ class BetDisplay extends React.Component<BetProps, BetState> {
               style={this.state.bet.on === 'high' ? styles.active : null}
               onPress={() => {this.onSelectBet('high')}} />
         </AnimationContainer>
-        {/* <View style={styles.containerOptions}>
-          <MyButton 
-            title="Low" 
-            style={this.state.bet.on === 'low' ? styles.active : null}
-            onPress={() => {this.onSelectBet('low')}} />
-          <MyButton 
-            title="Draw" 
-            style={this.state.bet.on === 'draw' ? styles.active : null}
-            onPress={() => {this.onSelectBet('draw')}} />
-          <MyButton 
-            title="High" 
-            style={this.state.bet.on === 'high' ? styles.active : null}
-            onPress={() => {this.onSelectBet('high')}} />
-        </View> */}
       </View>
     );    
   }
@@ -111,7 +97,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 2/5,
     flexDirection: 'column',
-    width: screen.width,
   },
   containerOptions: {
     flex: 1,

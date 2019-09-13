@@ -3,20 +3,19 @@ import { View, Text, StyleSheet, TextInput } from 'react-native';
 import { screen } from '../config';
 import CardWithFlip from './CardWithFlip';
 import StrengthOfHand from './StrengthOfHand';
-import { Input } from 'react-native-elements';
-import { actionSetUserEmail } from '../stateHandle';
 
 const HandOfPlayer = ({
   player,
   positionOnTop=false,
   renderStrength=false,
   displayCards=false,
-  actionSetUserUsername
+  actionSetUserUsername,
+  drawHorizontalRule=true,
 }) => {
   // deconstruct props
   const { username, cards, valueHand } = player;
   // create stylesheet based on position
-  const styles = createStyle(!positionOnTop);
+  const styles = createStyle(!positionOnTop, drawHorizontalRule);
 
   const [value, onChangeText] = React.useState('Useless Placeholder');
 
@@ -57,7 +56,7 @@ const HandOfPlayer = ({
   );
 }
 
-const createStyle = (bottom=false) => {
+const createStyle = (bottom=false, drawHorizontalRule=true) => {
   return StyleSheet.create({
     container: {
       flex: 1,
@@ -81,8 +80,8 @@ const createStyle = (bottom=false) => {
       alignSelf: 'center',
       borderTopColor: 'white',
       borderBottomColor: 'white',
-      borderBottomWidth: bottom ? 3 * StyleSheet.hairlineWidth : null,
-      borderTopWidth: !bottom ? 2 * StyleSheet.hairlineWidth : null,
+      borderBottomWidth: drawHorizontalRule && bottom ? 3 * StyleSheet.hairlineWidth : null,
+      borderTopWidth: drawHorizontalRule && !bottom ? 2 * StyleSheet.hairlineWidth : null,
       width: screen.width * 0.7,
       height: 30,
     },

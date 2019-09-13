@@ -29,7 +29,12 @@ const AppNavigator = createStackNavigator({
         header: null,
     },
   },
-  Info: GameInfoView,
+  Info: {
+    screen: GameInfoView, 
+    navigationOptions: {
+        header: null,
+    },
+  },
   Highscore: HighScoreView,
 });
 
