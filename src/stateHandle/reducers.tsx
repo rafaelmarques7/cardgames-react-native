@@ -50,7 +50,6 @@ export const rootReducer = (state=initState, action) => {
 
 function gameInit(state, action) {
   const game = new HigherOrLower(action.payload.players, action.payload.numCardsPerHand)
-  game.drawCards(48)
   return {
     ...initState,
     user: {
@@ -66,6 +65,7 @@ function gameDeal(state) {
   if (state.cardsInDeck < state.game.numCardsPerHand * 2) {
     console.log('rebuilding deck')
     state.game.deck.buildDeck()
+    state.game.deck.shuffleDeck()
   }
   state.game.deal();  // changes happen inside the class object
   const newGame = Object.assign(  // this preserves the class methods
