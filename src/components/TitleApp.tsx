@@ -4,7 +4,6 @@ import { StyleSheet, Text } from 'react-native'
 import { screen } from '../config'
 
 const TitleApp = ({animate=true}) => {
-  console.log(`inside title app`)
   return (
     <AnimationContainer
       style={styles.containerTitle}

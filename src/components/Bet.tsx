@@ -97,7 +97,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 2/5,
     flexDirection: 'column',
-    // width: screen.width,
   },
   containerOptions: {
     flex: 1,
