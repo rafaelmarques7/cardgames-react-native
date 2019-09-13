@@ -10,7 +10,7 @@
   "dependencies": {
     "aws-amplify": "^1.1.38",
     "aws-amplify-react-native": "^2.1.19",
-    "card-games-typescript": "^1.2.2",
+    "card-games-typescript": "^1.2.3",
     "expo": "^34.0.1",
     "lodash.get": "^4.4.2",
     "react": "16.8.3",
