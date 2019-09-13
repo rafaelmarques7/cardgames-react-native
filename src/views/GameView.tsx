@@ -16,7 +16,7 @@ const GameView = (props) => {
         player={props.dealer}
         positionOnTop={true}
         displayCards={!props.gameStatus.dealMode}
-        renderStrength={props.gameStatus.showMode || props.gameStatus.endMode}
+        renderStrength={!props.gameStatus.dealMode}
         actionSetUserUsername={props.actionSetUserUsername}/>
       <ActionDisplay 
         {...props} />
@@ -24,7 +24,7 @@ const GameView = (props) => {
         player={props.player}
         positionOnTop={false}
         displayCards={props.gameStatus.showMode || props.gameStatus.endMode}
-        renderStrength={!props.gameStatus.dealMode}
+        renderStrength={props.gameStatus.showMode || props.gameStatus.endMode}
         actionSetUserUsername={props.actionSetUserUsername}/>
       <BetDisplay
         betValue={props.player.creditAmmount}
