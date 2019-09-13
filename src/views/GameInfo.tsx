@@ -12,12 +12,12 @@ import AnimationContainer from '../components/AnimationContainer'
 class GameInfoView extends React.Component {
   state = {
     player: {
-      username: 'player',
+      username: 'Player',
       cards: [{rank: 'A', suite: 'hearts'}],
       bet: {betOn: 'pass'},
     }, 
     dealer: {
-      username: 'dealer',
+      username: 'Dealer',
       cards: [{rank: '2', suite: 'clubs'}],
     },
     showCardsPlayer: false,
@@ -44,12 +44,14 @@ class GameInfoView extends React.Component {
           <View style={styles.containerText}>
             <Text style={styles.textInfo}>
               In this game, the dealer and player are dealt one or more cards. {'\n\n'}
-              The dealer shows their hand first. The player now has to guess if their 
-              cards are higher, lower, or of the same value as the dealers.{'\n\n'}
+              The dealer shows their hand first.{'\n'}
+              <Text style={{fontWeight: 'bold'}}>The player has to guess their cards value: </Text>
+              is it lower, higher or of the same value as the dealers?{'\n\n'}
               If the player guesses right, their coins are doubled. 
               If the player guesses wrong, they loose a life.{'\n\n'}
-              Unlike cats, players only have 3 lifes, so be careful, and good luck!
-              If you still have questions, see the example below.
+              Unlike cats, players only have 3 lifes, so be careful, and good luck!{'\n\n'}
+              If you still have questions,
+              <Text style={{fontWeight: 'bold'}}> see the example below.</Text>
             </Text>
           </View>
           <View style={styles.containerExample}>
@@ -69,23 +71,25 @@ class GameInfoView extends React.Component {
               <HandOfPlayer 
                 player={this.state.dealer} 
                 positionOnTop={true}
-                displayCards={this.state.showCardsDealer} />
+                displayCards={this.state.showCardsDealer}
+                drawHorizontalRule={false} />
             </View>
             <View style={styles.containerText}>
               <Text style={styles.textInfo}>
-                At this point, the player places a bet. {'\n'}
+                At this point, the player has to guess: {'\n'}
                 Is the players card higher, lower or the same value as the dealer?</Text>
             </View>
             <View style={{flex: 1, width: screen.width*0.8, alignSelf: 'center', marginTop: 20}}>
               <BetDisplay 
                 betOn={this.state.player.bet.betOn} 
-                betValue={1000}
+                betValue={2}
                 acceptBets={this.state.showCardsDealer && !this.state.showCardsPlayer}
                 onSetBet={(bet) => this.onSetBet(bet)} />
             </View>
             <View style={{flex: 1, marginTop: 20}}>
               <HandOfPlayer 
                 player={this.state.player} 
+                drawHorizontalRule={false}
                 displayCards={this.state.showCardsPlayer} />
             </View>
             <View style={styles.containerText}>
@@ -126,7 +130,7 @@ const styles = StyleSheet.create({
     marginRight: 40
   },
   containerExample: {
-    marginTop: 20
+    marginTop: 50
   },
   textInfo: {
     ...stylesApp.textSubTitle, 
