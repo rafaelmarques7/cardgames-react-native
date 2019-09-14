@@ -1,4 +1,5 @@
 import { HigherOrLower } from "card-games-typescript";
+import { getPlayerInfo, getPlayersCreditAmmount } from "./selectors";
 
 export const NUM_LIVES_INITIAL = 3
 
@@ -19,6 +20,7 @@ export const initState = {
   },
   betOn: 'pass',
   cardsInDeck: 52,
+  highscores: [],
 }
 
 export const rootReducer = (state=initState, action) => {
@@ -40,9 +42,11 @@ export const rootReducer = (state=initState, action) => {
     case 'GAME_REDUCE_LIVES':
       return gameReduceLives(state);
     case 'SET_USER_USERNAME':
-        return setUserUsername(state, action)
-      case 'SET_USER_EMAIL':
-        return setUserEmail(state, action)
+      return setUserUsername(state, action)
+    case 'SET_USER_EMAIL':
+      return setUserEmail(state, action)
+    case 'HIGHSCORE':
+      return highscoreUpdate(state)
     default:
       return state;  
   }
@@ -56,7 +60,10 @@ function gameInit(state, action) {
       ...state.user,
       username: game.players[0].username,
     },
-    game: game 
+    game: game ,
+    highscores: [
+      ...state.highscores
+    ]
   }
 }
 
@@ -151,7 +158,6 @@ function gameSetNumberOfCards(state, action) {
   state.game.dealer.cards.cards = [];
   const newGame = Object.assign(
     Object.create(Object.getPrototypeOf(state.game)), state.game);
-  console.log(newGame.players)
   return {
     ...state,
     game: newGame,
@@ -190,3 +196,22 @@ function setUserEmail(state, action) {
     }
   }
 } 	
+
+function highscoreUpdate(state) {
+  console.log(`inside highscore update`)
+  const points = getPlayersCreditAmmount(state)
+  const numRounds = state.gameStatus.numRounds
+  const date = new Date()
+  const score = { points, numRounds, date }
+  const scores = [...state.highscores]
+  scores.push(score)
+  scores.sort((a, b) => a.points > b.points)
+  if (scores.length > 10) {
+    scores.pop()
+  }
+
+  return {
+    ...state,
+    highscores: scores
+  }
+}

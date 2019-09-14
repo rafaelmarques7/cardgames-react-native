@@ -2,16 +2,26 @@ import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { stylesApp, colorsApp } from '../styles'
 import AnimationContainer from '../components/AnimationContainer'
+import { connect } from "react-redux";
+import { bindActionCreators } from 'redux';
+import { actionUpdateHighscore } from '../stateHandle/actions'
 
-const scoresList = [
-  { numRounds: 3, points: 8, dateStr: '13/09/19' },
-  { numRounds: 4, points: 16, dateStr: '13/09/19' },
-  { numRounds: 3, points: 8, dateStr: '13/09/19' },
-  { numRounds: 3, points: 8, dateStr: '13/09/19' },
-  { numRounds: 5, points: 32, dateStr:'13/09/19' },
-]
+// example data
+// const scoresList = [
+//   { numRounds: 3, points: 8, date: new Date() },
+//   { numRounds: 4, points: 16, date: new Date() },
+//   { numRounds: 3, points: 8, date: new Date() },
+//   { numRounds: 3, points: 8, date: new Date() },
+//   { numRounds: 5, points: 32, date: new Date() },
+// ]
 
-const HighScoreView = ({ scores=scoresList }) => {
+const formatDate = (date) => (
+  date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear()
+)
+
+const HighScoreView = (props) => {
+  const { scores } = props;
+
   return (
     <View style={stylesApp.fullScreen}>
       <View style={styles.containerHighscore}>
@@ -50,7 +60,7 @@ const HighScoreView = ({ scores=scoresList }) => {
                 <Text style={styles.textScore}>{score.points}</Text>
               </View>
               <View style={styles.containerCell}>
-                <Text style={styles.textScore}>{score.dateStr}</Text>      
+                <Text style={styles.textScore}>{formatDate(score.date)}</Text>      
               </View>
             </AnimationContainer>
           ))}
@@ -105,4 +115,18 @@ const styles = StyleSheet.create({
   },
 })
 
-export default HighScoreView
+const mapStateToProps = state => ({
+  scores: state.highscores,
+})
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({
+    actionUpdateHighscore
+  }, dispatch)
+}
+
+export default connect(
+  mapStateToProps, 
+  mapDispatchToProps
+)(HighScoreView)
+
