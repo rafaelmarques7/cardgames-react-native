@@ -23,7 +23,6 @@ const mapStateToProps = state => ({
   dealer: getDealerInfo(state),
   gameStatus: state.gameStatus,
   cardsInDeck: state.cardsInDeck,
-  highscores: state.highscores,
 });
 
 const mapDispatchToProps = dispatch => {

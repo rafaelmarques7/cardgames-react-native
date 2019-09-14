@@ -9,20 +9,8 @@ import {
   actionUpdateHighscore,
   getPlayersCreditAmmount } from '../stateHandle'
 
-class LooseModalContainer extends React.Component {
 
-  componentDidUpdate(prevProps) {
-    if (this.props.isVisible && !prevProps.isVisible) {
-      this.props.actionUpdateHighscore()
-    }
-  }
-
-  render() {
-    return (
-      <LooseModal {...this.props} />
-    )
-  }
-}
+const LooseModalContainer = (props) => <LooseModal {...props} />
 
 const mapStateToProps = state => ({
   isVisible: isPlayerLooser(state),

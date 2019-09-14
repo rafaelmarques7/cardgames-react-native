@@ -14,7 +14,7 @@ type cProps = {
 export default class HomeScreen extends React.Component<cProps> {
   componentDidMount() {
     // console.log(this.props)
-    this.props.navigation.push('Highscore')
+    // this.props.navigation.push('')
   }
 
   render() {
