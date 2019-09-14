@@ -1,14 +1,16 @@
 import React from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-import { isPlayerLooser, actionGameRestart, numRoundsPlayed, getPlayersCreditAmmount } from '../stateHandle'
 import LooseModal from '../components/LooseModal';
+import { 
+  isPlayerLooser, 
+  actionGameRestart, 
+  numRoundsPlayed, 
+  actionUpdateHighscore,
+  getPlayersCreditAmmount } from '../stateHandle'
 
-const LooseModalContainer = (props) => {
-  return (
-    <LooseModal {...props} />
-  )
-}
+
+const LooseModalContainer = (props) => <LooseModal {...props} />
 
 const mapStateToProps = state => ({
   isVisible: isPlayerLooser(state),
@@ -19,6 +21,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
     actionGameRestart,
+    actionUpdateHighscore,
   }, dispatch)
 }
 

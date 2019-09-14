@@ -24,8 +24,6 @@ export const actionSetNumberOfCards = (value) => {
   }
 }
 
-
-
 export const actionGameInit = (players, numCardsPerHand) => ({
   type: 'GAME_INIT',
   payload: {
@@ -56,8 +54,6 @@ export const actionGamePayoff = () => ({
 export const actionGameRestartRound = () => ({
   type: 'GAME_RESTART_ROUND',
 })
-
-
 
 export const actionGameBet = (bets) => {
   return (dispatch, getState) => {  
@@ -114,4 +110,8 @@ export const actionSetUserUsername = (username) => ({
   payload: {
     email: email,
   }
+})
+
+export const actionUpdateHighscore = () => ({
+  type: 'HIGHSCORE',
 })

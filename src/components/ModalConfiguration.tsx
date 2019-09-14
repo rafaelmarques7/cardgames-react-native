@@ -4,6 +4,7 @@ import Modal from 'react-native-modal';
 import { screen } from '../config';
 import Icon from 'react-native-vector-icons/AntDesign'
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import { colorsApp } from '../styles';
 
 type cProps = {
   actionSetNumberOfCards: Function,
@@ -91,6 +92,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
-    backgroundColor: '#efc050', // cream colour. @TODO Refactor colors in the future
+    backgroundColor: colorsApp.cream,
   }
 })

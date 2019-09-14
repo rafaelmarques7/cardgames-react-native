@@ -5,9 +5,10 @@ import AnimationContainer from './AnimationContainer'
 
 type cProps = {
   isVisible: boolean, 
-  actionGameRestart: Function,
   numRoundsPlayed: number,
   highscore: number,
+  actionGameRestart: Function,
+  actionUpdateHighscore: Function,
 }
 
 type cState = {
@@ -17,6 +18,12 @@ type cState = {
 class LooseModal extends React.Component<cProps, cState> { 
   state = {
     animationComplete: false
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.isVisible && !prevProps.isVisible) {
+      this.props.actionUpdateHighscore()
+    }
   }
 
   toggleState = () => {
