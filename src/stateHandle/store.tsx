@@ -9,8 +9,9 @@ import { startGame } from './actions';
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: [],
-  // stateReconciler: autoMergeLevel2,
+  whitelist: ['highscores'],
+  blacklist: ['game'],
+  stateReconciler: autoMergeLevel2,
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
