@@ -128,7 +128,6 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = state => {
-  console.log(state.highscores)
   return {
     scores: state.highscores.highscores,
   }

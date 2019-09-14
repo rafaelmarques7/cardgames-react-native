@@ -50,8 +50,6 @@ const gameReducer = (state=initState, action) => {
       return setUserUsername(state, action)
     case 'SET_USER_EMAIL':
       return setUserEmail(state, action)
-    // case 'HIGHSCORE':
-    //   return highscoreUpdate(state)
     default:
       return state;  
   }
