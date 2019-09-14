@@ -18,12 +18,15 @@ const Game = (props) => {
   );
 }
 
-const mapStateToProps = state => ({
-  player: getPlayerInfo(state),
-  dealer: getDealerInfo(state),
-  gameStatus: state.gameStatus,
-  cardsInDeck: state.cardsInDeck,
-});
+const mapStateToProps = state => {
+  state = state.game
+  return {
+    player: getPlayerInfo(state),
+    dealer: getDealerInfo(state),
+    gameStatus: state.gameStatus,
+    cardsInDeck: state.cardsInDeck,
+  }
+};
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({

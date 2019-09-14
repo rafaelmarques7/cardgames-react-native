@@ -22,7 +22,6 @@ export default class HomeScreen extends React.Component<cProps> {
       <View style={styles.container}>
 
         <TitleApp />
-
         
         <AnimationContainer
           style={styles.containerSubTitle}

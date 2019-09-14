@@ -1,5 +1,6 @@
 import { HigherOrLower } from "card-games-typescript";
 import { getPlayerInfo, getPlayersCreditAmmount } from "./selectors";
+import { combineReducers } from "redux";
 
 export const NUM_LIVES_INITIAL = 3
 
@@ -23,7 +24,11 @@ export const initState = {
   highscores: [],
 }
 
-export const rootReducer = (state=initState, action) => {
+const initStateHighscores = { 
+  highscores: [],
+}
+
+const gameReducer = (state=initState, action) => {
   switch(action.type) {
     case 'GAME_INIT':
       return gameInit(state, action);
@@ -45,12 +50,27 @@ export const rootReducer = (state=initState, action) => {
       return setUserUsername(state, action)
     case 'SET_USER_EMAIL':
       return setUserEmail(state, action)
-    case 'HIGHSCORE':
-      return highscoreUpdate(state)
+    // case 'HIGHSCORE':
+    //   return highscoreUpdate(state)
     default:
       return state;  
   }
 }
+
+const highscoreReducer = (state=initStateHighscores, action) => {
+  console.log('inside highscoreReducer')
+  switch(action.type) {
+    case 'HIGHSCORE':
+        return highscoreUpdate(state, action)
+      default:
+        return state;  
+  }
+}
+
+export const rootReducer = combineReducers({
+  game: gameReducer,
+  highscores: highscoreReducer
+})
 
 function gameInit(state, action) {
   const game = new HigherOrLower(action.payload.players, action.payload.numCardsPerHand)
@@ -197,10 +217,9 @@ function setUserEmail(state, action) {
   }
 } 	
 
-function highscoreUpdate(state) {
+function highscoreUpdate(state, action) {
   console.log(`inside highscore update`)
-  const points = getPlayersCreditAmmount(state)
-  const numRounds = state.gameStatus.numRounds
+  const {  points, numRounds } = action.payload
   const date = new Date()
   const score = { points, numRounds, date }
   const scores = [...state.highscores]

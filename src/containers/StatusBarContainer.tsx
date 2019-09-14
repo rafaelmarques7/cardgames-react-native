@@ -12,11 +12,14 @@ const StatusBarContainer = (props) => {
   )
 }
 
-const mapStateToProps = (state) => ({
-  numLives: getPlayersLives(state),
-  numDeaths: getPlayersDeaths(state),
-  numPoints: getPlayersCreditAmmount(state),
-})
+const mapStateToProps = (state) => {
+  state = state.game
+  return {
+    numLives: getPlayersLives(state),
+    numDeaths: getPlayersDeaths(state),
+    numPoints: getPlayersCreditAmmount(state),
+  }
+}
 
 export default connect(
   mapStateToProps

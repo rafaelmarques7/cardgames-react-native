@@ -47,6 +47,9 @@ export function getNumberOfCardsPerHand(state) {
 }
 
 export function getPlayerInfo(state) {
+  console.log('inside getPlayerInfo: ')
+  console.log(state.game.players)
+
   return {
     username: getPlayersUsername(state),
     cards: getPlayersCards(state),
@@ -74,7 +77,7 @@ export const getPlayersDeaths = state => state.gameStatus.numDeaths
 
 export const getRoundWinner = state => state.game.isWinner(state.game.players[0]) || false
 
-export const isPlayerLooser = state => state.gameStatus.numLives === 0
+export const isPlayerLooser = state => state.gameStatus.numLives === 2
 
 export const numRoundsPlayed = state => state.gameStatus.numRounds
 

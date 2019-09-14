@@ -1,5 +1,5 @@
 import { PlayerHighLow } from 'card-games-typescript' 
-import { getRoundWinner, getNumberOfCardsPerHand, getUserUsername } from './selectors';
+import { getRoundWinner, getNumberOfCardsPerHand, getUserUsername, getPlayersCreditAmmount } from './selectors';
 
 export const DEF_PLAYERS = [new PlayerHighLow('Player')];
 export const DEF_NUM_CARDS_PER_HAND = 1;
@@ -64,7 +64,7 @@ export const actionGameBet = (bets) => {
     dispatch(actionBet(bets));
 
     setTimeout(() => {
-      const playerIsWinner = getRoundWinner(getState())
+      const playerIsWinner = getRoundWinner(getState().game)
       if (!playerIsWinner) {
         console.log('dispatch reduce lives')
         dispatch(actionReduceLives())
@@ -88,9 +88,9 @@ export const actionReduceLives = () => ({
 export const actionGameRestart = () => {
   return (dispatch, getState) => {
     // get number of cards so that user preferences are not overwritten
-    const numCards = getNumberOfCardsPerHand(getState())
+    const numCards = getNumberOfCardsPerHand(getState().game)
     // get username so it is not overwritten
-    const username = getUserUsername(getState())
+    const username = getUserUsername(getState().game)
     // re-declare players; this is necessary to reset the credit 
     const players = [new PlayerHighLow(username)]
     console.log('dispatch actionGameInit (restart)')
@@ -112,6 +112,19 @@ export const actionSetUserUsername = (username) => ({
   }
 })
 
-export const actionUpdateHighscore = () => ({
+export const actionSetHighscore = (points, numRounds) => ({
   type: 'HIGHSCORE',
+  payload: {
+    points, 
+    numRounds
+  }
 })
+
+export const actionUpdateHighscore = () => {
+  return (dispatch, getState) => {
+    const points = getPlayersCreditAmmount(getState().game)
+    const numRounds = getState().game.gameStatus.numRounds
+    dispatch(actionSetHighscore(points, numRounds))
+
+  }
+}

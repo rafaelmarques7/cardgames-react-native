@@ -6,9 +6,13 @@ import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 import { actionUpdateHighscore } from '../stateHandle/actions'
 
-const formatDate = (date) => (
-  date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear()
-)
+const formatDate = (date) => {
+  if (typeof(date) === 'string') {
+    date = new Date(date)
+  }
+  return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear()
+}
+
 
 type cProps = {
   scores: [{
@@ -123,9 +127,12 @@ const styles = StyleSheet.create({
   },
 })
 
-const mapStateToProps = state => ({
-  scores: state.highscores,
-})
+const mapStateToProps = state => {
+  console.log(state.highscores)
+  return {
+    scores: state.highscores.highscores,
+  }
+}
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
