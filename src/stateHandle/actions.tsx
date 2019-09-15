@@ -5,6 +5,7 @@ import {
   getNumberOfCardsPerHand, 
   getPlayersCreditAmmount, 
   getNumberOfRoundsPlayed } from './gameState';
+import { updateHighscore } from '../graphql/mutations';
 
 /**
  * Action helper constants and functions
@@ -118,6 +119,9 @@ export const actionUpdateHighscore = () => {
     const points = getPlayersCreditAmmount(getState())
     const numRounds = getNumberOfRoundsPlayed(getState())
     dispatch(setHighscore(points, numRounds))
+
+    updateHighscore({id: 1, ownerId: 1, points: 0, numRounds: 1, date: Date.now().toString()})
+
   }
 }
 

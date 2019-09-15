@@ -1,0 +1,4 @@
+{
+    "AppSyncApiName": "guesswhatApi",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST"
+}
