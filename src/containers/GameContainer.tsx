@@ -1,37 +1,29 @@
 import React from 'react';
+import { connect } from "react-redux";
+import { bindActionCreators } from 'redux';
 import { 
   actionGameDeal, 
-  actionGameInit,
   actionGameBet,
   getPlayerInfo,
   getDealerInfo,
   actionSetUserUsername,
+  getStatusGame,
+  getNumberCardsInDeck,
 } from '../stateHandle';
-import { connect } from "react-redux";
-import { bindActionCreators } from 'redux';
 import GameView from '../views/GameView';
 
-const Game = (props) => {
-  // console.log('<Game /> props: ', props);
-  return(
-    <GameView {...props} />
-  );
-}
+const Game = (props) => <GameView {...props} />
 
-const mapStateToProps = state => {
-  state = state.game
-  return {
-    player: getPlayerInfo(state),
-    dealer: getDealerInfo(state),
-    gameStatus: state.gameStatus,
-    cardsInDeck: state.cardsInDeck,
-  }
-};
+const mapStateToProps = state => ({
+  player: getPlayerInfo(state),
+  dealer: getDealerInfo(state),
+  gameStatus: getStatusGame(state),
+  cardsInDeck: getNumberCardsInDeck(state)
+})
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
     actionGameDeal,
-    actionGameInit,
     actionGameBet,
     actionSetUserUsername,
   }, dispatch);

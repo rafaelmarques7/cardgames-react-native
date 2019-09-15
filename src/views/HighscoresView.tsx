@@ -2,17 +2,6 @@ import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { stylesApp, colorsApp } from '../styles'
 import AnimationContainer from '../components/AnimationContainer'
-import { connect } from "react-redux";
-import { bindActionCreators } from 'redux';
-import { actionUpdateHighscore } from '../stateHandle/actions'
-
-const formatDate = (date) => {
-  if (typeof(date) === 'string') {
-    date = new Date(date)
-  }
-  return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear()
-}
-
 
 type cProps = {
   scores: [{
@@ -22,7 +11,14 @@ type cProps = {
   }]
 }
 
-class HighScoreView extends React.Component<cProps> {
+class HighscoresView extends React.Component<cProps> {
+  formatDate = (date) => {
+    if (typeof(date) === 'string') {
+      date = new Date(date)
+    }
+    return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear()
+  }
+  
   render() {
     const { scores } = this.props
 
@@ -70,7 +66,7 @@ class HighScoreView extends React.Component<cProps> {
                   <Text style={styles.textScore}>{score.points}</Text>
                 </View>
                 <View style={styles.containerCell}>
-                  <Text style={styles.textScore}>{formatDate(score.date)}</Text>      
+                  <Text style={styles.textScore}>{this.formatDate(score.date)}</Text>      
                 </View>
               </AnimationContainer>
             ))}
@@ -127,20 +123,4 @@ const styles = StyleSheet.create({
   },
 })
 
-const mapStateToProps = state => {
-  return {
-    scores: state.highscores.highscores,
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({
-    actionUpdateHighscore
-  }, dispatch)
-}
-
-export default connect(
-  mapStateToProps, 
-  mapDispatchToProps
-)(HighScoreView)
-
+export default HighscoresView

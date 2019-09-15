@@ -6,8 +6,6 @@ import {
   actionSetUserUsername, 
   actionSetUserEmail, 
   isUserLoggedIn } from '../stateHandle'
-import HomeView from '../views/HomeView';
-import { Text } from 'react-native';
 
 const AuthContainer = (props) => <AuthView {...props} />
 

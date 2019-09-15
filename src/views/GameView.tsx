@@ -8,6 +8,7 @@ import LooseModalContainer from '../containers/LooseModalContainer';
 import BetDisplay from '../components/Bet';
 
 const GameView = (props) => {
+  // console.log('GameView props: ', props.gameStatus)
   return(
     <View style={styles.container}>
       <StatusBarContainer />
@@ -15,16 +16,16 @@ const GameView = (props) => {
       <HandOfPlayer
         player={props.dealer}
         positionOnTop={true}
-        displayCards={!props.gameStatus.dealMode}
-        renderStrength={!props.gameStatus.dealMode}
+        displayCards={props.gameStatus.betMode || props.gameStatus.showMode}
+        renderStrength={props.gameStatus.betMode || props.gameStatus.showMode}
         actionSetUserUsername={props.actionSetUserUsername}/>
       <ActionDisplay 
         {...props} />
       <HandOfPlayer
         player={props.player}
         positionOnTop={false}
-        displayCards={props.gameStatus.showMode || props.gameStatus.endMode}
-        renderStrength={props.gameStatus.showMode || props.gameStatus.endMode}
+        displayCards={props.gameStatus.showMode}
+        renderStrength={props.gameStatus.showMode}
         actionSetUserUsername={props.actionSetUserUsername}/>
       <BetDisplay
         betValue={props.player.creditAmmount}

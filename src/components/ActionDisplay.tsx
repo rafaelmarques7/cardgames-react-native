@@ -2,7 +2,6 @@ import React from 'react'
 import { View, StyleSheet, Text } from 'react-native'
 import DeckOfCardsImg from './DeckOfCards';
 import AnimationContainer from './AnimationContainer';
-import { screen } from '../config';
 
 const ActionDisplay = (props) => {
   return (
@@ -25,7 +24,7 @@ const ActionDisplay = (props) => {
       <View style={styles.containerResult}>
       { props.gameStatus.showMode &&
         <AnimationContainer
-          animate={true} animationType='bounceIn' delay={500}>
+          animate={true} animationType='bounceIn' iterationDelay={500}>
           <Text style={styles.text}>
             {props.player.isWinner ? 'Nice!' : 'Nope!'}
           </Text>

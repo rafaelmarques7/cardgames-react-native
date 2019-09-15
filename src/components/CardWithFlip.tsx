@@ -55,7 +55,7 @@ class CardWithFlip extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.showCards !== prevProps.showCards) {
-      this.flipCard()
+     this.flipCard()
     }
   }
 
