@@ -3,9 +3,9 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import GameContainer from '../containers/GameContainer';
 import AuthContainer from '../containers/AuthContainer';
-import HighScoreView from '../views/Highscores';
 import GameInfoView from '../views/GameInfo';
 import HomeView from '../views/HomeView';
+import HighscoresContainer from './HighscoresContainer';
 
 const HomeContainer = (props) => <HomeView {...props}/>
 
@@ -36,7 +36,7 @@ const AppNavigator = createStackNavigator({
     },
   },
   Highscore: {
-    screen: HighScoreView, 
+    screen: HighscoresContainer, 
     navigationOptions: {
         header: null,
     },

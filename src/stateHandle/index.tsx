@@ -1,3 +1,6 @@
 export * from './actions'
 export * from './reducers'
-export * from './selectors'
+export * from './gameState'
+export * from './highscoreState'
+export * from './statusGameState'
+export * from './userState'

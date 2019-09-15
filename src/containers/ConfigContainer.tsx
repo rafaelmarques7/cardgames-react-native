@@ -4,11 +4,7 @@ import { bindActionCreators } from 'redux';
 import { actionSetNumberOfCards } from '../stateHandle'
 import ModalConfiguration from '../components/ModalConfiguration';
 
-const ConfigContainer = (props) => {
-  return (
-    <ModalConfiguration {...props} />
-  )
-}
+const ConfigContainer = (props) => <ModalConfiguration {...props} />
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
