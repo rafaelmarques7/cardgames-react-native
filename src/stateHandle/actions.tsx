@@ -5,7 +5,7 @@ import {
   getNumberOfCardsPerHand, 
   getPlayersCreditAmmount, 
   getNumberOfRoundsPlayed } from './gameState';
-import { updateHighscore } from '../graphql/mutations';
+
 
 /**
  * Action helper constants and functions
@@ -157,3 +157,4 @@ export const actionSetNumberOfCards = (value) => {
     dispatch(setNumberOfCards(value))
   }
 }
+
