@@ -6,12 +6,11 @@ import {
   getPlayersCreditAmmount, 
   getNumberOfRoundsPlayed } from './gameState';
 
-export const DEF_PLAYERS = [new PlayerHighLow('Player')];
-export const DEF_NUM_CARDS_PER_HAND = 1;
-
-export const startGame = (store) => {
-  store.dispatch(actionGameInit(DEF_PLAYERS, DEF_NUM_CARDS_PER_HAND));
-}
+/**
+ * Action helper constants and functions
+ */
+const DEF_PLAYERS = [new PlayerHighLow('Player')];
+const DEF_NUM_CARDS_PER_HAND = 1;
 
 const actionGameInit = (players, numCardsPerHand) => ({
   type: 'GAME_INIT',
@@ -27,13 +26,6 @@ const setNumberOfCards = (value) => ({
     value: value,
   }
 })
-
-export const actionSetNumberOfCards = (value) => {
-  return dispatch => {
-    dispatch(actionGameRestartRound())
-    dispatch(setNumberOfCards(value))
-  }
-}
 
 const setGameDeal = () => ({
   type: 'GAME_DEAL',
@@ -69,29 +61,6 @@ const setBet = (bets) => ({
   }
 })
 
-export const actionGameBet = (bets) => {
-  return (dispatch, getState) => {  
-    const TIMEOUT_RESTART_ROUND = 4000;
-
-    dispatch(setGameMode('show'))
-    dispatch(setBet(bets));
-
-    setTimeout(() => {
-      const playerIsWinner = getRoundWinner(getState())
-      if (!playerIsWinner) {
-        dispatch(actionReduceLives())
-      }
-    }, TIMEOUT_RESTART_ROUND/2);
-
-    setTimeout(() => {
-      dispatch(actionGamePayoff());
-      dispatch(actionGameRestartRound());
-      dispatch(setGameMode('deal'))
-    }, TIMEOUT_RESTART_ROUND);
-
-  }
-}
-
 const actionReduceLives = () => ({
   type: 'GAME_REDUCE_LIVES'
 })
@@ -99,6 +68,23 @@ const actionReduceLives = () => ({
 const resetStatusGame = () => ({
   type: 'RESET_STATUS_GAME'
 })
+
+const setHighscore = (points, numRounds) => ({
+  type: 'SET_HIGHSCORE',
+  payload: {
+    points, 
+    numRounds,
+  }
+})
+
+/**
+ * These exported actions will be used to move the game forward
+ * and to trigger side-effects.
+ * 
+ */
+export const startGame = (store) => {
+  store.dispatch(actionGameInit(DEF_PLAYERS, DEF_NUM_CARDS_PER_HAND));
+}
 
 export const actionGameRestart = () => {
   return (dispatch, getState) => {
@@ -127,18 +113,40 @@ export const actionSetUserEmail = (email) => ({
   }
 })
 
-const setHighscore = (points, numRounds) => ({
-  type: 'SET_HIGHSCORE',
-  payload: {
-    points, 
-    numRounds,
-  }
-})
-
 export const actionUpdateHighscore = () => {
   return (dispatch, getState) => {
     const points = getPlayersCreditAmmount(getState())
     const numRounds = getNumberOfRoundsPlayed(getState())
     dispatch(setHighscore(points, numRounds))
+  }
+}
+
+export const actionGameBet = (bets) => {
+  return (dispatch, getState) => {  
+    const TIMEOUT_RESTART_ROUND = 4000;
+
+    dispatch(setGameMode('show'))
+    dispatch(setBet(bets));
+
+    setTimeout(() => {
+      const playerIsWinner = getRoundWinner(getState())
+      if (!playerIsWinner) {
+        dispatch(actionReduceLives())
+      }
+    }, TIMEOUT_RESTART_ROUND/2);
+
+    setTimeout(() => {
+      dispatch(actionGamePayoff());
+      dispatch(actionGameRestartRound());
+      dispatch(setGameMode('deal'))
+    }, TIMEOUT_RESTART_ROUND);
+
+  }
+}
+
+export const actionSetNumberOfCards = (value) => {
+  return dispatch => {
+    dispatch(actionGameRestartRound())
+    dispatch(setNumberOfCards(value))
   }
 }
