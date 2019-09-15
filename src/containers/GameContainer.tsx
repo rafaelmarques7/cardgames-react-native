@@ -12,22 +12,14 @@ import {
 } from '../stateHandle';
 import GameView from '../views/GameView';
 
-const Game = (props) => {
-  console.log('<Game /> props: ', props.player, props.gameStatus);
-  return(
-    <GameView {...props} />
-  );
-}
+const Game = (props) => <GameView {...props} />
 
-const mapStateToProps = state => {
-  // console.log(state)
-  return {
-    player: getPlayerInfo(state),
-    dealer: getDealerInfo(state),
-    gameStatus: getStatusGame(state),
-    cardsInDeck: getNumberCardsInDeck(state)
-  }
-};
+const mapStateToProps = state => ({
+  player: getPlayerInfo(state),
+  dealer: getDealerInfo(state),
+  gameStatus: getStatusGame(state),
+  cardsInDeck: getNumberCardsInDeck(state)
+})
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({

@@ -2,7 +2,6 @@ import React from 'react'
 import { View, StyleSheet, Text } from 'react-native'
 import DeckOfCardsImg from './DeckOfCards';
 import AnimationContainer from './AnimationContainer';
-import { screen } from '../config';
 
 const ActionDisplay = (props) => {
   return (

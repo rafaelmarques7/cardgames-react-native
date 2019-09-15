@@ -163,7 +163,7 @@ export const getPlayerInfo = (state) => ({
   creditAmmount: getPlayersCreditAmmount(state),
   valueHand: getCardsStrength(state),
   bet: getPlayersBet(state),
-  betOn: state.betOn,
+  betOn: state.game.betOn,
   isWinner: getRoundWinner(state)
 })
 
