@@ -137,10 +137,13 @@ export const actionGameBet = (bets) => {
 
     setTimeout(() => {
       dispatch(actionGamePayoff());
-      dispatch(actionGameRestartRound());
-      dispatch(setGameMode('deal'))
+      dispatch(setGameMode('end'))
     }, TIMEOUT_RESTART_ROUND);
 
+    setTimeout(() => {
+      dispatch(actionGameRestartRound());
+      dispatch(setGameMode('deal'))
+    }, TIMEOUT_RESTART_ROUND+500) // this delay is necessary so that the card has time to flip.
   }
 }
 

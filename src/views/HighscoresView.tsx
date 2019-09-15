@@ -21,7 +21,6 @@ class HighscoresView extends React.Component<cProps> {
   
   render() {
     const { scores } = this.props
-    console.log('inside highscoreview ', scores)
 
     return (
       <View style={stylesApp.fullScreen}>
