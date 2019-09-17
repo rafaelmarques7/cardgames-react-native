@@ -54,6 +54,6 @@ export const getPlayersLives = state => state.statusGame.numLives
 
 export const getPlayersDeaths = state => state.statusGame.numDeaths
 
-export const isPlayerLooser = state => state.statusGame.numLives === 2
+export const isPlayerLooser = state => state.statusGame.numLives === 0
 
 export const getStatusGame = state => state.statusGame

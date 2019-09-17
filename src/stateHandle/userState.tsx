@@ -5,7 +5,7 @@ const userInitState = {
 
 // state manipulation functions
 function setUsername(state, action) {
-  console.log('inside setUsername: ')
+  console.log('inside setUsername')
   return {
     ...state,
     username: action.payload.username
@@ -42,7 +42,7 @@ export const userStateReducer = (state=userInitState, action) => {
  * 
  */
 // export const isUserLoggedIn = state => state.user.email !== null
-export const isUserLoggedIn = state => true
+export const isUserLoggedIn = state => state.user.username != 'Player'
 
 export const getUserUsername = state => state.user.username
 

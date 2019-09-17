@@ -146,12 +146,10 @@ function highscoreUpdate(state, action) {
   const gameHighscore = { points, numRounds, date }
   // get all tracked highscores
   const allHighscores = [...state.highscores]
-  console.log(allHighscores)
   // add this games highscore to highscore list
   allHighscores.push(gameHighscore)
   // sort from higest to minimum
   allHighscores.sort((a, b) => a.points < b.points)
-  console.log(allHighscores)
   // track only 10 highscores
   if (allHighscores.length > 10) {
     allHighscores.pop()

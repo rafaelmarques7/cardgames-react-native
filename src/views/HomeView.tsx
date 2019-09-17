@@ -18,7 +18,7 @@ type cProps = {
 class HomeScreen extends React.Component<cProps> {
   componentDidMount() {
     this.props.fetchHighscoreWorld()
-    this.props.navigation.push('Game')
+    // this.props.navigation.push('Game')
     // this.props.navigation.push('Highscore')
   }
 
