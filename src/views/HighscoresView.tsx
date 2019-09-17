@@ -4,9 +4,6 @@ import { stylesApp, colorsApp, blueLightBackground, brown } from '../styles'
 import AnimationContainer from '../components/AnimationContainer'
 
 type cProps = {
-  actionUpdateHighscore,
-  actionGetHighscoreWorld,
-  actionSetHighscoreWorld,
   fetchHighscoreWorld,
   scores: [{
     numRounds: number,
@@ -22,7 +19,7 @@ class HighscoresView extends React.Component<cProps> {
   }
 
   componentDidMount() {
-    // this.props.fetchHighscoreWorld()
+    this.props.fetchHighscoreWorld()
   }
 
   formatDate = (date) => {
@@ -164,7 +161,6 @@ const styles = StyleSheet.create({
     flex: 1
   },
   containerHeader: {
-    // flex: 1/10,
     flexDirection: 'row',
     justifyContent: 'space-around',
     borderBottomWidth: 3,

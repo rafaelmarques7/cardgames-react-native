@@ -3,6 +3,7 @@ import { getHighscoreByPoints } from '../graphql/queries';
 import { createHighscore } from '../graphql/mutations';
 import uuid from 'uuid/v1'
 import get from 'lodash.get';
+import { getPlayersCreditAmmount, getNumberOfRoundsPlayed } from './gameState';
 
 type Highscore = {
   type: String, // primary partition key - set to same value on all data entries to allow sorting
@@ -85,6 +86,42 @@ export const fetchHighscoreWorld = () => {
   }
 }
 
+export const actionUpdateHighscoreWorld = () => {
+  return async (dispatch, getState) => {
+    try {
+      console.log('inside actionUpdateHighscoreWorld')
+      const highscoresWorld = getHighscoresWorld(getState())
+      const points = getPlayersCreditAmmount(getState())
+      const numRounds = getNumberOfRoundsPlayed(getState())
+
+      const highscore = {
+        type: 'Highscore',
+        points: -points, // remember to apply - to allow sorting from "lowest" 
+        numRounds,
+        id: uuid(),
+        ownerId: 0, 
+        date: `${new Date()}`,
+      }
+
+      // logic to determine if update is requires
+      let shouldUpdate = false
+      if (highscoresWorld.length < 10 || points > highscoresWorld[highscoresWorld.length-1].points) {
+        shouldUpdate = true
+      }
+
+      if (shouldUpdate) {
+        await apiUpdateWorldHighscores(highscore)
+        // update world leaderboard
+        dispatch(fetchHighscoreWorld())
+      }
+
+
+    } catch(e) {
+      console.log('actionUpdateHighscoreWorld threw error: ', e)
+    }
+  }
+}
+
 /**
  * State manipulation functions
  * 
@@ -129,26 +166,26 @@ function highscoreUpdate(state, action) {
   }
 }
 
-function reduceHighscoreWorldUpdate(state, action) {
-  console.log('inside reduceHighscoreWorldUpdate')
+// function reduceHighscoreWorldUpdate(state, action) {
+//   console.log('inside reduceHighscoreWorldUpdate')
 
-  const highscore = {
-    type: 'Highscore',
-    id: uuid(),
-    ownerId: 0, // playerID
-    points: action.payload.points, 
-    numRounds: action.payload.numRounds,
-    date: Date.now().toString(),
-  }
+//   const highscore = {
+//     type: 'Highscore',
+//     id: uuid(),
+//     ownerId: 0, // playerID
+//     points: action.payload.points, 
+//     numRounds: action.payload.numRounds,
+//     date: Date.now().toString(),
+//   }
 
-  const response = updateWorldLeaderboard(highscore)
-  console.log(response)
+//   const response = apiUpdateWorldHighscores(highscore)
+//   console.log(response)
 
-  return {
-    ...state,
-    highscoresWorld: [...state.highscoresWorld]
-  }
-}
+//   return {
+//     ...state,
+//     highscoresWorld: [...state.highscoresWorld]
+//   }
+// }
 
 /**
  * This is the 'highscore' reducer.
@@ -160,8 +197,8 @@ export const highscoreReducer = (state=initStateHighscores, action) => {
   switch(action.type) {
     case 'SET_HIGHSCORE':
       return highscoreUpdate(state, action)
-    case 'UPDATE_HIGHSCORE_WORLD':
-      return reduceHighscoreWorldUpdate(state, action)
+    // case 'SET_HIGHSCORE_WORLD':
+    //   return reduceHighscoreWorldUpdate(state, action)
     case 'GET_HIGHSCORE_WORLD':
       return reduceHighscoreWorldGet(state, action)
     default:

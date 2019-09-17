@@ -9,6 +9,7 @@ type cProps = {
   highscore: number,
   actionGameRestart: Function,
   actionUpdateHighscore: Function,
+  actionUpdateHighscoreWorld: Function,
 }
 
 type cState = {
@@ -23,6 +24,7 @@ class LooseModal extends React.Component<cProps, cState> {
   componentDidUpdate(prevProps) {
     if (this.props.isVisible && !prevProps.isVisible) {
       this.props.actionUpdateHighscore()
+      this.props.actionUpdateHighscoreWorld()
     }
   }
 

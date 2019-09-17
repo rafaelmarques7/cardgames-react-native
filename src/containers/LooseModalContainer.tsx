@@ -6,6 +6,7 @@ import {
   actionGameRestart, 
   numRoundsPlayed, 
   actionUpdateHighscore,
+  actionUpdateHighscoreWorld,
   getPlayersCreditAmmount } from '../stateHandle'
 import LooseModal from '../components/LooseModal';
 
@@ -21,6 +22,7 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators({
     actionGameRestart,
     actionUpdateHighscore,
+    actionUpdateHighscoreWorld,
   }, dispatch)
 }
 

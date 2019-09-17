@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from "react-redux";
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import GameContainer from '../containers/GameContainer';

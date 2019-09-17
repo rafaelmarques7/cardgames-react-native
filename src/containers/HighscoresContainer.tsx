@@ -1,13 +1,11 @@
 import React from 'react'
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-import { getHighscores, getHighscoresWorld } from '../stateHandle/highscoreState';
 import HighscoresView from '../views/HighscoresView';
 import { 
-  actionUpdateHighscore, 
-  actionGetHighscoreWorld,
-  actionSetHighscoreWorld,
-  fetchHighscoreWorld } from '../stateHandle'
+  fetchHighscoreWorld, 
+  getHighscores, 
+  getHighscoresWorld } from '../stateHandle'
 
 const HighScoreContainer = (props) => <HighscoresView {...props} />
 
@@ -18,9 +16,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
-    actionUpdateHighscore,
-    actionGetHighscoreWorld,
-    actionSetHighscoreWorld,
     fetchHighscoreWorld,
   }, dispatch)
 }

@@ -5,6 +5,7 @@ import {
   getNumberOfCardsPerHand, 
   getPlayersCreditAmmount, 
   getNumberOfRoundsPlayed } from './gameState';
+import { fetchHighscoreWorld } from './highscoreState';
 
 
 /**
@@ -119,9 +120,6 @@ export const actionUpdateHighscore = () => {
     const points = getPlayersCreditAmmount(getState())
     const numRounds = getNumberOfRoundsPlayed(getState())
     dispatch(setHighscore(points, numRounds))
-
-    updateHighscore({id: 1, ownerId: 1, points: 0, numRounds: 1, date: Date.now().toString()})
-
   }
 }
 

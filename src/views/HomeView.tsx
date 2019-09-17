@@ -4,18 +4,22 @@ import { screen } from '../config';
 import HomeCardAnimation from '../components/HomeCardAnimation';
 import AnimationContainer from '../components/AnimationContainer';
 import TitleApp from '../components/TitleApp';
+import { connect } from "react-redux";
+import { bindActionCreators } from 'redux';
+import { fetchHighscoreWorld } from '../stateHandle'
 
 type cProps = {
+  fetchHighscoreWorld: Function,
   navigation: {
     push: Function,
   },
 }
 
-export default class HomeScreen extends React.Component<cProps> {
+class HomeScreen extends React.Component<cProps> {
   componentDidMount() {
-    // console.log(this.props)
+    this.props.fetchHighscoreWorld()
     // this.props.navigation.push('Game')
-    this.props.navigation.push('Highscore')
+    // this.props.navigation.push('Highscore')
   }
 
   render() {
@@ -95,3 +99,14 @@ const styles = StyleSheet.create({
     color: 'white',
   }
 })
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({
+    fetchHighscoreWorld,
+  }, dispatch)
+}
+
+export default connect(
+  null, 
+  mapDispatchToProps
+)(HomeScreen);
