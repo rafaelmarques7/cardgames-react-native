@@ -23,6 +23,9 @@ class HighscoresView extends React.Component<cProps> {
   }
 
   formatDate = (date) => {
+    if (!date) {
+      return 
+    }
     if (typeof(date) === 'string') {
       date = new Date(date)
     }

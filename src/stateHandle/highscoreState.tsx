@@ -28,7 +28,8 @@ export async function apiGetWorldHighscores(limit=10) {
   try {
     return await API.graphql(graphqlOperation(getHighscoreByPoints, {
       type: 'Highscore', // tpye is the partition key, that should be set to 'Highscore' on all entries
-      limit: limit,    
+      limit: limit,
+      sortDirection: "DESC",
     }))
   } catch (e) {
     console.log('getWorldHighscores threw error: \n', e)
@@ -101,7 +102,7 @@ export const actionUpdateHighscoreWorld = () => {
         const numRounds = getNumberOfRoundsPlayed(getState())
         const highscore = {
           type: 'Highscore',
-          points: -points, // remember to apply - to allow sorting from "lowest" 
+          points: points,
           numRounds,
           id: uuid(),
           ownerId: 0, 
@@ -124,17 +125,9 @@ export const actionUpdateHighscoreWorld = () => {
 const reduceHighscoreWorldGet = (state, action) => {
   console.log('inside reduceHighscoreWorldGet')
   const highscores = get(action.payload.data, 'data.getHighscoreByPoints.items', [])
-  // points come from Api as negativevalues, so we need to change that
-  let highscoresClean = []
-  highscores.map((score) => {
-    highscoresClean.push({
-      ...score,
-      points: -score.points,
-    })
-  })
   return {
     ...state,
-    highscoresWorld: highscoresClean,
+    highscoresWorld: highscores,
   }
 }
 

@@ -107,6 +107,12 @@ export type ModelIntKeyConditionInput = {
   between?: Array< number | null > | null,
 };
 
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
+
+
 export type CreateUserMutationVariables = {
   input: CreateUserInput,
 };
@@ -267,6 +273,7 @@ export type ListHighscoresQuery = {
 export type GetHighscoreByPointsQueryVariables = {
   type?: string | null,
   points?: ModelIntKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
   filter?: ModelHighscoreFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,

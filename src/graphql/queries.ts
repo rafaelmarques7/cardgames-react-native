@@ -56,6 +56,7 @@ export const listHighscores = `query ListHighscores(
 export const getHighscoreByPoints = `query GetHighscoreByPoints(
   $type: String
   $points: ModelIntKeyConditionInput
+  $sortDirection: ModelSortDirection
   $filter: ModelHighscoreFilterInput
   $limit: Int
   $nextToken: String
@@ -63,6 +64,7 @@ export const getHighscoreByPoints = `query GetHighscoreByPoints(
   getHighscoreByPoints(
     type: $type
     points: $points
+    sortDirection: $sortDirection
     filter: $filter
     limit: $limit
     nextToken: $nextToken
