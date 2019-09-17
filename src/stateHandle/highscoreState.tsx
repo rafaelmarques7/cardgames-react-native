@@ -100,7 +100,6 @@ const reduceHighscoreWorldGet = (state, action) => {
       points: -score.points,
     })
   })
-
   return {
     ...state,
     highscoresWorld: highscoresClean,
