@@ -90,32 +90,27 @@ export const actionUpdateHighscoreWorld = () => {
   return async (dispatch, getState) => {
     try {
       console.log('inside actionUpdateHighscoreWorld')
-      const highscoresWorld = getHighscoresWorld(getState())
-      const points = getPlayersCreditAmmount(getState())
-      const numRounds = getNumberOfRoundsPlayed(getState())
-
-      const highscore = {
-        type: 'Highscore',
-        points: -points, // remember to apply - to allow sorting from "lowest" 
-        numRounds,
-        id: uuid(),
-        ownerId: 0, 
-        date: `${new Date()}`,
-      }
-
       // logic to determine if update is requires
-      let shouldUpdate = false
-      if (highscoresWorld.length < 10 || points > highscoresWorld[highscoresWorld.length-1].points) {
-        shouldUpdate = true
-      }
+      const isWinner = isHighscoreWorldWinner(getState())
+      const shouldUpdate = isWinner.isWinner
 
       if (shouldUpdate) {
-        await apiUpdateWorldHighscores(highscore)
-        // update world leaderboard
-        dispatch(fetchHighscoreWorld())
+        console.log('found a winner!')
+        // data to put
+        const points = getPlayersCreditAmmount(getState())
+        const numRounds = getNumberOfRoundsPlayed(getState())
+        const highscore = {
+          type: 'Highscore',
+          points: -points, // remember to apply - to allow sorting from "lowest" 
+          numRounds,
+          id: uuid(),
+          ownerId: 0, 
+          date: `${new Date()}`,
+        }
+        // update backend and own app state
+        await apiUpdateWorldHighscores(highscore) // update world leaderboard database
+        dispatch(fetchHighscoreWorld()) // update world leaderboard state
       }
-
-
     } catch(e) {
       console.log('actionUpdateHighscoreWorld threw error: ', e)
     }
@@ -151,10 +146,12 @@ function highscoreUpdate(state, action) {
   const gameHighscore = { points, numRounds, date }
   // get all tracked highscores
   const allHighscores = [...state.highscores]
+  console.log(allHighscores)
   // add this games highscore to highscore list
   allHighscores.push(gameHighscore)
   // sort from higest to minimum
-  allHighscores.sort((a, b) => a.points > b.points)
+  allHighscores.sort((a, b) => a.points < b.points)
+  console.log(allHighscores)
   // track only 10 highscores
   if (allHighscores.length > 10) {
     allHighscores.pop()
@@ -166,26 +163,6 @@ function highscoreUpdate(state, action) {
   }
 }
 
-// function reduceHighscoreWorldUpdate(state, action) {
-//   console.log('inside reduceHighscoreWorldUpdate')
-
-//   const highscore = {
-//     type: 'Highscore',
-//     id: uuid(),
-//     ownerId: 0, // playerID
-//     points: action.payload.points, 
-//     numRounds: action.payload.numRounds,
-//     date: Date.now().toString(),
-//   }
-
-//   const response = apiUpdateWorldHighscores(highscore)
-//   console.log(response)
-
-//   return {
-//     ...state,
-//     highscoresWorld: [...state.highscoresWorld]
-//   }
-// }
 
 /**
  * This is the 'highscore' reducer.
@@ -210,3 +187,22 @@ export const highscoreReducer = (state=initStateHighscores, action) => {
 export const getHighscores = state => state.highscores.highscores
 
 export const getHighscoresWorld = state => state.highscores.highscoresWorld
+
+// export const isHighscoreWorldWinner = (state) => ({ isWinner: true, index: 1})
+
+export const isHighscoreWorldWinner = (state) => {
+  const points = getPlayersCreditAmmount(state)
+  const highscores = getHighscoresWorld(state)
+  const isWinner =  highscores.length < 10 || points > highscores[highscores.length-1].points
+  let index = 0
+  // determine highscore index
+  if (isWinner) {
+    for (var i=0; i<highscores.length; i+=1) {
+      if (points > highscores[i].points) {
+        index = i + 1
+        return { isWinner, index }
+      }
+    }
+  }
+  return { isWinner, index }
+}

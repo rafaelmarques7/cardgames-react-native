@@ -5,6 +5,10 @@ import AnimationContainer from './AnimationContainer'
 
 type cProps = {
   isVisible: boolean, 
+  isWorldWinner: {
+    isWinner: boolean,
+    index: number,
+  },
   numRoundsPlayed: number,
   highscore: number,
   actionGameRestart: Function,
@@ -38,6 +42,9 @@ class LooseModal extends React.Component<cProps, cState> {
 
   render() {
     const { isVisible, actionGameRestart, numRoundsPlayed, highscore} = this.props;
+    
+    const mainText = this.props.isWorldWinner.isWinner ? 'World Record!' : 'You lose!' 
+    const delayWin = this.props.isWorldWinner.isWinner ? 1000 : 0
 
     return (
       <Modal
@@ -50,13 +57,33 @@ class LooseModal extends React.Component<cProps, cState> {
               style={{flex: 1}}
               animate={true} animationType='bounceIn' delay={200} duration={2000}>
               <Text 
-                style={{...styles.text, ...styles.titleText}}>You lose!</Text>
+                style={{...styles.text, ...styles.titleText}}>{mainText}</Text>
               </AnimationContainer>
             </View>
             <View style={styles.containerInfo}>
+              { this.props.isWorldWinner.isWinner && 
+                <View style={{flex: 1, margin: 20}}>
+                  <AnimationContainer 
+                    style={{...styles.subTitleContainer, flex: 2}}   
+                    animate={true} animationType='bounceIn' delay={1000}>
+                    <Text 
+                      style={{...styles.text, fontSize: 23}}>You achieved position{' '}</Text>
+                    <Text 
+                      style={{...styles.text, fontSize: 23, fontWeight: 'bold'}}>#{this.props.isWorldWinner.index}</Text>
+                  </AnimationContainer>
+                  <AnimationContainer 
+                    style={{...styles.subTitleContainer, flex: 1}}   
+                    animate={true} animationType='bounceIn' delay={1000}>
+                    <Text 
+                      style={{...styles.text, fontSize: 23}}>in the hall of fame.</Text>
+                  </AnimationContainer>
+                </View>
+              }
+
+
               <AnimationContainer 
                 style={{...styles.subTitleContainer, flex: 1}}   
-                animate={true} animationType='bounceInRight' delay={1000}>
+                animate={true} animationType='bounceInRight' delay={1000+delayWin}>
                 <Text 
                   style={styles.text}>You played </Text>
                 <Text 
@@ -64,7 +91,7 @@ class LooseModal extends React.Component<cProps, cState> {
               </AnimationContainer>
               <AnimationContainer 
                 style={{...styles.subTitleContainer, flex: 1}}                 
-                animate={true} animationType='bounceInLeft' delay={2000}>
+                animate={true} animationType='bounceInLeft' delay={2000+delayWin}>
                 <Text 
                   style={styles.text}>And scored </Text>
                 <Text 
@@ -74,7 +101,7 @@ class LooseModal extends React.Component<cProps, cState> {
               !this.state.animationComplete &&
               <AnimationContainer 
                 style={{flex: 1, justifyContent: 'center'}}
-                animate={true} animationType='bounceIn' delay={3000} duration={3000} count={1}>
+                animate={true} animationType='bounceIn' delay={3000+delayWin} duration={3000} count={1}>
                 <TouchableOpacity style={styles.playAgainButton}
                   onPress={() => {actionGameRestart()}}>
                   <Text 
@@ -88,7 +115,7 @@ class LooseModal extends React.Component<cProps, cState> {
               <AnimationContainer 
                 style={{flex: 1, justifyContent: 'center'}}
                 animate={true} 
-                animationType='bounceIn' delay={0} duration={3000} count={'infinite'}>
+                animationType='bounceIn' delay={0} duration={3000+delayWin} count={'infinite'}>
                 <TouchableOpacity style={styles.playAgainButton}
                   onPress={() => {actionGameRestart()}}>
                   <Text 

@@ -7,13 +7,15 @@ import {
   numRoundsPlayed, 
   actionUpdateHighscore,
   actionUpdateHighscoreWorld,
-  getPlayersCreditAmmount } from '../stateHandle'
+  getPlayersCreditAmmount, 
+  isHighscoreWorldWinner} from '../stateHandle'
 import LooseModal from '../components/LooseModal';
 
 const LooseModalContainer = (props) => <LooseModal {...props} />
 
 const mapStateToProps = state => ({
   isVisible: isPlayerLooser(state),
+  isWorldWinner: isHighscoreWorldWinner(state),
   numRoundsPlayed: numRoundsPlayed(state),
   highscore: getPlayersCreditAmmount(state),
 })
