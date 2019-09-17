@@ -9,7 +9,6 @@ export const createUser = `mutation CreateUser($input: CreateUserInput!) {
   }
 }
 `;
-
 export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
   updateUser(input: $input) {
     id
@@ -18,7 +17,6 @@ export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
   }
 }
 `;
-
 export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
   deleteUser(input: $input) {
     id
@@ -30,8 +28,9 @@ export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
 export const createHighscore = `mutation CreateHighscore($input: CreateHighscoreInput!) {
   createHighscore(input: $input) {
     id
-    ownerId
+    type
     points
+    ownerId
     numRounds
     date
   }
@@ -40,8 +39,9 @@ export const createHighscore = `mutation CreateHighscore($input: CreateHighscore
 export const updateHighscore = `mutation UpdateHighscore($input: UpdateHighscoreInput!) {
   updateHighscore(input: $input) {
     id
-    ownerId
+    type
     points
+    ownerId
     numRounds
     date
   }
@@ -50,8 +50,9 @@ export const updateHighscore = `mutation UpdateHighscore($input: UpdateHighscore
 export const deleteHighscore = `mutation DeleteHighscore($input: DeleteHighscoreInput!) {
   deleteHighscore(input: $input) {
     id
-    ownerId
+    type
     points
+    ownerId
     numRounds
     date
   }

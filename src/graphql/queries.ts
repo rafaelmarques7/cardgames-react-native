@@ -9,7 +9,6 @@ export const getUser = `query GetUser($id: ID!) {
   }
 }
 `;
-
 export const listUsers = `query ListUsers(
   $filter: ModelUserFilterInput
   $limit: Int
@@ -25,19 +24,17 @@ export const listUsers = `query ListUsers(
   }
 }
 `;
-
 export const getHighscore = `query GetHighscore($id: ID!) {
   getHighscore(id: $id) {
     id
-    ownerId
+    type
     points
+    ownerId
     numRounds
     date
   }
 }
 `;
-
-
 export const listHighscores = `query ListHighscores(
   $filter: ModelHighscoreFilterInput
   $limit: Int
@@ -46,8 +43,35 @@ export const listHighscores = `query ListHighscores(
   listHighscores(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      ownerId
+      type
       points
+      ownerId
+      numRounds
+      date
+    }
+    nextToken
+  }
+}
+`;
+export const getHighscoreByPoints = `query GetHighscoreByPoints(
+  $type: String
+  $points: ModelIntKeyConditionInput
+  $filter: ModelHighscoreFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  getHighscoreByPoints(
+    type: $type
+    points: $points
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      type
+      points
+      ownerId
       numRounds
       date
     }

@@ -28,8 +28,9 @@ export const onDeleteUser = `subscription OnDeleteUser {
 export const onCreateHighscore = `subscription OnCreateHighscore {
   onCreateHighscore {
     id
-    ownerId
+    type
     points
+    ownerId
     numRounds
     date
   }
@@ -38,8 +39,9 @@ export const onCreateHighscore = `subscription OnCreateHighscore {
 export const onUpdateHighscore = `subscription OnUpdateHighscore {
   onUpdateHighscore {
     id
-    ownerId
+    type
     points
+    ownerId
     numRounds
     date
   }
@@ -48,8 +50,9 @@ export const onUpdateHighscore = `subscription OnUpdateHighscore {
 export const onDeleteHighscore = `subscription OnDeleteHighscore {
   onDeleteHighscore {
     id
-    ownerId
+    type
     points
+    ownerId
     numRounds
     date
   }

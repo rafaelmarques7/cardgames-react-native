@@ -37,7 +37,11 @@ function highscoreUpdate(state, action) {
 export const highscoreReducer = (state=initStateHighscores, action) => {
   switch(action.type) {
     case 'SET_HIGHSCORE':
-        return highscoreUpdate(state, action)
+      return highscoreUpdate(state, action)
+    case 'SET_HIGHSCORE_WORLD':
+      return state
+    case 'GET_HIGHSCORE_WORLD':
+      return state
     default:
       return state;  
   }

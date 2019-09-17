@@ -3,7 +3,7 @@
 
 export type CreateUserInput = {
   id?: string | null,
-  username?: string | null,
+  username: string,
   email?: string | null,
 };
 
@@ -19,16 +19,18 @@ export type DeleteUserInput = {
 
 export type CreateHighscoreInput = {
   id?: string | null,
-  ownerId?: string | null,
-  points?: number | null,
+  type: string,
+  points: number,
+  ownerId: string,
   numRounds?: number | null,
   date?: string | null,
 };
 
 export type UpdateHighscoreInput = {
   id: string,
-  ownerId?: string | null,
+  type?: string | null,
   points?: number | null,
+  ownerId?: string | null,
   numRounds?: number | null,
   date?: string | null,
 };
@@ -74,8 +76,9 @@ export type ModelStringFilterInput = {
 
 export type ModelHighscoreFilterInput = {
   id?: ModelIDFilterInput | null,
-  ownerId?: ModelIDFilterInput | null,
+  type?: ModelStringFilterInput | null,
   points?: ModelIntFilterInput | null,
+  ownerId?: ModelIDFilterInput | null,
   numRounds?: ModelIntFilterInput | null,
   date?: ModelStringFilterInput | null,
   and?: Array< ModelHighscoreFilterInput | null > | null,
@@ -95,6 +98,15 @@ export type ModelIntFilterInput = {
   between?: Array< number | null > | null,
 };
 
+export type ModelIntKeyConditionInput = {
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+};
+
 export type CreateUserMutationVariables = {
   input: CreateUserInput,
 };
@@ -103,7 +115,7 @@ export type CreateUserMutation = {
   createUser:  {
     __typename: "User",
     id: string,
-    username: string | null,
+    username: string,
     email: string | null,
   } | null,
 };
@@ -116,7 +128,7 @@ export type UpdateUserMutation = {
   updateUser:  {
     __typename: "User",
     id: string,
-    username: string | null,
+    username: string,
     email: string | null,
   } | null,
 };
@@ -129,7 +141,7 @@ export type DeleteUserMutation = {
   deleteUser:  {
     __typename: "User",
     id: string,
-    username: string | null,
+    username: string,
     email: string | null,
   } | null,
 };
@@ -142,8 +154,9 @@ export type CreateHighscoreMutation = {
   createHighscore:  {
     __typename: "Highscore",
     id: string,
-    ownerId: string | null,
-    points: number | null,
+    type: string,
+    points: number,
+    ownerId: string,
     numRounds: number | null,
     date: string | null,
   } | null,
@@ -157,8 +170,9 @@ export type UpdateHighscoreMutation = {
   updateHighscore:  {
     __typename: "Highscore",
     id: string,
-    ownerId: string | null,
-    points: number | null,
+    type: string,
+    points: number,
+    ownerId: string,
     numRounds: number | null,
     date: string | null,
   } | null,
@@ -172,8 +186,9 @@ export type DeleteHighscoreMutation = {
   deleteHighscore:  {
     __typename: "Highscore",
     id: string,
-    ownerId: string | null,
-    points: number | null,
+    type: string,
+    points: number,
+    ownerId: string,
     numRounds: number | null,
     date: string | null,
   } | null,
@@ -187,7 +202,7 @@ export type GetUserQuery = {
   getUser:  {
     __typename: "User",
     id: string,
-    username: string | null,
+    username: string,
     email: string | null,
   } | null,
 };
@@ -204,7 +219,7 @@ export type ListUsersQuery = {
     items:  Array< {
       __typename: "User",
       id: string,
-      username: string | null,
+      username: string,
       email: string | null,
     } | null > | null,
     nextToken: string | null,
@@ -219,8 +234,9 @@ export type GetHighscoreQuery = {
   getHighscore:  {
     __typename: "Highscore",
     id: string,
-    ownerId: string | null,
-    points: number | null,
+    type: string,
+    points: number,
+    ownerId: string,
     numRounds: number | null,
     date: string | null,
   } | null,
@@ -238,8 +254,33 @@ export type ListHighscoresQuery = {
     items:  Array< {
       __typename: "Highscore",
       id: string,
-      ownerId: string | null,
-      points: number | null,
+      type: string,
+      points: number,
+      ownerId: string,
+      numRounds: number | null,
+      date: string | null,
+    } | null > | null,
+    nextToken: string | null,
+  } | null,
+};
+
+export type GetHighscoreByPointsQueryVariables = {
+  type?: string | null,
+  points?: ModelIntKeyConditionInput | null,
+  filter?: ModelHighscoreFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type GetHighscoreByPointsQuery = {
+  getHighscoreByPoints:  {
+    __typename: "ModelHighscoreConnection",
+    items:  Array< {
+      __typename: "Highscore",
+      id: string,
+      type: string,
+      points: number,
+      ownerId: string,
       numRounds: number | null,
       date: string | null,
     } | null > | null,
@@ -251,7 +292,7 @@ export type OnCreateUserSubscription = {
   onCreateUser:  {
     __typename: "User",
     id: string,
-    username: string | null,
+    username: string,
     email: string | null,
   } | null,
 };
@@ -260,7 +301,7 @@ export type OnUpdateUserSubscription = {
   onUpdateUser:  {
     __typename: "User",
     id: string,
-    username: string | null,
+    username: string,
     email: string | null,
   } | null,
 };
@@ -269,7 +310,7 @@ export type OnDeleteUserSubscription = {
   onDeleteUser:  {
     __typename: "User",
     id: string,
-    username: string | null,
+    username: string,
     email: string | null,
   } | null,
 };
@@ -278,8 +319,9 @@ export type OnCreateHighscoreSubscription = {
   onCreateHighscore:  {
     __typename: "Highscore",
     id: string,
-    ownerId: string | null,
-    points: number | null,
+    type: string,
+    points: number,
+    ownerId: string,
     numRounds: number | null,
     date: string | null,
   } | null,
@@ -289,8 +331,9 @@ export type OnUpdateHighscoreSubscription = {
   onUpdateHighscore:  {
     __typename: "Highscore",
     id: string,
-    ownerId: string | null,
-    points: number | null,
+    type: string,
+    points: number,
+    ownerId: string,
     numRounds: number | null,
     date: string | null,
   } | null,
@@ -300,8 +343,9 @@ export type OnDeleteHighscoreSubscription = {
   onDeleteHighscore:  {
     __typename: "Highscore",
     id: string,
-    ownerId: string | null,
-    points: number | null,
+    type: string,
+    points: number,
+    ownerId: string,
     numRounds: number | null,
     date: string | null,
   } | null,

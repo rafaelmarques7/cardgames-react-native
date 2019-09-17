@@ -85,3 +85,14 @@ https://github.com/oblador/react-native-animatable
 ## Navigation
 
 https://facebook.github.io/react-native/docs/navigation
+
+## World Leader Board
+
+The setup should be as follows:
+
+* load WLB highscores on application start.
+* on game loose:
+  * compare players points to WLB highscores
+  * IF player beats highscore, update WLB database
+
+
