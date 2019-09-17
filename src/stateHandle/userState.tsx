@@ -41,7 +41,8 @@ export const userStateReducer = (state=userInitState, action) => {
  * 'user' state selector functions
  * 
  */
-export const isUserLoggedIn = state => state.user.email !== null
+// export const isUserLoggedIn = state => state.user.email !== null
+export const isUserLoggedIn = state => true
 
 export const getUserUsername = state => state.user.username
 

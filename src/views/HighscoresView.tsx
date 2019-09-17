@@ -4,6 +4,10 @@ import { stylesApp, colorsApp } from '../styles'
 import AnimationContainer from '../components/AnimationContainer'
 
 type cProps = {
+  actionUpdateHighscore,
+  actionGetHighscoreWorld,
+  actionSetHighscoreWorld,
+  fetchHighscoreWorld,
   scores: [{
     numRounds: number,
     points: number,
@@ -12,6 +16,11 @@ type cProps = {
 }
 
 class HighscoresView extends React.Component<cProps> {
+
+  componentDidMount() {
+    this.props.fetchHighscoreWorld()
+  }
+
   formatDate = (date) => {
     if (typeof(date) === 'string') {
       date = new Date(date)
