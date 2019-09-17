@@ -5,6 +5,8 @@ import {
   getNumberOfCardsPerHand, 
   getPlayersCreditAmmount, 
   getNumberOfRoundsPlayed } from './gameState';
+import { fetchHighscoreWorld } from './highscoreState';
+
 
 /**
  * Action helper constants and functions
@@ -153,3 +155,4 @@ export const actionSetNumberOfCards = (value) => {
     dispatch(setNumberOfCards(value))
   }
 }
+

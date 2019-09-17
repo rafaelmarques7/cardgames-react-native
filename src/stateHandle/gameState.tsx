@@ -68,7 +68,7 @@ function gamePayoff(state) {
   }
 }
 
-function gameRestartRound(state) {
+function  gameRestartRound(state) {
   console.log('inside gameRestartRound')
   return {
     ...state,

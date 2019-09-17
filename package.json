@@ -27,7 +27,8 @@
     "react-spring": "^8.0.27",
     "redux": "^4.0.4",
     "redux-persist": "^6.0.0",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "uuid": "^3.3.3"
   },
   "devDependencies": {
     "@types/react": "^16.8.23",

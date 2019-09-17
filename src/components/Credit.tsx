@@ -11,7 +11,7 @@ const CreditPlayer = ({ ammount }) => {
   // this is called on prop or state update
   useEffect(() => {
     if (credit !== ammount) {
-      setTimeout(setCredit, 1500, ammount)
+      setTimeout(setCredit, 1500, ammount)  // @TODO this should not be executed if unmounted!
     }
   })
 

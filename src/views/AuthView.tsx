@@ -11,7 +11,7 @@ import { Input, Button } from 'react-native-elements';
 import { Auth } from 'aws-amplify';
 import LogoutButton from '../components/LogoutButton';
 import { screen } from '../config';
-import { blueLightBackground, greyMedium } from '../styles';
+import { blueLightBackground, greyMedium, stylesApp } from '../styles';
 
 type cProps = {
   isLoggedIn: boolean,
@@ -29,6 +29,8 @@ type cState = {
   confirmationCode: string,
   confirmationCodeVisible: boolean,
   displayLogin: boolean,
+  username: string
+  displaySelectUsername: boolean,
 }
 
 export default class AuthView extends React.Component<cProps, cState> {
@@ -41,6 +43,8 @@ export default class AuthView extends React.Component<cProps, cState> {
       confirmationCode: '',
       confirmationCodeVisible: false,
       displayLogin: true,  // display sign-in on true; display sign-up on false
+      username: '',
+      displaySelectUsername: false
     };
   }
 
@@ -144,13 +148,41 @@ export default class AuthView extends React.Component<cProps, cState> {
     </>
   )
   
+
+  handleUsernameSelect() {
+    this.props.actionSetUserUsername(this.state.username)
+    this.props.navigation.navigate('Home')
+  }
+
   renderSkipButton = () => {
+    if (this.state.displaySelectUsername) {
+      return(
+        <Button
+          disabled={this.state.username === '' }
+          title="Click to proceed." 
+          onPress={this.handleUsernameSelect.bind(this)}/>
+        )          
+    }
     return(
       <Button
         title="Skip registration" 
-        onPress={() => this.props.navigation.navigate('Home')}/>
-    )    
+        onPress={() => this.setState({displaySelectUsername: true})}/>
+      )    
   }
+
+  renderUsernameForm = () => (
+    <>
+      <Text 
+        style={{...styles.textSubtitle, marginBottom: 10}}>
+        Please choose a cool username.</Text>
+      <Input
+        placeholder="   Username"
+        placeholderTextColor={greyMedium} 
+        leftIcon={{ type: 'font-awesome', name: 'user' }}     
+        onChangeText={(value) => this.setState({ username: value })} /> 
+    </>
+  )
+  
 
   renderActionButton = () => {
     let buttonTitle = ''
@@ -203,16 +235,27 @@ export default class AuthView extends React.Component<cProps, cState> {
           <Text style={styles.textSubtitle}>Please take a minute to sign-in or to register an account.</Text>
         </View>
         <View style={styles.containerMain}>
-          <View style={styles.containerOptions}>
-            {this.renderAuthOptions()}
-          </View>
-          <View style={styles.actionContainer}>
-            {this.state.displayLogin && this.renderLoginForm()}
-            {!this.state.displayLogin && this.renderRegistrationForm()}
-            {this.state.confirmationCodeVisible && this.renderConfirmationCodeForm()}
-            {this.renderActionButton()}
-          </View>
+          { 
+            !this.state.displaySelectUsername && 
+            <> 
+              <View style={styles.containerOptions}>
+                {this.renderAuthOptions()}
+              </View>
+              <View style={styles.actionContainer}>
+                {this.state.displayLogin && this.renderLoginForm()}
+                {!this.state.displayLogin && this.renderRegistrationForm()}
+                {this.state.confirmationCodeVisible && this.renderConfirmationCodeForm()}
+                {this.renderActionButton()}
+              </View> 
+            </>
+          }
+          {
+            this.state.displaySelectUsername && 
+            this.renderUsernameForm()
+
+          }
         </View>
+        
         <View style={styles.skipContainer}>
           {this.renderSkipButton()}
         </View>
