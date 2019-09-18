@@ -153,7 +153,7 @@ function highscoreUpdate(state, action) {
   // update state
   return {
     ...state,
-    highscores: allHighscores
+    highscores: []// allHighscores
   }
 }
 

@@ -2,6 +2,7 @@ import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { stylesApp, colorsApp, blueLightBackground, brown } from '../styles'
 import AnimationContainer from '../components/AnimationContainer'
+import get from 'lodash.get';
 
 type cProps = {
   fetchHighscoreWorld,
@@ -87,7 +88,7 @@ class HighscoresView extends React.Component<cProps> {
             <Text style={styles.textScore}>{score.numRounds}</Text>
           </View>
           <View style={styles.containerCell}>
-            <Text style={styles.textScore}>{score.user.username}</Text>
+            <Text style={styles.textScore}>{get(score, 'user.username', '')}</Text>
           </View>
           <View style={styles.containerCell}>
             <Text style={styles.textScore}>{this.formatDate(score.date)}</Text>      
