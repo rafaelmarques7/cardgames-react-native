@@ -109,7 +109,7 @@ export const actionUpdateHighscoreWorld = () => {
         }
         // update backend and own app state
         await apiUpdateWorldHighscores(highscore) // update world leaderboard database
-        dispatch(fetchHighscoreWorld()) // update world leaderboard state
+        // dispatch(fetchHighscoreWorld()) // update world leaderboard state
       }
     } catch(e) {
       console.log('actionUpdateHighscoreWorld threw error: ', e)
@@ -189,9 +189,10 @@ export const isHighscoreWorldWinner = (state) => {
   let index = highscores.length // base position for the case in which highscores.length < 10
   // determine highscore index
   if (isWinner) {
-    for (var i=1; i<highscores.length; i+=1) {
-      if (points > highscores[i-1].points) {
-        return { isWinner, index: i }
+    for (var i=0; i<highscores.length; i+=1) {
+      if (points > highscores[i].points) {
+        console.log({ isWinner, index: i+1 })
+        return { isWinner, index: i+1 }
       }
     }
   }
