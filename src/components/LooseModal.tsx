@@ -42,7 +42,7 @@ class LooseModal extends React.Component<cProps, cState> {
 
   render() {
     const { isVisible, actionGameRestart, numRoundsPlayed, highscore} = this.props;
-    
+
     const mainText = this.props.isWorldWinner.isWinner ? 'World Record!' : 'You lose!' 
     const delayWin = this.props.isWorldWinner.isWinner ? 1000 : 0
 

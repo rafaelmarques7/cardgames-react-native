@@ -4,7 +4,7 @@ import { createHighscore } from '../graphql/mutations';
 import uuid from 'uuid/v1'
 import get from 'lodash.get';
 import { getPlayersCreditAmmount, getNumberOfRoundsPlayed } from './gameState';
-import { getUserId } from './userState';
+import { getUserId, getUserUsername } from './userState';
 
 type Highscore = {
   type: String, // primary partition key - set to same value on all data entries to allow sorting
@@ -32,7 +32,7 @@ export async function apiGetWorldHighscores(limit=10) {
       sortDirection: "DESC",
     }))
   } catch (e) {
-    console.log(e)
+    console.log('apiGetWorldHighscores thre error: \n',e)
   } 
 }
 
@@ -78,6 +78,7 @@ export const fetchHighscoreWorld = () => {
     try {
       console.log('inside fetchHighscoreWorld')
       const data = await apiGetWorldHighscores()
+      // console.log('fetchHighscoreWorld', data)
       return onSuccess(data);
     } catch (e) {
       console.log('fetchHighscoreWorld threw error: \n', e);
@@ -103,7 +104,7 @@ export const actionUpdateHighscoreWorld = () => {
           type: 'Highscore',
           points: points,
           numRounds,
-          date: `${new Date()}`,
+          date: `${new Date().toString()}`,
           highscoreUserId: getUserId(getState()),
         }
         // update backend and own app state
@@ -132,14 +133,18 @@ const reduceHighscoreWorldGet = (state, action) => {
 function highscoreUpdate(state, action) {
   console.log(`inside highscoreUpdate`)
   // construct this games highscore based on payload
-  const {  points, numRounds } = action.payload
-  const date = new Date()
-  const gameHighscore = { points, numRounds, date }
+  const {  points, numRounds, username } = action.payload
+  const gameHighscore = { 
+    points, 
+    numRounds, 
+    date: `${new Date().toString()}`,
+    user: { username }
+  }
   // get all tracked highscores
   const allHighscores = [...state.highscores]
   // add this games highscore to highscore list
   allHighscores.push(gameHighscore)
-  // sort from higest to minimum
+  // sort from highest to lowest
   allHighscores.sort((a, b) => a.points < b.points)
   // track only 10 highscores
   if (allHighscores.length > 10) {
@@ -177,19 +182,16 @@ export const getHighscores = state => state.highscores.highscores
 
 export const getHighscoresWorld = state => state.highscores.highscoresWorld
 
-// export const isHighscoreWorldWinner = (state) => ({ isWinner: true, index: 1})
-
 export const isHighscoreWorldWinner = (state) => {
   const points = getPlayersCreditAmmount(state)
   const highscores = getHighscoresWorld(state)
   const isWinner =  highscores.length < 10 || points > highscores[highscores.length-1].points
-  let index = 0
+  let index = highscores.length // base position for the case in which highscores.length < 10
   // determine highscore index
   if (isWinner) {
-    for (var i=0; i<highscores.length; i+=1) {
-      if (points > highscores[i].points) {
-        index = i + 1
-        return { isWinner, index }
+    for (var i=1; i<highscores.length; i+=1) {
+      if (points > highscores[i-1].points) {
+        return { isWinner, index: i }
       }
     }
   }

@@ -1,7 +1,6 @@
 import { API, graphqlOperation } from "aws-amplify"
 import { createUser } from "../graphql/mutations"
-import uuid from "uuid-js"
-import { actionSetUserUsername } from "./actions"
+// import { actionSetUserUsername } from "./actions"
 import get from 'lodash.get';
 
 const userInitState = {
@@ -27,6 +26,13 @@ export const actionCreateUser = (username) => {
     }
   }
 }
+
+export const actionSetUserUsername = (username) => ({
+  type: 'SET_USER_USERNAME',
+  payload: {
+    username: username,
+  }
+})
 
 export const actionSetUserId = (data) => ({
   type: 'SET_USER_ID',
@@ -99,8 +105,7 @@ export const userStateReducer = (state=userInitState, action) => {
  * 'user' state selector functions
  * 
  */
-// export const isUserLoggedIn = state => state.user.email !== null
-export const isUserLoggedIn = state => state.user.username != 'Player'
+export const isUserLoggedIn = state => state.user.username !== 'Player'
 
 export const getUserUsername = state => state.user.username
 
