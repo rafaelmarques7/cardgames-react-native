@@ -5,7 +5,6 @@ import {
   getNumberOfCardsPerHand, 
   getPlayersCreditAmmount, 
   getNumberOfRoundsPlayed } from './gameState';
-import { fetchHighscoreWorld } from './highscoreState';
 
 
 /**
@@ -71,11 +70,12 @@ const resetStatusGame = () => ({
   type: 'RESET_STATUS_GAME'
 })
 
-const setHighscore = (points, numRounds) => ({
+const setHighscore = (points, numRounds, username) => ({
   type: 'SET_HIGHSCORE',
   payload: {
     points, 
     numRounds,
+    username,
   }
 })
 
@@ -101,13 +101,6 @@ export const actionGameRestart = () => {
   }
 }
 
-export const actionSetUserUsername = (username) => ({
-  type: 'SET_USER_USERNAME',
-  payload: {
-    username: username,
-  }
-})
-
 export const actionSetUserEmail = (email) => ({
   type: 'SET_USER_EMAIL',
   payload: {
@@ -119,7 +112,8 @@ export const actionUpdateHighscore = () => {
   return (dispatch, getState) => {
     const points = getPlayersCreditAmmount(getState())
     const numRounds = getNumberOfRoundsPlayed(getState())
-    dispatch(setHighscore(points, numRounds))
+    const username = getUserUsername(getState())
+    dispatch(setHighscore(points, numRounds, username))
   }
 }
 

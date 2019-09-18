@@ -13,6 +13,11 @@ type cProps = {
   scoresWorld
 }
 
+const months = [
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+]
+
 class HighscoresView extends React.Component<cProps> {
   state = {
     displayWorld: false
@@ -23,10 +28,13 @@ class HighscoresView extends React.Component<cProps> {
   }
 
   formatDate = (date) => {
+    if (!date) {
+      return 
+    }
     if (typeof(date) === 'string') {
       date = new Date(date)
     }
-    return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear()
+    return `${months[date.getMonth()]} ${date.getDate()}`
   }
 
   setDisplayType(displayWorld=false) {
@@ -42,8 +50,8 @@ class HighscoresView extends React.Component<cProps> {
           backgroundColor: !this.state.displayWorld ? 'green' : brown
         }}>
         <Text 
-          style={styles.textScore}>
-          My Highscores</Text>
+          style={{...styles.textScore, fontSize: 20}}>
+          My{'\n'}Highscores</Text>
       </TouchableOpacity>
       <TouchableOpacity 
         onPress={() => this.setDisplayType(true)}
@@ -52,8 +60,8 @@ class HighscoresView extends React.Component<cProps> {
           backgroundColor: this.state.displayWorld ? 'green' : brown
         }}>
         <Text 
-          style={styles.textScore}>
-          World Leaderboard</Text>
+          style={{...styles.textScore, fontSize: 20}}>
+          World{'\n'}Leaderboard</Text>
       </TouchableOpacity>
     </>
   )
@@ -70,10 +78,16 @@ class HighscoresView extends React.Component<cProps> {
           iterationDelay={500 + index*200}
           animationType={index % 2 ? 'slideInLeft' : 'slideInRight'}>
           <View style={styles.containerCell}>
-            <Text style={styles.textScore}>{score.numRounds}</Text>
+            <Text style={styles.textScore}>{scores.length-index}</Text>
           </View>
           <View style={styles.containerCell}>
             <Text style={styles.textScore}>{score.points}</Text>
+          </View>
+          <View style={styles.containerCell}>
+            <Text style={styles.textScore}>{score.numRounds}</Text>
+          </View>
+          <View style={styles.containerCell}>
+            <Text style={styles.textScore}>{score.user.username}</Text>
           </View>
           <View style={styles.containerCell}>
             <Text style={styles.textScore}>{this.formatDate(score.date)}</Text>      
@@ -81,6 +95,30 @@ class HighscoresView extends React.Component<cProps> {
         </AnimationContainer>
       ))}
     </View> 
+  )
+
+  renderHeader = () => (
+    <AnimationContainer
+      style={styles.containerHeader}
+      animate={true} 
+      iterationDelay={300}
+      animationType='fadeInUp'>
+      <View style={styles.containerCell}>
+        <Text style={styles.textScore}># Rank</Text>
+      </View>
+      <View style={styles.containerCell}>
+        <Text style={styles.textScore}># Points</Text>            
+      </View>
+      <View style={styles.containerCell}>
+        <Text style={styles.textScore}># Rounds</Text>
+      </View>
+      <View style={styles.containerCell}>
+        <Text style={styles.textScore}>Username</Text>
+      </View>
+      <View style={styles.containerCell}>
+        <Text style={styles.textScore}>Date</Text>
+      </View>
+    </AnimationContainer>
   )
 
   render() {
@@ -103,21 +141,7 @@ class HighscoresView extends React.Component<cProps> {
           </AnimationContainer>
 
           {/* HEADER */}
-          <AnimationContainer
-            style={styles.containerHeader}
-            animate={true} 
-            iterationDelay={300}
-            animationType='fadeInUp'>
-            <View style={styles.containerCell}>
-              <Text style={styles.textScore}># Rounds</Text>
-            </View>
-            <View style={styles.containerCell}>
-              <Text style={styles.textScore}># Points</Text>            
-            </View>
-            <View style={styles.containerCell}>
-              <Text style={styles.textScore}>Date</Text>
-            </View>
-          </AnimationContainer>
+          {this.renderHeader()}
 
           {/* TABLE */}
           <View style={styles.containerTable}>
@@ -178,19 +202,24 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
   containerCell: {
-    flex: 1/3,
+    flex: 1,
   },
   textScore: {
     ...stylesApp.textSubTitle,
-    fontSize: 20,
+    fontSize: 15,
   },
   containerDisplayOptions: {
     flex: 1/10,
     flexDirection: 'row',
+    marginTop: 20, 
+    marginBottom: 20,
   },
   optionItem: {
     flex: 1,
-    alignSelf: 'center',
+    justifyContent: 'center',
+    // height: 50,
+    // padding: 20,
+    borderRadius: 5,
   }
 })
 

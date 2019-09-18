@@ -15,6 +15,7 @@ import { blueLightBackground, greyMedium, stylesApp } from '../styles';
 
 type cProps = {
   isLoggedIn: boolean,
+  actionCreateUser: Function,
   actionSetUserUsername: Function,
   actionSetUserEmail: Function,
   navigation: {
@@ -150,7 +151,7 @@ export default class AuthView extends React.Component<cProps, cState> {
   
 
   handleUsernameSelect() {
-    this.props.actionSetUserUsername(this.state.username)
+    this.props.actionCreateUser(this.state.username)
     this.props.navigation.navigate('Home')
   }
 

@@ -27,34 +27,43 @@ export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
 `;
 export const createHighscore = `mutation CreateHighscore($input: CreateHighscoreInput!) {
   createHighscore(input: $input) {
-    id
     type
     points
-    ownerId
     numRounds
     date
+    user {
+      id
+      username
+      email
+    }
   }
 }
 `;
 export const updateHighscore = `mutation UpdateHighscore($input: UpdateHighscoreInput!) {
   updateHighscore(input: $input) {
-    id
     type
     points
-    ownerId
     numRounds
     date
+    user {
+      id
+      username
+      email
+    }
   }
 }
 `;
 export const deleteHighscore = `mutation DeleteHighscore($input: DeleteHighscoreInput!) {
   deleteHighscore(input: $input) {
-    id
     type
     points
-    ownerId
     numRounds
     date
+    user {
+      id
+      username
+      email
+    }
   }
 }
 `;
