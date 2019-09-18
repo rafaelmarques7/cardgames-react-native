@@ -27,34 +27,43 @@ export const onDeleteUser = `subscription OnDeleteUser {
 `;
 export const onCreateHighscore = `subscription OnCreateHighscore {
   onCreateHighscore {
-    id
     type
     points
-    ownerId
     numRounds
     date
+    user {
+      id
+      username
+      email
+    }
   }
 }
 `;
 export const onUpdateHighscore = `subscription OnUpdateHighscore {
   onUpdateHighscore {
-    id
     type
     points
-    ownerId
     numRounds
     date
+    user {
+      id
+      username
+      email
+    }
   }
 }
 `;
 export const onDeleteHighscore = `subscription OnDeleteHighscore {
   onDeleteHighscore {
-    id
     type
     points
-    ownerId
     numRounds
     date
+    user {
+      id
+      username
+      email
+    }
   }
 }
 `;

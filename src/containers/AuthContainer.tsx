@@ -4,7 +4,8 @@ import { bindActionCreators } from 'redux';
 import AuthView from '../views/AuthView';
 import { 
   actionSetUserUsername, 
-  actionSetUserEmail, 
+  actionSetUserEmail,
+  actionCreateUser, 
   isUserLoggedIn } from '../stateHandle'
 
 const AuthContainer = (props) => <AuthView {...props} />
@@ -15,6 +16,7 @@ const AuthContainer = (props) => <AuthView {...props} />
 
  const mapDispatchToProps = dispatch => {
   return bindActionCreators({
+    actionCreateUser,
     actionSetUserUsername, 
     actionSetUserEmail,
   }, dispatch)

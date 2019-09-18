@@ -5,7 +5,6 @@ import {
   getNumberOfCardsPerHand, 
   getPlayersCreditAmmount, 
   getNumberOfRoundsPlayed } from './gameState';
-import { fetchHighscoreWorld } from './highscoreState';
 
 
 /**

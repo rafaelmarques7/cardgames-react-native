@@ -4,14 +4,14 @@ import { createHighscore } from '../graphql/mutations';
 import uuid from 'uuid/v1'
 import get from 'lodash.get';
 import { getPlayersCreditAmmount, getNumberOfRoundsPlayed } from './gameState';
+import { getUserId } from './userState';
 
 type Highscore = {
   type: String, // primary partition key - set to same value on all data entries to allow sorting
-  id: String, // hash
-  ownerId: number, // playerID
   points: number, 
   numRounds: number,
-  date: String
+  date: String,
+  highscoreUserId: String,
 }
 
 const initStateHighscores = { 
@@ -32,8 +32,7 @@ export async function apiGetWorldHighscores(limit=10) {
       sortDirection: "DESC",
     }))
   } catch (e) {
-    console.log('getWorldHighscores threw error: \n', e)
-    return null    
+    console.log(e)
   } 
 }
 
@@ -104,9 +103,8 @@ export const actionUpdateHighscoreWorld = () => {
           type: 'Highscore',
           points: points,
           numRounds,
-          id: uuid(),
-          ownerId: 0, 
           date: `${new Date()}`,
+          highscoreUserId: getUserId(getState()),
         }
         // update backend and own app state
         await apiUpdateWorldHighscores(highscore) // update world leaderboard database

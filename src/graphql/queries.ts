@@ -26,12 +26,15 @@ export const listUsers = `query ListUsers(
 `;
 export const getHighscore = `query GetHighscore($id: ID!) {
   getHighscore(id: $id) {
-    id
     type
     points
-    ownerId
     numRounds
     date
+    user {
+      id
+      username
+      email
+    }
   }
 }
 `;
@@ -42,12 +45,15 @@ export const listHighscores = `query ListHighscores(
 ) {
   listHighscores(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
-      id
       type
       points
-      ownerId
       numRounds
       date
+      user {
+        id
+        username
+        email
+      }
     }
     nextToken
   }
@@ -70,12 +76,15 @@ export const getHighscoreByPoints = `query GetHighscoreByPoints(
     nextToken: $nextToken
   ) {
     items {
-      id
       type
       points
-      ownerId
       numRounds
       date
+      user {
+        id
+        username
+        email
+      }
     }
     nextToken
   }
