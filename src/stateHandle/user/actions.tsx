@@ -22,7 +22,7 @@ export const actionSetUserUsername = (username) => ({
   }
 })
 
-export const actionSetUserId = (data) => ({
+const actionSetUserId = (data) => ({
   type: 'SET_USER_ID',
   payload: {
     data

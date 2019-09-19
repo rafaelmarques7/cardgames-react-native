@@ -1,4 +1,4 @@
-import { getUserId } from '../userState';
+import { getUserId } from '../user';
 import { getNumberOfRoundsPlayed, getPlayersCreditAmmount } from '../game';
 
 export const getHighscoresPersonal = state => state.highscores.highscores

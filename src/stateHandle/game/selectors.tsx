@@ -1,5 +1,15 @@
 import get from 'lodash.get';
-import { getPlayersUsername } from '../userState';
+import { getUserUsername } from '../user';
+
+export const getPlayerInfo = (state) => ({
+  username: getUserUsername(state),
+  cards: getPlayersCards(state),
+  creditAmmount: getPlayersCreditAmmount(state),
+  valueHand: getCardsStrength(state),
+  bet: getPlayersBet(state),
+  betOn: state.game.betOn,
+  isWinner: getRoundWinner(state)
+})
 
 /**
  * This selects the cards of the player.
@@ -22,16 +32,6 @@ export const getDealerCards = (state) => {
   return cardsDealer.length > 0 ? cardsDealer : defCards;
 }
 
-export const getPlayerInfo = (state) => ({
-  username: getPlayersUsername(state),
-  cards: getPlayersCards(state),
-  creditAmmount: getPlayersCreditAmmount(state),
-  valueHand: getCardsStrength(state),
-  bet: getPlayersBet(state),
-  betOn: state.game.betOn,
-  isWinner: getRoundWinner(state)
-})
-
 export const getDealerInfo = (state) => ({
   username: 'Dealer',
   cards: getDealerCards(state),
@@ -52,7 +52,7 @@ export const getCardsStrength = (state, indexPlayer=0) => state.game.game.player
 
 export const getPlayersCreditAmmount = (state, indexPlayer=0) => state.game.game.players[indexPlayer].credit
 
-export const getPlayersBet = (state) => state.game.game.players[0].bet
+const getPlayersBet = (state) => state.game.game.players[0].bet
 
 export const getNumberCardsInDeck = (state) => state.game.cardsInDeck
 

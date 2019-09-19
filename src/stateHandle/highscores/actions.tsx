@@ -1,24 +1,7 @@
 import { apiGetWorldHighscores, apiUpdateWorldHighscores } from "./api";
 import { isHighscoreWorldWinner, buildHighscoreEntry } from "./selectors";
 import { getPlayersCreditAmmount, getNumberOfRoundsPlayed } from "../game";
-import { getUserUsername } from "../userState";
-
-const getHighscoreWorld = (data) => ({
-  type: 'GET_HIGHSCORE_WORLD',
-  payload: { 
-    data
-  }
-})
-
-const setHighscore = (points, numRounds, username) => ({
-  type: 'SET_HIGHSCORE',
-  payload: {
-    points, 
-    numRounds,
-    username,
-  }
-})
-
+import { getUserUsername } from "../user";
 
 /**
  * Function that makes an API call to the backend to GET 
@@ -73,3 +56,19 @@ export const actionUpdateHighscore = () => {
     dispatch(setHighscore(points, numRounds, username))
   }
 }
+
+const getHighscoreWorld = (data) => ({
+  type: 'GET_HIGHSCORE_WORLD',
+  payload: { 
+    data
+  }
+})
+
+const setHighscore = (points, numRounds, username) => ({
+  type: 'SET_HIGHSCORE',
+  payload: {
+    points, 
+    numRounds,
+    username,
+  }
+})
