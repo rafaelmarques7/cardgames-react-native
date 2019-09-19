@@ -45,6 +45,7 @@ class LooseModal extends React.Component<cProps, cState> {
 
     const mainText = this.props.isWorldWinner.isWinner ? 'World Record!' : 'You lose!' 
     const delayWin = this.props.isWorldWinner.isWinner ? 1000 : 0
+    const colorTitleBackground = this.props.isWorldWinner.isWinner ? '#E3841A' : '#7F3912'
 
     return (
       <Modal
@@ -52,10 +53,10 @@ class LooseModal extends React.Component<cProps, cState> {
         isVisible={isVisible}
         onBackdropPress={() => actionGameRestart}>
         <View style={styles.modal}>
-            <View style={styles.containerTitle}>
+            <View style={{...styles.containerTitle, backgroundColor: colorTitleBackground}}>
             <AnimationContainer 
               style={{flex: 1}}
-              animate={true} animationType='bounceIn' delay={200} duration={2000}>
+              animate={true} animationType='bounceIn' iterationDelay={200} duration={2000}>
               <Text 
                 style={{...styles.text, ...styles.titleText}}>{mainText}</Text>
               </AnimationContainer>
@@ -65,7 +66,7 @@ class LooseModal extends React.Component<cProps, cState> {
                 <View style={{flex: 1, margin: 20}}>
                   <AnimationContainer 
                     style={{...styles.subTitleContainer, flex: 2}}   
-                    animate={true} animationType='bounceIn' delay={1000}>
+                    animate={true} animationType='bounceIn' iterationDelay={1000}>
                     <Text 
                       style={{...styles.text, fontSize: 23}}>You achieved position{' '}</Text>
                     <Text 
@@ -73,7 +74,7 @@ class LooseModal extends React.Component<cProps, cState> {
                   </AnimationContainer>
                   <AnimationContainer 
                     style={{...styles.subTitleContainer, flex: 1}}   
-                    animate={true} animationType='bounceIn' delay={1000}>
+                    animate={true} animationType='bounceIn' iterationDelay={1000}>
                     <Text 
                       style={{...styles.text, fontSize: 23}}>in the hall of fame.</Text>
                   </AnimationContainer>
@@ -83,7 +84,7 @@ class LooseModal extends React.Component<cProps, cState> {
 
               <AnimationContainer 
                 style={{...styles.subTitleContainer, flex: 1}}   
-                animate={true} animationType='bounceInRight' delay={1000+delayWin}>
+                animate={true} animationType='bounceInRight' iterationDelay={1000+delayWin}>
                 <Text 
                   style={styles.text}>You played </Text>
                 <Text 
@@ -91,7 +92,7 @@ class LooseModal extends React.Component<cProps, cState> {
               </AnimationContainer>
               <AnimationContainer 
                 style={{...styles.subTitleContainer, flex: 1}}                 
-                animate={true} animationType='bounceInLeft' delay={2000+delayWin}>
+                animate={true} animationType='bounceInLeft' iterationDelay={2000+delayWin}>
                 <Text 
                   style={styles.text}>And scored </Text>
                 <Text 
@@ -101,7 +102,7 @@ class LooseModal extends React.Component<cProps, cState> {
               !this.state.animationComplete &&
               <AnimationContainer 
                 style={{flex: 1, justifyContent: 'center'}}
-                animate={true} animationType='bounceIn' delay={3000+delayWin} duration={3000} count={1}>
+                animate={true} animationType='bounceIn' iterationDelay={3000+delayWin} duration={3000} iterationCount={1}>
                 <TouchableOpacity style={styles.playAgainButton}
                   onPress={() => {actionGameRestart()}}>
                   <Text 
@@ -115,7 +116,7 @@ class LooseModal extends React.Component<cProps, cState> {
               <AnimationContainer 
                 style={{flex: 1, justifyContent: 'center'}}
                 animate={true} 
-                animationType='bounceIn' delay={0} duration={3000+delayWin} count={'infinite'}>
+                animationType='bounceIn' iterationDelay={0} duration={3000+delayWin} iterationCount={'infinite'}>
                 <TouchableOpacity style={styles.playAgainButton}
                   onPress={() => {actionGameRestart()}}>
                   <Text 
@@ -158,7 +159,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   titleText: {
-    fontSize: 45,
+    fontSize: 40,
     fontWeight: "900",
     textTransform: 'uppercase',
     color: 'white',

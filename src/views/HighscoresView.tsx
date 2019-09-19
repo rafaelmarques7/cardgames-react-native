@@ -78,14 +78,11 @@ class HighscoresView extends React.Component<cProps> {
           animate={true} 
           iterationDelay={500 + index*200}
           animationType={index % 2 ? 'slideInLeft' : 'slideInRight'}>
-          <View style={styles.containerCell}>
+          <View style={styles.containerCellSmall}>
             <Text style={styles.textScore}>{scores.length-index}</Text>
           </View>
           <View style={styles.containerCell}>
             <Text style={styles.textScore}>{score.points}</Text>
-          </View>
-          <View style={styles.containerCell}>
-            <Text style={styles.textScore}>{score.numRounds}</Text>
           </View>
           <View style={styles.containerCell}>
             <Text style={styles.textScore}>{get(score, 'user.username', '')}</Text>
@@ -104,14 +101,11 @@ class HighscoresView extends React.Component<cProps> {
       animate={true} 
       iterationDelay={300}
       animationType='fadeInUp'>
-      <View style={styles.containerCell}>
+      <View style={styles.containerCellSmall}>
         <Text style={styles.textScore}># Rank</Text>
       </View>
       <View style={styles.containerCell}>
         <Text style={styles.textScore}># Points</Text>            
-      </View>
-      <View style={styles.containerCell}>
-        <Text style={styles.textScore}># Rounds</Text>
       </View>
       <View style={styles.containerCell}>
         <Text style={styles.textScore}>Username</Text>
@@ -123,7 +117,6 @@ class HighscoresView extends React.Component<cProps> {
   )
 
   render() {
-    console.log(this.props.scores)
     return (
       <View style={stylesApp.fullScreen}>
         <View style={styles.containerHighscore}>
@@ -206,12 +199,15 @@ const styles = StyleSheet.create({
   containerCell: {
     flex: 1,
   },
+  containerCellSmall: {
+    flex: 1/2,
+  },
   textScore: {
     ...stylesApp.textSubTitle,
     fontSize: 15,
   },
   containerDisplayOptions: {
-    flex: 1/10,
+    flex: 1/7,
     flexDirection: 'row',
     marginTop: 20, 
     marginBottom: 20,
@@ -222,6 +218,7 @@ const styles = StyleSheet.create({
     // height: 50,
     // padding: 20,
     borderRadius: 5,
+    // padding: 10,
   }
 })
 
