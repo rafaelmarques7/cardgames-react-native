@@ -5,6 +5,23 @@ const initStateHighscores = {
   highscoresWorld: [], 
 }
 
+/**
+ * This is the 'highscore' reducer.
+ * The 'combineReducer' function must use the keyword 'highscore'
+ * on this reducer for the respetive selectors to work correctly.
+ *  
+ */
+export const highscoreReducer = (state=initStateHighscores, action) => {
+  switch(action.type) {
+    case 'SET_HIGHSCORE':
+      return reducePersonalHighscore(state, action)
+    case 'GET_HIGHSCORE_WORLD':
+      return reduceWorldHighscore(state, action)
+    default:
+      return state;  
+  }
+}
+
 const reduceWorldHighscore = (state, action) => {
   console.log('inside reduceHighscoreWorldGet')
   const highscores = get(action.payload.data, 'data.getHighscoreByPoints.items', [])
@@ -32,22 +49,5 @@ const reducePersonalHighscore = (state, action) => {
   return {
     ...state,
     highscores: allHighscores
-  }
-}
-
-/**
- * This is the 'highscore' reducer.
- * The 'combineReducer' function must use the keyword 'highscore'
- * on this reducer for the respetive selectors to work correctly.
- *  
- */
-export const highscoreReducer = (state=initStateHighscores, action) => {
-  switch(action.type) {
-    case 'SET_HIGHSCORE':
-      return reducePersonalHighscore(state, action)
-    case 'GET_HIGHSCORE_WORLD':
-      return reduceWorldHighscore(state, action)
-    default:
-      return state;  
   }
 }

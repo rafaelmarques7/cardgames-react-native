@@ -1,10 +1,10 @@
 import { AsyncStorage } from 'react-native';
 import { createStore, applyMiddleware } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
+import autoMergeLevel2 from 'redux-persist/es/stateReconciler/autoMergeLevel2';
 import { rootReducer } from './reducers';
 import thunk from 'redux-thunk';
-import autoMergeLevel2 from 'redux-persist/es/stateReconciler/autoMergeLevel2';
-import { startGame } from './actions';
+import { startGame } from './game';
 
 const persistConfig = {
   key: 'root',
