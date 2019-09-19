@@ -6,7 +6,6 @@ import {
   getPlayersCreditAmmount, 
   getNumberOfRoundsPlayed } from './gameState';
 
-
 /**
  * Action helper constants and functions
  */
