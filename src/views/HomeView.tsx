@@ -6,7 +6,7 @@ import AnimationContainer from '../components/AnimationContainer';
 import TitleApp from '../components/TitleApp';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-import { fetchHighscoreWorld } from '../stateHandle'
+import { actionGetHighscoreWorld as  fetchHighscoreWorld } from '../stateHandle'
 
 type cProps = {
   fetchHighscoreWorld: Function,

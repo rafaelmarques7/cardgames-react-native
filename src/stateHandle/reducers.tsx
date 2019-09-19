@@ -1,12 +1,12 @@
 import { combineReducers } from "redux";
 import { gameReducer } from "./gameState";
 import { userStateReducer } from "./userState";
-import { highscoreReducer } from "./highscoreState";
 import { statusGameReducer } from "./statusGameState";
+import { highscoreReducer } from "./highscores";
 
 export const rootReducer = combineReducers({
   game: gameReducer,
   user: userStateReducer,
   statusGame: statusGameReducer,
-  highscores: highscoreReducer
+  highscores: highscoreReducer,
 })
