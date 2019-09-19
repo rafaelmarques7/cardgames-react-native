@@ -153,7 +153,7 @@ function highscoreUpdate(state, action) {
   // update state
   return {
     ...state,
-    highscores: []// allHighscores
+    highscores: allHighscores
   }
 }
 
@@ -168,8 +168,6 @@ export const highscoreReducer = (state=initStateHighscores, action) => {
   switch(action.type) {
     case 'SET_HIGHSCORE':
       return highscoreUpdate(state, action)
-    // case 'SET_HIGHSCORE_WORLD':
-    //   return reduceHighscoreWorldUpdate(state, action)
     case 'GET_HIGHSCORE_WORLD':
       return reduceHighscoreWorldGet(state, action)
     default:

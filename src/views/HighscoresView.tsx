@@ -123,6 +123,7 @@ class HighscoresView extends React.Component<cProps> {
   )
 
   render() {
+    console.log(this.props.scores)
     return (
       <View style={stylesApp.fullScreen}>
         <View style={styles.containerHighscore}>

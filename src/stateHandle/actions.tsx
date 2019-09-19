@@ -121,8 +121,6 @@ export const actionGameBet = (bets) => {
   return (dispatch, getState) => {  
     const TIMEOUT_RESTART_ROUND = 4000;
 
-    dispatch(setHighscore(2, 2, '2'))
-
     dispatch(setGameMode('show'))
     dispatch(setBet(bets));
 
