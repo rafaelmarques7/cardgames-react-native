@@ -9,7 +9,7 @@
       "android",
       "web"
     ],
-    "version": "1.1.1",
+    "version": "1.1.2",
     "orientation": "portrait",
     "icon": "./assets/highlow.png",
     "splash": {
@@ -30,7 +30,7 @@
     "android": {
       "package": "com.highlow.cardgames",
       "permissions": [],
-      "versionCode": 11
+      "versionCode": 12
     }
   }
 }
