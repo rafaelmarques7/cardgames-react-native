@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
-import { gameReducer } from "./gameState";
-import { userStateReducer } from "./userState";
-import { statusGameReducer } from "./statusGameState";
+import { gameReducer } from "./game";
+import { userStateReducer } from "./user";
+import { statusGameReducer } from "./statusGame";
 import { highscoreReducer } from "./highscores";
 
 export const rootReducer = combineReducers({
