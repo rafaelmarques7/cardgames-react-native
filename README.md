@@ -22,9 +22,9 @@ Note:
 
 ## Building and deploying
 
-```
-expo build:android -t apk
-```
+1. Increment the `android.versionCode` on the [app.json](./app.json) file
+2. Build the android bundle: `expo build:android -t apk`
+3. Go the [google developer console](https://play.google.com/console/) and upload the bundle
 
 ## Game phases
 
@@ -63,7 +63,6 @@ const gameState = {
 
 The flip card animation was achieved by following a sample tutorial, together with some minor refactors and cleanups. [Video](https://codedaily.io/screencasts/12/Create-a-Flip-Card-Animation-with-React-Native) and [code](https://github.com/browniefed/examples/tree/animated_basic/flip) for further reference.
  
-
 ## Re-thinking the game
 
 I want to make the game more exciting, and make it last longer.
@@ -95,22 +94,6 @@ Given the current state of the application, what is necessary to achieve this?
   * "Game over" modal - should also display "new highscore" if that is the case...
   * state management regarding all of the above
   * reset deck;
-* add redux persist;
-* add testing for state management and basic game logic;
-
-## User authentication
-
-User authentication will be managed by AWS Amplify.
-[This article](https://alligator.io/react/react-native-authentication/) is a good reference.
-
-
-## Animable
-
-https://github.com/oblador/react-native-animatable
-
-## Navigation
-
-https://facebook.github.io/react-native/docs/navigation
 
 ## World Leader Board
 
@@ -118,6 +101,27 @@ The setup should be as follows:
 
 * load WLB highscores on application start.
 * on game loose:
-  * compare players points to WLB highscores
-  * IF player beats highscore, update WLB database
+  * update local leaderboard
+  * update world leaderboard (always!)
 
+## Desired features
+
+* Animation speed control
+* Backgroundcolor control
+* Ability to show odds of any hand
+
+## Refactors to consider
+
+* Move all styles to one stylesheet
+* Ability to better control and manipulate animation speed
+* API keys
+* unit-tests
+* linter
+* ci/cd 
+
+## Useful links
+
+* https://facebook.github.io/react-native/docs/navigation
+* https://github.com/oblador/react-native-animatable
+* User authentication will be managed by AWS Amplify.
+[This article](https://alligator.io/react/react-native-authentication/) is a good reference.
