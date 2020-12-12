@@ -51,3 +51,5 @@ const reducePersonalHighscore = (state, action) => {
     highscores: allHighscores
   }
 }
+
+

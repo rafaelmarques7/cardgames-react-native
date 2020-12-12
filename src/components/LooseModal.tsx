@@ -27,6 +27,7 @@ class LooseModal extends React.Component<cProps, cState> {
 
   componentDidUpdate(prevProps) {
     if (this.props.isVisible && !prevProps.isVisible) {
+      // Dispatch action to update the highscores for local and world leaderboard 
       this.props.actionUpdateHighscore()
       this.props.actionUpdateHighscoreWorld()
     }

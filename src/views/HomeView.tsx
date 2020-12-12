@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, Button, StyleSheet } from 'react-native'
+import { Text, View, Button, StyleSheet, processColor } from 'react-native'
 import { screen } from '../config';
 import HomeCardAnimation from '../components/HomeCardAnimation';
 import AnimationContainer from '../components/AnimationContainer';
