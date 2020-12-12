@@ -29,8 +29,8 @@
     },
     "android": {
       "package": "com.highlow.cardgames",
-      "permissions": [],
-      "versionCode": 14
+      "permissions": ["com.android.vending.BILLING"],
+      "versionCode": 15
     }
   }
 }

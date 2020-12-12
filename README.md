@@ -96,3 +96,4 @@ The setup should be as follows:
   * IF player beats highscore, update WLB database
 
 
+expo build:android -t apk
