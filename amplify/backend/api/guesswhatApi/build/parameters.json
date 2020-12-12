@@ -1,0 +1,8 @@
+{
+    "CreateAPIKey": 1,
+    "AppSyncApiName": "guesswhatApi",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": "false",
+    "S3DeploymentBucket": "app-prod-20190908003000-deployment",
+    "S3DeploymentRootKey": "amplify-appsync-files/995f0da9f70e7b9ce3cbaf9b4f687e71484a3e8d"
+}

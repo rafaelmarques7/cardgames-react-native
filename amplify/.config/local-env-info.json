@@ -1,5 +1,11 @@
 {
+<<<<<<< HEAD
   "projectPath": "/Users/rafael/proj/cardgames-react-native",
   "defaultEditor": "vscode",
   "envName": "dev"
+=======
+    "projectPath": "/home/rafael/proj/cardgames-native/app",
+    "defaultEditor": "code",
+    "envName": "prod"
+>>>>>>> restore
 }

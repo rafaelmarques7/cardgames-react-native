@@ -16,8 +16,15 @@ To run on virtual Android phone:
   
 Note:
 * This app uses AWS Amplify, and you may need to initialise amplify before using it `amplify init`
+* This app uses an API key to talk with Amplify on the backend. This key has a validation of one year and will expire on the 12-12-2021.
 
 ---
+
+## Building and deploying
+
+```
+expo build:android -t apk
+```
 
 ## Game phases
 
@@ -114,12 +121,3 @@ The setup should be as follows:
   * compare players points to WLB highscores
   * IF player beats highscore, update WLB database
 
-
-## Desired Features
-
-* Game speed settings
-* Win/Loose percentage info 
-
-## Known bugs
-
-* World leaderboard highscores

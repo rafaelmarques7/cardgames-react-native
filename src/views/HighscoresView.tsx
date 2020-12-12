@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import { stylesApp, colorsApp, blueLightBackground, brown } from '../styles'
+import { stylesApp, colorsApp, animationDelayApp } from '../styles'
 import AnimationContainer from '../components/AnimationContainer'
 import get from 'lodash.get';
 
@@ -21,7 +21,7 @@ const months = [
 
 class HighscoresView extends React.Component<cProps> {
   state = {
-    displayWorld: false
+    displayWorld: true,
   }
 
   componentDidMount() {
@@ -42,33 +42,46 @@ class HighscoresView extends React.Component<cProps> {
     this.setState({ displayWorld: displayWorld})
   }
 
-  renderDisplayOptions = () => (
+  renderDisplayOptions = () => {
+    const styleRegular = {...styles.optionItem}
+    const styleActive = {...styles.optionItem, ...styles.isActive}
+    return (
     <>
       <TouchableOpacity 
         onPress={() => this.setDisplayType(false)}
-        style={{
-          ...styles.optionItem, 
-          backgroundColor: !this.state.displayWorld ? 'green' : brown
-        }}>
+        style={this.state.displayWorld ? styleRegular : styleActive}
+        >
         <Text 
           style={{...styles.textScore, fontSize: 20}}>
           My{'\n'}Highscores</Text>
       </TouchableOpacity>
+      
       <TouchableOpacity 
         onPress={() => this.setDisplayType(true)}
-        style={{
-          ...styles.optionItem, 
-          backgroundColor: this.state.displayWorld ? 'green' : brown
-        }}>
+        style={this.state.displayWorld ? styleActive : styleRegular}
+      >
         <Text 
           style={{...styles.textScore, fontSize: 20}}>
           World{'\n'}Leaderboard</Text>
       </TouchableOpacity>
     </>
   )
+}
+
+  renderNoScoresAvailableView = () => (
+    <View>
+      <Text style={styles.textScore}>You have no scores yet.</Text> 
+      <Text style={styles.textScore}>Play some games first.</Text>
+    </View>
+  )
   
   renderScores = (scores) => (
     <View style={styles.containerScores}>
+      { 
+        scores.length === 0 
+          ? this.renderNoScoresAvailableView() 
+          : null
+      }
       { scores
         .sort((a, b) => a.points > b.points)
         .map((score, index) => (
@@ -76,7 +89,7 @@ class HighscoresView extends React.Component<cProps> {
           key={`score=${index}`}
           style={styles.containerRow}
           animate={true} 
-          iterationDelay={500 + index*200}
+          iterationDelay={animationDelayApp.highscores.fadeInStart + index*animationDelayApp.highscores.fadeInItemsDelay}
           animationType={index % 2 ? 'slideInLeft' : 'slideInRight'}>
           <View style={styles.containerCellSmall}>
             <Text style={styles.textScore}>{scores.length-index}</Text>
@@ -95,20 +108,20 @@ class HighscoresView extends React.Component<cProps> {
     </View> 
   )
 
-  renderHeader = () => (
+  renderTableHeader = () => (
     <AnimationContainer
       style={styles.containerHeader}
       animate={true} 
-      iterationDelay={300}
+      iterationDelay={animationDelayApp.highscores.fadeInStart + animationDelayApp.highscores.fadeInItemsDelay}
       animationType='fadeInUp'>
       <View style={styles.containerCellSmall}>
-        <Text style={styles.textScore}># Rank</Text>
+        <Text style={styles.textScore}>#</Text>
       </View>
       <View style={styles.containerCell}>
         <Text style={styles.textScore}># Points</Text>            
       </View>
       <View style={styles.containerCell}>
-        <Text style={styles.textScore}>Username</Text>
+        <Text style={styles.textScore}>User</Text>
       </View>
       <View style={styles.containerCell}>
         <Text style={styles.textScore}>Date</Text>
@@ -121,34 +134,27 @@ class HighscoresView extends React.Component<cProps> {
       <View style={stylesApp.fullScreen}>
         <View style={styles.containerHighscore}>
 
-          {/* TITLE */}
           <View style={styles.containerTitle}>
             <Text style={styles.titleScore}>Highscores</Text>
           </View>
 
-          {/* DISPLAY OPTIONS */}
           <AnimationContainer
             style={styles.containerDisplayOptions}
             animate={true} 
-            iterationDelay={400}
+            iterationDelay={animationDelayApp.highscores.fadeInStart + 2*animationDelayApp.highscores.fadeInItemsDelay}
             animationType='fadeInUp'>
             {this.renderDisplayOptions()}
           </AnimationContainer>
 
-          {/* HEADER */}
-          {this.renderHeader()}
+          {this.renderTableHeader()}
 
-          {/* TABLE */}
           <View style={styles.containerTable}>
-            {/* ROWS MY HIGHSCORE */}
-            { !this.state.displayWorld &&            
-              this.renderScores(this.props.scores)
+            {
+              this.state.displayWorld 
+              ? this.renderScores(this.props.scoresWorld)
+              : this.renderScores(this.props.scores)
             }
 
-            {/* ROWS WORLD LEADERBOARD  */}
-            { this.state.displayWorld &&            
-              this.renderScores(this.props.scoresWorld)
-            }
           </View>
           
         </View>
@@ -214,11 +220,14 @@ const styles = StyleSheet.create({
   },
   optionItem: {
     flex: 1,
+    margin: 1,
     justifyContent: 'center',
-    // height: 50,
-    // padding: 20,
-    borderRadius: 5,
-    // padding: 10,
+    borderRadius: 10,
+    backgroundColor: colorsApp.brown,
+  },
+  isActive: {
+    borderBottomWidth: 5,
+    borderRightWidth: 2,
   }
 })
 

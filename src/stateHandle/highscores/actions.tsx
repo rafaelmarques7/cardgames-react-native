@@ -35,13 +35,8 @@ export const actionUpdateHighscoreWorld = () => {
   return async (dispatch, getState) => {
     try {
       console.log('inside actionUpdateHighscoreWorld')
-      const isWinner = isHighscoreWorldWinner(getState())
-      const shouldUpdate = isWinner.isWinner
-      if (shouldUpdate) {
-        console.log('found a world winner!')
-        const highscore = buildHighscoreEntry(getState())
-        await apiUpdateWorldHighscores(highscore) // update world leaderboard database
-      }
+      const highscore = buildHighscoreEntry(getState())
+      await apiUpdateWorldHighscores(highscore) // update world leaderboard database
     } catch(e) {
       console.log('actionUpdateHighscoreWorld threw error: ', e)
     }

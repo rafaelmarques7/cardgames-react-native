@@ -1,0 +1,173 @@
+type User {
+  id: ID!
+  username: String!
+  email: String
+}
+
+type Highscore {
+  type: String!
+  points: Int!
+  numRounds: Int!
+  date: String!
+  user: User
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelUserConnection {
+  items: [User]
+  nextToken: String
+}
+
+input ModelStringFilterInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+}
+
+input ModelIDFilterInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+}
+
+input ModelIntFilterInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  contains: Int
+  notContains: Int
+  between: [Int]
+}
+
+input ModelFloatFilterInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  contains: Float
+  notContains: Float
+  between: [Float]
+}
+
+input ModelBooleanFilterInput {
+  ne: Boolean
+  eq: Boolean
+}
+
+input ModelUserFilterInput {
+  id: ModelIDFilterInput
+  username: ModelStringFilterInput
+  email: ModelStringFilterInput
+  and: [ModelUserFilterInput]
+  or: [ModelUserFilterInput]
+  not: ModelUserFilterInput
+}
+
+type Query {
+  getUser(id: ID!): User
+  listUsers(filter: ModelUserFilterInput, limit: Int, nextToken: String): ModelUserConnection
+  getHighscore(id: ID!): Highscore
+  listHighscores(filter: ModelHighscoreFilterInput, limit: Int, nextToken: String): ModelHighscoreConnection
+  getHighscoreByPoints(type: String, points: ModelIntKeyConditionInput, sortDirection: ModelSortDirection, filter: ModelHighscoreFilterInput, limit: Int, nextToken: String): ModelHighscoreConnection
+}
+
+input CreateUserInput {
+  id: ID
+  username: String!
+  email: String
+}
+
+input UpdateUserInput {
+  id: ID!
+  username: String
+  email: String
+}
+
+input DeleteUserInput {
+  id: ID
+}
+
+type Mutation {
+  createUser(input: CreateUserInput!): User
+  updateUser(input: UpdateUserInput!): User
+  deleteUser(input: DeleteUserInput!): User
+  createHighscore(input: CreateHighscoreInput!): Highscore
+  updateHighscore(input: UpdateHighscoreInput!): Highscore
+  deleteHighscore(input: DeleteHighscoreInput!): Highscore
+}
+
+type Subscription {
+  onCreateUser: User @aws_subscribe(mutations: ["createUser"])
+  onUpdateUser: User @aws_subscribe(mutations: ["updateUser"])
+  onDeleteUser: User @aws_subscribe(mutations: ["deleteUser"])
+  onCreateHighscore: Highscore @aws_subscribe(mutations: ["createHighscore"])
+  onUpdateHighscore: Highscore @aws_subscribe(mutations: ["updateHighscore"])
+  onDeleteHighscore: Highscore @aws_subscribe(mutations: ["deleteHighscore"])
+}
+
+type ModelHighscoreConnection {
+  items: [Highscore]
+  nextToken: String
+}
+
+input ModelHighscoreFilterInput {
+  type: ModelStringFilterInput
+  points: ModelIntFilterInput
+  numRounds: ModelIntFilterInput
+  date: ModelStringFilterInput
+  and: [ModelHighscoreFilterInput]
+  or: [ModelHighscoreFilterInput]
+  not: ModelHighscoreFilterInput
+}
+
+input CreateHighscoreInput {
+  type: String!
+  points: Int!
+  numRounds: Int!
+  date: String!
+  highscoreUserId: ID
+}
+
+input UpdateHighscoreInput {
+  type: String
+  points: Int
+  numRounds: Int
+  date: String
+  highscoreUserId: ID
+}
+
+input DeleteHighscoreInput {
+  id: ID
+}
+
+input ModelIntKeyConditionInput {
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+}
