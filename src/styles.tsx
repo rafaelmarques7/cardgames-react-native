@@ -20,5 +20,11 @@ export const stylesApp = StyleSheet.create({
     fontSize: 30,
     textAlign: 'center',
     color: 'white',
-  }
+  },
+  fontLarge: {
+    fontSize: 80,
+  },
+  fontSmall: {
+    fontSize: 30
+  },
 })

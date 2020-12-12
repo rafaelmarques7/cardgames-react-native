@@ -19,7 +19,7 @@ export async function apiGetWorldHighscores(limit=10) {
       sortDirection: "DESC",
     }))
   } catch (e) {
-    console.log('apiGetWorldHighscores thre error: \n',e)
+    console.log('apiGetWorldHighscores threw error: \n',e)
   } 
 }
 

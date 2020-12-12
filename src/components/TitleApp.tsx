@@ -9,9 +9,10 @@ const TitleApp = ({animate=true}) => {
       style={styles.containerTitle}
       animate={animate} 
       animationType='bounceInUp'>
-      <Text
-        style={styles.title}>
-        Guess What?</Text>
+      <Text style={styles.title}>
+        Guess
+        What?
+      </Text>
     </AnimationContainer>
   )
 }

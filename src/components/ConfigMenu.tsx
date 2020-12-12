@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Text, Picker, StyleSheet, View, TouchableOpacity } from 'react-native';
 import Modal from 'react-native-modal';
-import { screen } from '../config';
 import Icon from 'react-native-vector-icons/AntDesign'
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import { colorsApp } from '../styles';
@@ -10,7 +9,7 @@ type cProps = {
   actionSetNumberOfCards: Function,
 } 
 
-export default class ModalConfiguration extends Component<cProps> {
+export default class ConfigMenu extends Component<cProps> {
   state = {
     isModalVisible: false,
     numCards: 2
@@ -58,7 +57,11 @@ export default class ModalConfiguration extends Component<cProps> {
   renderModalButton = () => (
     <TouchableOpacity
       onPress={this.toggleModal}>
-      <EvilIcons name='gear' size={35} color='grey' />
+      <EvilIcons 
+        name='gear' 
+        size={35} 
+        color='grey' 
+      />
     </TouchableOpacity>    
   )
 

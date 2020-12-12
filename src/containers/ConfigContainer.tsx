@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 import { actionSetNumberOfCards } from '../stateHandle'
-import ModalConfiguration from '../components/ModalConfiguration';
+import ConfigMenu from '../components/ConfigMenu';
 
-const ConfigContainer = (props) => <ModalConfiguration {...props} />
+const ConfigContainer = (props) => <ConfigMenu {...props} />
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
