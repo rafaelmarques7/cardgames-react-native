@@ -1,5 +1,24 @@
 # Game 
 
+## Setup
+
+Requirements:
+* Make sure you have *expo-cli* installed globally: `npm install -g expo-cli`
+* Make sure you have *Android Studio* and an appropriate emulator installed
+
+Setup:
+* Clone this repo
+* Run `npm install`
+
+To run on virtual Android phone:
+* Run the android emulator (locally: `run-android-device`)
+* Run `npm run android` and click `a` to run on android emualtor
+  
+Note:
+* This app uses AWS Amplify, and you may need to initialise amplify before using it `amplify init`
+
+---
+
 ## Game phases
 
 What are the phases of this game, and how does it evolve? 
@@ -96,3 +115,11 @@ The setup should be as follows:
   * IF player beats highscore, update WLB database
 
 
+## Desired Features
+
+* Game speed settings
+* Win/Loose percentage info 
+
+## Known bugs
+
+* World leaderboard highscores

@@ -1,0 +1,39 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-app-dev-132822-authRole",
+      "UnauthRoleArn": "arn:aws:iam::581077528189:role/amplify-app-dev-132822-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::581077528189:role/amplify-app-dev-132822-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-app-dev-132822-deployment",
+      "UnauthRoleName": "amplify-app-dev-132822-unauthRole",
+      "StackName": "amplify-app-dev-132822",
+      "StackId": "arn:aws:cloudformation:eu-west-1:581077528189:stack/amplify-app-dev-132822/e8fc9ce0-3c7d-11eb-9951-0a8974d3057d",
+      "AmplifyAppId": "d3cc10tzwto6vd"
+    }
+  },
+  "auth": {
+    "appa3e45a6b": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation"
+    }
+  },
+  "api": {
+    "guesswhatApi": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "additionalAuthenticationProviders": [],
+          "defaultAuthentication": {
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "description": "",
+              "apiKeyExpirationDays": 180
+            }
+          }
+        }
+      }
+    }
+  }
+}

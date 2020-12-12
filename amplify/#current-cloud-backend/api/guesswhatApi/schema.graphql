@@ -1,0 +1,13 @@
+type User @model {
+  id: ID!
+  username: String!
+  email: String
+}
+
+type Highscore @model @key(name: "ByPoints", fields: ["type", "points"], queryField: "getHighscoreByPoints") {
+  type: String!
+  points: Int!
+  numRounds: Int!
+  date: String!
+  user: User @connection
+}
