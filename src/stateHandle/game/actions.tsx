@@ -1,5 +1,5 @@
 import { PlayerHighLow } from "card-games-typescript";
-import { getRoundWinner, getNumberOfCardsPerHand } from "./selectors";
+import { getRoundWinner, getNumberOfCardsPerHand, getOdds } from "./selectors";
 import { actionReduceLives, actionResetStatusGame } from "../statusGame";
 import { getUserUsername } from "../user";
 
@@ -16,8 +16,10 @@ export const startGame = (store) => {
 }
 
 export const actionGameDeal = () => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     dispatch(setGameDeal())
+    // const state = getState()
+    // console.log('odds: ', getOdds(state))
     dispatch(setGameMode('bet')) // after deal comes bet
   } 
 }

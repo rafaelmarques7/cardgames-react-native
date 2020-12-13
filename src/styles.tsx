@@ -9,7 +9,9 @@ export const colorsApp = {
   blueLightBackground: '#90caf9',
   greyMedium: '#757575',
   brown: '#4d2f00',
-  cream: '#efc050',  
+  cream: '#efc050', 
+  green: 'green',
+  white: 'white', 
 }
 
 export const animationDelayApp = {

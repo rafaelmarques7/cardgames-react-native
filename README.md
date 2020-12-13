@@ -1,6 +1,21 @@
 # Game 
 
-## Setup
+Game description. Add GIF here, if availble. Add link to Play Store.
+
+- [Game](#game)
+  - [Installation and Usage](#installation-and-usage)
+  - [Game phases](#game-phases)
+    - [Machine State diagram](#machine-state-diagram)
+  - [Flip card animation](#flip-card-animation)
+  - [Re-thinking the game](#re-thinking-the-game)
+  - [World Leader Board](#world-leader-board)
+  - [Desired features](#desired-features)
+  - [Refactors to consider](#refactors-to-consider)
+  - [Useful links](#useful-links)
+
+---
+
+## Installation and Usage
 
 Requirements:
 * Make sure you have *expo-cli* installed globally: `npm install -g expo-cli`
@@ -25,6 +40,8 @@ Note:
 1. Increment the `android.versionCode` on the [app.json](./app.json) file
 2. Build the android bundle: `expo build:android -t apk`
 3. Go the [google developer console](https://play.google.com/console/) and upload the bundle
+
+---
 
 ## Game phases
 

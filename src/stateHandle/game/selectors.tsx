@@ -44,6 +44,8 @@ export const numRoundsPlayed = state => state.game.numRounds
 
 export const getRoundWinner = state => state.game.game.isWinner(state.game.game.players[0])
 
+export const getOdds = state => state.game.game.calculateOdds()
+
 export const getNumberOfCardsPerHand = (state) => state.game.game.numCardsPerHand
 
 export const getDealerCardsStrength = (state) => state.game.game.dealer.cards.valueHand

@@ -55,10 +55,17 @@ function gameDeal(state) {
     state.game.deck.buildDeck()
     state.game.deck.shuffleDeck()
   }
+
   // changes happen inside the class object
   state.game.deal();
+  // console.log(Object.getOwnPropertyNames(state.game))
+  console.log('this is the game:')
+  console.log(state.game.deal, state.game.setBets, state.game.payoff, state.game.calculateOdds)
+
+
   const newGame = Object.assign(  // this preserves the class methods
     Object.create(Object.getPrototypeOf(state.game)), state.game);
+
   return {
     ...state,
     game: newGame,
@@ -67,8 +74,8 @@ function gameDeal(state) {
 
 function gameBet(state, action) {
   console.log('inside gameBet')
-   // changes happen inside the class object
-   // the 2nd parameter has the effect of not decreasing the credit upon betting
+  // changes happen inside the class object
+  // the 2nd parameter has the effect of not decreasing the credit upon betting
   state.game.setBets(action.payload.bets, false); 
   const newGame = Object.assign(  // this preserves the class methods
     Object.create(Object.getPrototypeOf(state.game)), state.game);
