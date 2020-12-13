@@ -9,12 +9,14 @@ import {
   actionSetUserUsername,
   getStatusGame,
   getNumberCardsInDeck,
+  getOdds,
 } from '../stateHandle';
 import GameView from '../views/GameView';
 
 const Game = (props) => <GameView {...props} />
 
 const mapStateToProps = state => ({
+  odds: getOdds(state),
   player: getPlayerInfo(state),
   dealer: getDealerInfo(state),
   gameStatus: getStatusGame(state),

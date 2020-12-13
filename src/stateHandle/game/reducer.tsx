@@ -1,10 +1,16 @@
+// import { HigherOrLower } from "card-games-typescript/dist/Games/HighLow/game";
+// const { HigherOrLower } = require("card-games-typescript/dist/Games/HighLow/game");
+
 import { HigherOrLower } from "card-games-typescript";
+
+
 
 const gameInitState = {
   game: {}, // class object for game HigherOrLower
   betOn: 'pass',
   cardsInDeck: 52,
   numRounds : 0,
+  odds: {},
 }
 
 /**
@@ -40,6 +46,7 @@ export const gameReducer = (state=gameInitState, action) => {
 function gameInit(action) {
   console.log('inside gameInit')
   const { players, numCardsPerHand } = action.payload
+  console.log('creating new game')
   const game = new HigherOrLower(players, numCardsPerHand) // create new game
   return {
     ...gameInitState, // overwrite any previously existing game state
@@ -58,10 +65,7 @@ function gameDeal(state) {
 
   // changes happen inside the class object
   state.game.deal();
-  // console.log(Object.getOwnPropertyNames(state.game))
-  console.log('this is the game:')
-  console.log(state.game.deal, state.game.setBets, state.game.payoff, state.game.calculateOdds)
-
+  const odds = state.game.calculateOdds()
 
   const newGame = Object.assign(  // this preserves the class methods
     Object.create(Object.getPrototypeOf(state.game)), state.game);
@@ -69,6 +73,7 @@ function gameDeal(state) {
   return {
     ...state,
     game: newGame,
+    odds,
   }
 }
 

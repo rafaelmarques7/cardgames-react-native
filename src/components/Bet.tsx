@@ -14,7 +14,8 @@ type BetProps = {
   betValue: number,
   betOn: string
   onSetBet: Function,
-  acceptBets: boolean
+  acceptBets: boolean,
+  odds: object,
 }
 
 class BetDisplay extends React.Component<BetProps, BetState> {
@@ -76,15 +77,15 @@ class BetDisplay extends React.Component<BetProps, BetState> {
           iterationCount='infinite'
           iterationDelay={2500}>
           <MyButton 
-              title="Low" 
+              title={`Low (${this.props.odds.low*100}%)`}
               style={this.state.bet.on === 'low' ? styles.active : null}
               onPress={() => {this.onSelectBet('low')}} />
             <MyButton 
-              title="Draw" 
+              title={`Draw (${this.props.odds.draw*100}%)`}
               style={this.state.bet.on === 'draw' ? styles.active : null}
               onPress={() => {this.onSelectBet('draw')}} />
             <MyButton 
-              title="High" 
+              title={`High (${this.props.odds.high*100}%)`}
               style={this.state.bet.on === 'high' ? styles.active : null}
               onPress={() => {this.onSelectBet('high')}} />
         </AnimationContainer>
