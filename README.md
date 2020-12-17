@@ -136,6 +136,12 @@ The setup should be as follows:
 * linter
 * ci/cd 
 
+## Bugs
+
+* Win leader board  position #0 (offline)
+* play again button appears to quickly
+* add home button  to loss menu
+
 ## Useful links
 
 * https://facebook.github.io/react-native/docs/navigation

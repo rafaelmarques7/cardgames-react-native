@@ -11,9 +11,9 @@ Amplify.configure(aws_exports);
 export default function App() {
   return (
     <Provider store={store}>
-      {/* <PersistGate loading={null} persistor={persistor}> */}
+      <PersistGate loading={null} persistor={persistor}>
         <HomeContainer />
-      {/* </PersistGate> */}
+      </PersistGate>
     </Provider>
   );
 }

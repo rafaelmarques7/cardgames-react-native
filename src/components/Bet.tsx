@@ -4,6 +4,7 @@ import { Bet } from 'card-games-typescript';
 import { screen } from '../config';
 import MyButton from './MyButton';
 import AnimationContainer from './AnimationContainer';
+import StrengthOfHand from './StrengthOfHand';
 
 type BetState = {
   bet: Bet,
@@ -57,6 +58,44 @@ class BetDisplay extends React.Component<BetProps, BetState> {
     const stringBet = `Bet ${this.state.bet.ammount}\$ on ${this.state.bet.on !== 'pass' ? this.state.bet.on : '?'}`;
     return (
       <View style={styles.container}>
+        <View style={styles.strengthContainer}>
+          <StrengthOfHand 
+            valueHand={10} 
+            numCardsPerHand={2} 
+          />
+          <StrengthOfHand 
+            valueHand={10} 
+            numCardsPerHand={2} 
+          />
+          <StrengthOfHand 
+            valueHand={10} 
+            numCardsPerHand={2} 
+          />
+        </View>
+
+        <AnimationContainer 
+          style={styles.containerOptions}
+          animate={this.props.acceptBets && this.state.betOn === 'pass'} 
+          animationType='rubberBand' 
+          duration={1500}
+          iterationCount='infinite'
+          iterationDelay={2500}>
+          <MyButton 
+            title={`Low (${this.props.odds.low*100}%)`}
+            style={this.state.bet.on === 'low' ? styles.active : null}
+            onPress={() => {this.onSelectBet('low')}} 
+          />
+          <MyButton 
+            title={`Draw`}
+            style={this.state.bet.on === 'draw' ? styles.active : null}
+            onPress={() => {this.onSelectBet('draw')}} 
+          />
+          <MyButton 
+            title={`High`}
+            style={this.state.bet.on === 'high' ? styles.active : null}
+            onPress={() => {this.onSelectBet('high')}} 
+          />
+        </AnimationContainer>
         <View style={styles.containerAction}>
           { this.state.bet.on !== 'pass' && 
             <AnimationContainer
@@ -69,26 +108,6 @@ class BetDisplay extends React.Component<BetProps, BetState> {
             </AnimationContainer>
           } 
         </View>
-        <AnimationContainer 
-          style={styles.containerOptions}
-          animate={this.props.acceptBets && this.state.betOn === 'pass'} 
-          animationType='rubberBand' 
-          duration={1500}
-          iterationCount='infinite'
-          iterationDelay={2500}>
-          <MyButton 
-              title={`Low (${this.props.odds.low*100}%)`}
-              style={this.state.bet.on === 'low' ? styles.active : null}
-              onPress={() => {this.onSelectBet('low')}} />
-            <MyButton 
-              title={`Draw (${this.props.odds.draw*100}%)`}
-              style={this.state.bet.on === 'draw' ? styles.active : null}
-              onPress={() => {this.onSelectBet('draw')}} />
-            <MyButton 
-              title={`High (${this.props.odds.high*100}%)`}
-              style={this.state.bet.on === 'high' ? styles.active : null}
-              onPress={() => {this.onSelectBet('high')}} />
-        </AnimationContainer>
       </View>
     );    
   }
@@ -108,6 +127,12 @@ const styles = StyleSheet.create({
   },
   active: {
     backgroundColor: 'green'
+  },
+  strengthContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
   }
 });
 
