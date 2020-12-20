@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { animated, useSpring } from 'react-spring';
 import { selectColorFromGradient } from '../logic/strengthLogic';
@@ -21,6 +22,11 @@ const TextAnimatedBackgroundColor = ({ text, colorFrom, colorTo }) => {
   )
 }
 
+type cProps = {
+  valueHand: number,
+  numCardsPerHand: number,
+}
+
 /**
  * Component that visually represents the strength of a hand.
  * Strong hands will be red;
@@ -30,7 +36,7 @@ const TextAnimatedBackgroundColor = ({ text, colorFrom, colorTo }) => {
  * Possibly add onTouch event to support this, 
  * and change the text to display info. 
  */
-class StrengthOfHand extends React.Component {
+class StrengthOfHand extends React.Component<cProps> {
   state = {
     isToggled: false,
   }
