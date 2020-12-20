@@ -12,6 +12,7 @@ const DEF_NUM_CARDS_PER_HAND = 1;
  * 
  */
 export const startGame = (store) => {
+  console.log('inside startGame')
   store.dispatch(actionGameInit(DEF_PLAYERS, DEF_NUM_CARDS_PER_HAND));
 }
 

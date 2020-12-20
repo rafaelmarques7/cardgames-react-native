@@ -4,6 +4,7 @@ import { Bet } from 'card-games-typescript';
 import MyButton from './MyButton';
 import AnimationContainer from './AnimationContainer';
 import StrengthOfHand, {validSizes} from './StrengthOfHand';
+import { colorsApp } from '../styles';
 
 type BetState = {
   bet: Bet,
@@ -70,10 +71,11 @@ class BetDisplay extends React.Component<BetProps, BetState> {
 
     return (
       <View style={styles.container}>
-        {
-          this.props.shouldDisplayOdds &&
           <View style={styles.strengthContainer}>
-            <StrengthOfHand 
+          { 
+          this.props.shouldDisplayOdds &&
+            <View style={styles.strengthContainer}> 
+              <StrengthOfHand 
               colorGradient={this.props.odds.low}
               textFront={`${(this.props.odds.low*100).toFixed(oddsDecimalPlaces)}%`}
               textBack={`odds`}
@@ -91,9 +93,9 @@ class BetDisplay extends React.Component<BetProps, BetState> {
               textBack={`odds`}
               size={validSizes.small}
             />
-          </View>
-        }
-
+            </View>
+          }
+        </View>
 
         <AnimationContainer 
           style={styles.containerOptions}
@@ -148,7 +150,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   active: {
-    backgroundColor: 'green'
+    backgroundColor: colorsApp.green,
+    borderWidth: 1,
+    borderColor: colorsApp.brown
   },
   strengthContainer: {
     flex: 1,

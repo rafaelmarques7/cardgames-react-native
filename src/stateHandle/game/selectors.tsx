@@ -48,10 +48,8 @@ export const getRoundWinner = state => state.game.game.isWinner(state.game.game.
 export const getOdds = state => state.game.odds
 
 export const shouldDisplayOdds = state => {
-  // check if dealer already has cards
   const dcs = getDealerCardsStrength(state)
-  console.log(`dcs: ${dcs}`)
-  if (dcs) {
+  if (dcs && state.game.gameStatus !== 'deal') {
     return true
   }
 }

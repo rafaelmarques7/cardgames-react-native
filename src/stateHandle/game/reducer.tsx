@@ -3,10 +3,9 @@
 
 import { HigherOrLower } from "card-games-typescript";
 
-
-
 const gameInitState = {
   game: {}, // class object for game HigherOrLower
+  gameStatus: 'deal', // validOptions: deal || bet
   betOn: 'pass',
   cardsInDeck: 52,
   numRounds : 0,
@@ -38,6 +37,9 @@ export const gameReducer = (state=gameInitState, action) => {
       return gameRestartRound(state);
     case 'SET_NUMBER_OF_CARDS':
       return gameSetNumberOfCards(state, action);
+    case 'RESET': 
+      console.log('inside RESET')
+      return gameInitState;
     default:
       return state;  
   }
@@ -77,6 +79,7 @@ function gameDeal(state) {
   return {
     ...state,
     game: newGame,
+    gameStatus: 'bet',
     odds,
   }
 }
@@ -113,7 +116,8 @@ function  gameRestartRound(state) {
   return {
     ...state,
     betOn: 'pass',
-    numRounds: state.numRounds + 1
+    numRounds: state.numRounds + 1,
+    gameStatus: 'deal',
   }
 }
 
