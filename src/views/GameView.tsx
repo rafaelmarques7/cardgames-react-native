@@ -33,6 +33,7 @@ const GameView = (props) => {
         acceptBets={props.gameStatus.betMode} 
         betOn={props.player.betOn} 
         odds={props.odds}  
+        shouldDisplayOdds={props.shouldDisplayOdds}
       />
     </View>
   );

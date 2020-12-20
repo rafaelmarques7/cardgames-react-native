@@ -1,14 +1,19 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { Bet } from 'card-games-typescript';
-import { screen } from '../config';
 import MyButton from './MyButton';
 import AnimationContainer from './AnimationContainer';
-import StrengthOfHand from './StrengthOfHand';
+import StrengthOfHand, {validSizes} from './StrengthOfHand';
 
 type BetState = {
   bet: Bet,
   betOn: string,
+}
+
+type Odds = {
+  low: number,
+  draw: number,
+  high: number,
 }
 
 type BetProps = {
@@ -16,7 +21,9 @@ type BetProps = {
   betOn: string
   onSetBet: Function,
   acceptBets: boolean,
-  odds: object,
+  odds: Odds,
+  shouldDisplayOdds: boolean,
+  oddsDecimalPlaces?: number,
 }
 
 class BetDisplay extends React.Component<BetProps, BetState> {
@@ -50,28 +57,43 @@ class BetDisplay extends React.Component<BetProps, BetState> {
 
   onSetBet() {
     if (this.props.acceptBets) {
-      this.props.onSetBet(this.state.bet); // callback function that dispatches action to set bet
+      this.props.onSetBet(this.state.bet);
     }
   }
 
   render() {
-    const stringBet = `Bet ${this.state.bet.ammount}\$ on ${this.state.bet.on !== 'pass' ? this.state.bet.on : '?'}`;
+    const stringBet = this.state.bet.on === 'pass' 
+      ? 'Select Bet' 
+      : `Bet ${this.state.bet.ammount}\$ on ${this.state.bet.on}`;
+
+    const { oddsDecimalPlaces = 0 } = this.props
+
     return (
       <View style={styles.container}>
-        <View style={styles.strengthContainer}>
-          <StrengthOfHand 
-            valueHand={10} 
-            numCardsPerHand={2} 
-          />
-          <StrengthOfHand 
-            valueHand={10} 
-            numCardsPerHand={2} 
-          />
-          <StrengthOfHand 
-            valueHand={10} 
-            numCardsPerHand={2} 
-          />
-        </View>
+        {
+          this.props.shouldDisplayOdds &&
+          <View style={styles.strengthContainer}>
+            <StrengthOfHand 
+              colorGradient={this.props.odds.low}
+              textFront={`${(this.props.odds.low*100).toFixed(oddsDecimalPlaces)}%`}
+              textBack={`odds`}
+              size={validSizes.small}
+            />
+            <StrengthOfHand 
+              colorGradient={this.props.odds.draw}
+              textFront={`${(this.props.odds.draw*100).toFixed(oddsDecimalPlaces)}%`}
+              textBack={`odds`}
+              size={validSizes.small}
+            />
+            <StrengthOfHand 
+              colorGradient={this.props.odds.high}
+              textFront={`${(this.props.odds.high*100).toFixed(oddsDecimalPlaces)}%`}
+              textBack={`odds`}
+              size={validSizes.small}
+            />
+          </View>
+        }
+
 
         <AnimationContainer 
           style={styles.containerOptions}
@@ -81,32 +103,32 @@ class BetDisplay extends React.Component<BetProps, BetState> {
           iterationCount='infinite'
           iterationDelay={2500}>
           <MyButton 
-            title={`Low (${this.props.odds.low*100}%)`}
+            title={`Low`}
             style={this.state.bet.on === 'low' ? styles.active : null}
-            onPress={() => {this.onSelectBet('low')}} 
+            onPress={() => this.onSelectBet('low')} 
           />
           <MyButton 
             title={`Draw`}
             style={this.state.bet.on === 'draw' ? styles.active : null}
-            onPress={() => {this.onSelectBet('draw')}} 
+            onPress={() => this.onSelectBet('draw')} 
           />
           <MyButton 
             title={`High`}
             style={this.state.bet.on === 'high' ? styles.active : null}
-            onPress={() => {this.onSelectBet('high')}} 
+            onPress={() => this.onSelectBet('high')} 
           />
         </AnimationContainer>
+        
         <View style={styles.containerAction}>
-          { this.state.bet.on !== 'pass' && 
-            <AnimationContainer
-              style={{flex: 1}}
-              animate={this.props.acceptBets} 
-              animationType='rubberBand' iterationDelay={2000} duration={2000} iterationCount='infinite'>
-              <MyButton 
-                title={stringBet}
-                onPress={() => {this.onSetBet()}} />
-            </AnimationContainer>
-          } 
+          <AnimationContainer
+            style={styles.containerAction}
+            animate={this.props.acceptBets && this.state.bet.on !== 'pass'} 
+            animationType='rubberBand' iterationDelay={2000} duration={2000} iterationCount='infinite'>
+            <MyButton 
+              title={stringBet}
+              onPress={() => this.onSetBet()} 
+            />
+          </AnimationContainer>
         </View>
       </View>
     );    

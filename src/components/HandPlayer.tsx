@@ -12,7 +12,6 @@ const HandOfPlayer = ({
   actionSetUserUsername,
   drawHorizontalRule=true,
 }) => {
-  // deconstruct props
   const { username, cards, valueHand } = player;
   // create stylesheet based on position
   const styles = createStyle(!positionOnTop, drawHorizontalRule);
@@ -49,8 +48,11 @@ const HandOfPlayer = ({
       <View style={styles.strengthContainer}>
         { renderStrength && 
           <StrengthOfHand 
-            valueHand={valueHand} 
-            numCardsPerHand={cards.length} /> }
+            textFront={`${valueHand}/${cards.length*14}`}
+            textBack={`min/Max`}
+            colorGradient={valueHand/(cards.length*14)}
+          />
+        }
       </View>
     </View>
   );

@@ -1,12 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { animated, useSpring } from 'react-spring';
 import { selectColorFromGradient } from '../logic/strengthLogic';
 
 const AnimatedView = animated(View); 
 
-const TextAnimatedBackgroundColor = ({ text, colorFrom, colorTo }) => {
+const TextAnimatedBackgroundColor = ({ text, colorFrom, colorTo, size }) => {
   const spring = useSpring({
     config: {
       tension: 170/6, // this slows the animation; 170 is the default value
@@ -15,6 +14,8 @@ const TextAnimatedBackgroundColor = ({ text, colorFrom, colorTo }) => {
     to: { backgroundColor: colorTo }
   });
 
+  const styles = createStyle(size)
+
   return (
     <AnimatedView style={{...styles.container, ...spring}}>
       <Text style={styles.text}>{text}</Text>
@@ -22,9 +23,17 @@ const TextAnimatedBackgroundColor = ({ text, colorFrom, colorTo }) => {
   )
 }
 
+export enum validSizes {
+  small,
+  medium,
+  large,
+}
+
 type cProps = {
-  valueHand: number,
-  numCardsPerHand: number,
+  colorGradient: number, // between 0 and 1
+  textFront: string,
+  textBack?: string,
+  size?: validSizes,
 }
 
 /**
@@ -42,51 +51,58 @@ class StrengthOfHand extends React.Component<cProps> {
   }
 
   toggleState() {
-    this.setState({ isToggled: !this.state.isToggled });
-    // if the action was to toggle, 
-    // set delayed action to reset the toggle.
+    console.log(this.state)
+    this.setState({ 
+      isToggled: !this.state.isToggled,
+    });
     if (!this.state.isToggled) {
       setTimeout(this.toggleState.bind(this), 2000);
     }
   }
 
   render() {
-    const { valueHand, numCardsPerHand } = this.props;
-    
-    const maxValueHand = numCardsPerHand * 14;
-    const strengthHand = valueHand/maxValueHand;  
+    const { textFront, textBack, colorGradient, size = validSizes.medium } = this.props;
 
     const colorFrom = selectColorFromGradient(0);
-    const colorTo = selectColorFromGradient(strengthHand)
-
-    const textStrength = `${valueHand}/${maxValueHand}`;
-    const textInfo = `cards:\n me/max`;
+    const colorTo = selectColorFromGradient(colorGradient)
 
     return (      
       <TouchableOpacity
-        onPress={() => {this.toggleState()}}>
+        onPress={() => this.toggleState()}
+      >
         <TextAnimatedBackgroundColor 
-          text={this.state.isToggled ? textInfo : textStrength}
+          text={this.state.isToggled ? textBack : textFront}
           colorFrom={colorFrom}
-          colorTo={colorTo} />
+          colorTo={colorTo} 
+          size={size}
+        />
       </TouchableOpacity>
     )
   }
 } 
 
-const size = 65
-const styles = StyleSheet.create({
-  container: {
-    width: size,
-    height: size,
-    borderRadius: size/2,
-    alignItems: 'center',
-    justifyContent: 'center',
-    elevation: 10, 
-  }, 
-  text: {
-    textAlign: 'center',
+const createStyle = (size: validSizes) => {
+  let iconSize = 65
+  if (size === validSizes.small) {
+    iconSize = 50
+  } else if (size === validSizes.large) {
+    iconSize = 80
   }
-});
+
+  return StyleSheet.create({
+    container: {
+      width: iconSize,
+      height: iconSize,
+      borderRadius: iconSize/2,
+      alignItems: 'center',
+      justifyContent: 'center',
+      elevation: 10, 
+    }, 
+    text: {
+      textAlign: 'center',
+      fontWeight: 'bold',
+    }
+  })
+};
 
 export default StrengthOfHand;

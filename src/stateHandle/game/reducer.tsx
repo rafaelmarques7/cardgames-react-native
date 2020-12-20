@@ -10,7 +10,11 @@ const gameInitState = {
   betOn: 'pass',
   cardsInDeck: 52,
   numRounds : 0,
-  odds: {},
+  odds: {
+    low: 0,
+    draw: 0,
+    high: 0,
+  },
 }
 
 /**
