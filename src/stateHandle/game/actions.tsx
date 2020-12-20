@@ -71,6 +71,17 @@ export const actionSetNumberOfCards = (value) => {
   }
 }
 
+export const actionSetShouldDisplayOdds = (bool) => {
+  return dispatch => {
+    dispatch(aShouldDisplayOdds(bool))
+  }
+}
+
+const aShouldDisplayOdds = (value) => ({
+  type: 'SHOULD_DISPLAY_ODDS',
+  value,
+});
+
 const actionGameInit = (players, numCardsPerHand) => ({
   type: 'GAME_INIT',
   payload: {

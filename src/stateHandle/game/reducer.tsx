@@ -9,6 +9,7 @@ const gameInitState = {
   betOn: 'pass',
   cardsInDeck: 52,
   numRounds : 0,
+  shouldDisplayOdds: false,
   odds: {
     low: 0,
     draw: 0,
@@ -37,8 +38,9 @@ export const gameReducer = (state=gameInitState, action) => {
       return gameRestartRound(state);
     case 'SET_NUMBER_OF_CARDS':
       return gameSetNumberOfCards(state, action);
+    case 'SHOULD_DISPLAY_ODDS':
+      return gameSetShouldDisplayOdds(state, action)
     case 'RESET': 
-      console.log('inside RESET')
       return gameInitState;
     default:
       return state;  
@@ -133,5 +135,13 @@ function gameSetNumberOfCards(state, action) {
   return {
     ...state,
     game: newGame,
+  }
+}
+
+function gameSetShouldDisplayOdds(state, action) {
+  console.log('inside gameSetShouldDisplayOdds')
+  return {
+    ...state,
+    shouldDisplayOdds: action.value,
   }
 }
