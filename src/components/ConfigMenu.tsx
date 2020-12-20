@@ -45,7 +45,7 @@ export default class ConfigMenu extends Component<cProps> {
       <View style={styles.modal}>
         <View style={styles.valuePickerContainer}>
           <Picker
-            selectedValue={this.state.numCardsPerHand}
+            selectedValue={this.state.numCardsPerHand.toString()}
             style={styles.valuePicker}
             onValueChange={(itemValue) => this.setState({numCardsPerHand: itemValue})}>
             <Picker.Item label="1" value="1" />

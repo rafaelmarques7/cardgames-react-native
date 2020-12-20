@@ -4,7 +4,7 @@ import { actionReduceLives, actionResetStatusGame } from "../statusGame";
 import { getUserUsername } from "../user";
 
 const DEF_PLAYERS = [new PlayerHighLow('Player')];
-const DEF_NUM_CARDS_PER_HAND = 1;
+const DEF_NUM_CARDS_PER_HAND = 2;
 
 /**
  * These exported actions will be used to move the game forward
@@ -17,10 +17,8 @@ export const startGame = (store) => {
 }
 
 export const actionGameDeal = () => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     dispatch(setGameDeal())
-    // const state = getState()
-    // console.log('odds: ', getOdds(state))
     dispatch(setGameMode('bet')) // after deal comes bet
   } 
 }
@@ -66,8 +64,8 @@ export const actionGameRestart = () => {
 
 export const actionSetNumberOfCards = (value) => {
   return dispatch => {
-    dispatch(actionGameRestartRound())
     dispatch(setNumberOfCards(value))
+    dispatch(actionGameRestart())
   }
 }
 
@@ -97,7 +95,7 @@ const setGameDeal = () => ({
 const setNumberOfCards = (value) => ({
   type: 'SET_NUMBER_OF_CARDS',
   payload: {
-    value: value,
+    value: Number(value),
   }
 })
 

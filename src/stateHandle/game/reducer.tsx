@@ -1,6 +1,3 @@
-// import { HigherOrLower } from "card-games-typescript/dist/Games/HighLow/game";
-// const { HigherOrLower } = require("card-games-typescript/dist/Games/HighLow/game");
-
 import { HigherOrLower } from "card-games-typescript";
 
 const gameInitState = {
@@ -74,9 +71,13 @@ function gameDeal(state) {
   // changes happen inside the class object
   state.game.deal();
   const odds = state.game.calculateOdds()
+  console.log(`odds one: ${JSON.stringify(odds)}`)
 
   const newGame = Object.assign(  // this preserves the class methods
     Object.create(Object.getPrototypeOf(state.game)), state.game);
+  
+  const oddsTwo = newGame.calculateOdds()
+  console.log(`oddsTwo: ${JSON.stringify(odds)}`)
 
   return {
     ...state,
