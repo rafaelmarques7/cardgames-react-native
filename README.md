@@ -2,6 +2,8 @@
 
 Game description. Add GIF here, if availble. Add link to Play Store.
 
+This game is available on the Google Play Store, link [here](https://play.google.com/store/apps/details?id=com.highlow.cardgames).
+
 - [Game](#game)
   - [Installation and Usage](#installation-and-usage)
   - [Game phases](#game-phases)
@@ -121,11 +123,15 @@ The setup should be as follows:
   * update local leaderboard
   * update world leaderboard (always!)
 
+---
+
 ## Desired features
 
 * Animation speed control
 * Backgroundcolor control
 * Ability to show odds of any hand
+
+---
 
 ## Refactors to consider
 
@@ -136,11 +142,15 @@ The setup should be as follows:
 * linter
 * ci/cd 
 
+---
+
 ## Bugs
 
 * Win leader board  position #0 (offline)
 * play again button appears to quickly
 * add home button  to loss menu
+
+---
 
 ## Useful links
 
@@ -148,3 +158,4 @@ The setup should be as follows:
 * https://github.com/oblador/react-native-animatable
 * User authentication will be managed by AWS Amplify.
 [This article](https://alligator.io/react/react-native-authentication/) is a good reference.
+
