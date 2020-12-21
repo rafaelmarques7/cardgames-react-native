@@ -51,7 +51,6 @@ class StrengthOfHand extends React.Component<cProps> {
   }
 
   toggleState() {
-    console.log(this.state)
     this.setState({ 
       isToggled: !this.state.isToggled,
     });
