@@ -1,6 +1,23 @@
 # Game 
 
-## Setup
+Game description. Add GIF here, if availble. Add link to Play Store.
+
+This game is available on the Google Play Store, link [here](https://play.google.com/store/apps/details?id=com.highlow.cardgames).
+
+- [Game](#game)
+  - [Installation and Usage](#installation-and-usage)
+  - [Game phases](#game-phases)
+    - [Machine State diagram](#machine-state-diagram)
+  - [Flip card animation](#flip-card-animation)
+  - [Re-thinking the game](#re-thinking-the-game)
+  - [World Leader Board](#world-leader-board)
+  - [Desired features](#desired-features)
+  - [Refactors to consider](#refactors-to-consider)
+  - [Useful links](#useful-links)
+
+---
+
+## Installation and Usage
 
 Requirements:
 * Make sure you have *expo-cli* installed globally: `npm install -g expo-cli`
@@ -25,6 +42,8 @@ Note:
 1. Increment the `android.versionCode` on the [app.json](./app.json) file
 2. Build the android bundle: `expo build:android -t apk`
 3. Go the [google developer console](https://play.google.com/console/) and upload the bundle
+
+---
 
 ## Game phases
 
@@ -104,11 +123,15 @@ The setup should be as follows:
   * update local leaderboard
   * update world leaderboard (always!)
 
+---
+
 ## Desired features
 
 * Animation speed control
 * Backgroundcolor control
 * Ability to show odds of any hand
+
+---
 
 ## Refactors to consider
 
@@ -119,9 +142,20 @@ The setup should be as follows:
 * linter
 * ci/cd 
 
+---
+
+## Bugs
+
+* Win leader board  position #0 (offline)
+* play again button appears to quickly
+* add home button  to loss menu
+
+---
+
 ## Useful links
 
 * https://facebook.github.io/react-native/docs/navigation
 * https://github.com/oblador/react-native-animatable
 * User authentication will be managed by AWS Amplify.
 [This article](https://alligator.io/react/react-native-authentication/) is a good reference.
+

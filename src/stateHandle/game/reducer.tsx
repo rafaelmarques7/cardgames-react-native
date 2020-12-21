@@ -2,9 +2,16 @@ import { HigherOrLower } from "card-games-typescript";
 
 const gameInitState = {
   game: {}, // class object for game HigherOrLower
+  gameStatus: 'deal', // validOptions: deal || bet
   betOn: 'pass',
   cardsInDeck: 52,
   numRounds : 0,
+  shouldDisplayOdds: false,
+  odds: {
+    low: 0,
+    draw: 0,
+    high: 0,
+  },
 }
 
 /**
@@ -28,6 +35,10 @@ export const gameReducer = (state=gameInitState, action) => {
       return gameRestartRound(state);
     case 'SET_NUMBER_OF_CARDS':
       return gameSetNumberOfCards(state, action);
+    case 'SHOULD_DISPLAY_ODDS':
+      return gameSetShouldDisplayOdds(state, action)
+    case 'RESET': 
+      return gameInitState;
     default:
       return state;  
   }
@@ -40,6 +51,7 @@ export const gameReducer = (state=gameInitState, action) => {
 function gameInit(action) {
   console.log('inside gameInit')
   const { players, numCardsPerHand } = action.payload
+  console.log('creating new game')
   const game = new HigherOrLower(players, numCardsPerHand) // create new game
   return {
     ...gameInitState, // overwrite any previously existing game state
@@ -55,20 +67,26 @@ function gameDeal(state) {
     state.game.deck.buildDeck()
     state.game.deck.shuffleDeck()
   }
+
   // changes happen inside the class object
   state.game.deal();
+  const odds = state.game.calculateOdds()
+
   const newGame = Object.assign(  // this preserves the class methods
     Object.create(Object.getPrototypeOf(state.game)), state.game);
+  
   return {
     ...state,
     game: newGame,
+    gameStatus: 'bet',
+    odds,
   }
 }
 
 function gameBet(state, action) {
   console.log('inside gameBet')
-   // changes happen inside the class object
-   // the 2nd parameter has the effect of not decreasing the credit upon betting
+  // changes happen inside the class object
+  // the 2nd parameter has the effect of not decreasing the credit upon betting
   state.game.setBets(action.payload.bets, false); 
   const newGame = Object.assign(  // this preserves the class methods
     Object.create(Object.getPrototypeOf(state.game)), state.game);
@@ -97,7 +115,8 @@ function  gameRestartRound(state) {
   return {
     ...state,
     betOn: 'pass',
-    numRounds: state.numRounds + 1
+    numRounds: state.numRounds + 1,
+    gameStatus: 'deal',
   }
 }
 
@@ -113,5 +132,13 @@ function gameSetNumberOfCards(state, action) {
   return {
     ...state,
     game: newGame,
+  }
+}
+
+function gameSetShouldDisplayOdds(state, action) {
+  console.log('inside gameSetShouldDisplayOdds')
+  return {
+    ...state,
+    shouldDisplayOdds: action.value,
   }
 }

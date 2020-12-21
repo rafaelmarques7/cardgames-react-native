@@ -1,10 +1,10 @@
 import { PlayerHighLow } from "card-games-typescript";
-import { getRoundWinner, getNumberOfCardsPerHand } from "./selectors";
+import { getRoundWinner, getNumberOfCardsPerHand, getOdds } from "./selectors";
 import { actionReduceLives, actionResetStatusGame } from "../statusGame";
 import { getUserUsername } from "../user";
 
 const DEF_PLAYERS = [new PlayerHighLow('Player')];
-const DEF_NUM_CARDS_PER_HAND = 1;
+const DEF_NUM_CARDS_PER_HAND = 2;
 
 /**
  * These exported actions will be used to move the game forward
@@ -12,6 +12,7 @@ const DEF_NUM_CARDS_PER_HAND = 1;
  * 
  */
 export const startGame = (store) => {
+  console.log('inside startGame')
   store.dispatch(actionGameInit(DEF_PLAYERS, DEF_NUM_CARDS_PER_HAND));
 }
 
@@ -63,10 +64,21 @@ export const actionGameRestart = () => {
 
 export const actionSetNumberOfCards = (value) => {
   return dispatch => {
-    dispatch(actionGameRestartRound())
     dispatch(setNumberOfCards(value))
+    dispatch(actionGameRestart())
   }
 }
+
+export const actionSetShouldDisplayOdds = (bool) => {
+  return dispatch => {
+    dispatch(aShouldDisplayOdds(bool))
+  }
+}
+
+const aShouldDisplayOdds = (value) => ({
+  type: 'SHOULD_DISPLAY_ODDS',
+  value,
+});
 
 const actionGameInit = (players, numCardsPerHand) => ({
   type: 'GAME_INIT',
@@ -83,7 +95,7 @@ const setGameDeal = () => ({
 const setNumberOfCards = (value) => ({
   type: 'SET_NUMBER_OF_CARDS',
   payload: {
-    value: value,
+    value: Number(value),
   }
 })
 

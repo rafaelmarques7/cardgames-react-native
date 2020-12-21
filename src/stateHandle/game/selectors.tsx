@@ -8,7 +8,8 @@ export const getPlayerInfo = (state) => ({
   valueHand: getCardsStrength(state),
   bet: getPlayersBet(state),
   betOn: state.game.betOn,
-  isWinner: getRoundWinner(state)
+  isWinner: getRoundWinner(state),
+  odds: getOdds(state),
 })
 
 /**
@@ -43,6 +44,16 @@ export const getDealerInfo = (state) => ({
 export const numRoundsPlayed = state => state.game.numRounds
 
 export const getRoundWinner = state => state.game.game.isWinner(state.game.game.players[0])
+
+export const getOdds = state => state.game.odds
+
+export const shouldDisplayOdds = state => {
+  const shouldDisplay = state.game.shouldDisplayOdds
+  const dcs = getDealerCardsStrength(state)
+  if (shouldDisplay && dcs && state.game.gameStatus !== 'deal') {
+    return true
+  }
+}
 
 export const getNumberOfCardsPerHand = (state) => state.game.game.numCardsPerHand
 

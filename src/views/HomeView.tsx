@@ -7,6 +7,7 @@ import TitleApp from '../components/TitleApp';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 import { actionGetHighscoreWorld as  fetchHighscoreWorld } from '../stateHandle'
+import { colorsApp } from '../styles';
 
 type cProps = {
   fetchHighscoreWorld: Function,
@@ -18,6 +19,7 @@ type cProps = {
 class HomeScreen extends React.Component<cProps> {
   componentDidMount() {
     this.props.fetchHighscoreWorld()
+    // dev purposes only
     // this.props.navigation.push('Game')
     // this.props.navigation.push('Highscore')
   }
@@ -62,13 +64,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: (screen.heightScreen - screen.heightWindow) / 2,
-    backgroundColor: 'green',
+    backgroundColor: colorsApp.green,
   },
   containerTitle: {
     flex: 4,
     alignSelf: 'center',
     justifyContent: 'center',
-    borderColor: 'white',
+    borderColor: colorsApp.white,
     borderTopWidth: 2,
     borderBottomWidth: 2,
     marginTop: 15,
@@ -90,13 +92,13 @@ const styles = StyleSheet.create({
     fontSize: 80,
     fontWeight: '900',
     textAlign: 'center',
-    color: 'white',
+    color: colorsApp.white,
   },
   subTitle: {
     fontFamily: 'Roboto',
     fontSize: 30,
     textAlign: 'center',
-    color: 'white',
+    color: colorsApp.white,
   }
 })
 

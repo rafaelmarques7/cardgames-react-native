@@ -3,7 +3,7 @@
     "name": "GuessWhat",
     "slug": "app",
     "privacy": "public",
-    "sdkVersion": "37.0.0",
+    "sdkVersion": "40.0.0",
     "platforms": [
       "ios",
       "android",
@@ -30,7 +30,7 @@
     "android": {
       "package": "com.highlow.cardgames",
       "permissions": ["com.android.vending.BILLING"],
-      "versionCode": 16
+      "versionCode": 17
     }
   }
 }
