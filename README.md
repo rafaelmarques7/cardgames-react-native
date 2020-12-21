@@ -1,11 +1,14 @@
-# Game 
+# Guess What (React Native Game)
 
 Game description. Add GIF here, if availble. Add link to Play Store.
 
-This game is available on the Google Play Store, link [here](https://play.google.com/store/apps/details?id=com.highlow.cardgames).
+This game is available on the Google Play Store (link [here](https://play.google.com/store/apps/details?id=com.highlow.cardgames)).
 
-- [Game](#game)
+---
+
+- [Guess What (React Native Game)](#guess-what-react-native-game)
   - [Installation and Usage](#installation-and-usage)
+  - [Building and deploying](#building-and-deploying)
   - [Game phases](#game-phases)
     - [Machine State diagram](#machine-state-diagram)
   - [Flip card animation](#flip-card-animation)
@@ -13,6 +16,7 @@ This game is available on the Google Play Store, link [here](https://play.google
   - [World Leader Board](#world-leader-board)
   - [Desired features](#desired-features)
   - [Refactors to consider](#refactors-to-consider)
+  - [Bugs](#bugs)
   - [Useful links](#useful-links)
 
 ---
@@ -37,7 +41,7 @@ Note:
 
 ---
 
-## Building and deploying
+## Building and deploying
 
 1. Increment the `android.versionCode` on the [app.json](./app.json) file
 2. Build the android bundle: `expo build:android -t apk`
@@ -144,7 +148,7 @@ The setup should be as follows:
 
 ---
 
-## Bugs
+## Bugs
 
 * Win leader board  position #0 (offline)
 * play again button appears to quickly
