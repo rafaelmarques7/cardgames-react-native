@@ -153,6 +153,12 @@ The setup should be as follows:
 * Win leader board  position #0 (offline)
 * play again button appears to quickly
 * add home button  to loss menu
+* odds do not show on the second game
+
+### Ideas
+
+* make leaderboard winner name bigger
+* allow increasing the speed of the animations
 
 ---
 
